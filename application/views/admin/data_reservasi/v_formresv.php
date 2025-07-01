@@ -48,247 +48,269 @@
       <!--end page content wrapper-->
 
 
-      <div class="card-body">
-        <ul class="nav nav-pills mb-3 ms-4" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a class="nav-link active" data-bs-toggle="pill" href="#primary-pills-baru" role="tab" aria-selected="true">
-              <div class="d-flex align-items-center">
-                <div class="tab-icon"><ion-icon name="person-add-sharp" class="me-1"></ion-icon></div>
-                <div class="tab-title">Pasien Baru</div>
-              </div>
-            </a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" data-bs-toggle="pill" href="#primary-pills-lama" role="tab" aria-selected="false">
-              <div class="d-flex align-items-center">
-                <div class="tab-icon"><ion-icon name="repeat-sharp" class="me-1"></ion-icon></div>
-                <div class="tab-title">Pasien Lama</div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-          <!-- Tab Pasien Baru -->
-          <div class="tab-pane fade show active" id="primary-pills-baru" role="tabpanel">
-            <div class="card mx-4">
-              <div class="card-header">
-                <h6 class="mb-0">Data Diri Pasien</h6>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-control">
+      <div class="container mt-4">
+        <div class="card">
+          <div class="card-body">
+            <ul class="nav nav-pills mb-3 ms-4" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-baru-tab" data-bs-toggle="pill" data-bs-target="#pills-baru" type="button" role="tab" aria-controls="pills-baru" aria-selected="true">
+                  <div class="d-flex align-items-center">
+                    <div class="tab-icon"><ion-icon name="person-add-sharp" class="me-1"></ion-icon></div>
+                    <div class="tab-title">Pasien Baru</div>
                   </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Tempat Lahir</label>
-                    <input type="text" class="form-control">
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-lama-tab" data-bs-toggle="pill" data-bs-target="#pills-lama" type="button" role="tab" aria-controls="pills-lama" aria-selected="false">
+                  <div class="d-flex align-items-center">
+                    <div class="tab-icon"><ion-icon name="repeat-sharp" class="me-1"></ion-icon></div>
+                    <div class="tab-title">Pasien Lama</div>
                   </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Tanggal Lahir</label>
-                    <input type="text" class="form-control">
-                  </div>
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Jenis Kelamin</label>
-                    <input type="text" class="form-control">
-                  </div>
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Pekerjaan</label>
-                    <input type="text" class="form-control">
-                  </div>
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Status Pernikahan</label>
-                    <input type="text" class="form-control">
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Alamat</label>
-                    <input type="text" class="form-control">
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">No Hp</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-              </div>
-            </div>
+                </button>
+              </li>
+            </ul>
 
-            <div class="card mx-4">
-              <div class="card-header">
-                <h6 class="mb-0">Data Medik Pasien</h6>
-              </div>
-              <div class="card-body">
-                <div class="row">
-
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Golongan Darah</label>
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected="">Pilih...</option>
-                      <option value="gol">A</option>
-                      <option value="gol">B</option>
-                      <option value="gol">AB</option>
-                      <option value="gol">O</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Tekanan Darah</label>
-                    <input type="text" class="form-control">
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Penyakit Jantung</label>
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected="">Pilih...</option>
-                      <option value="jtg">Ada</option>
-                      <option value="jtg">Tidak Ada</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Diabetes</label>
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected="">Pilih...</option>
-                      <option value="dbs">Ada</option>
-                      <option value="dbs">Tidak Ada</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Haemophilia/Kelainan Darah</label>
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected="">Pilih...</option>
-                      <option value="kd">Ada</option>
-                      <option value="kd">Tidak Ada</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Hepatitis</label>
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected="">Pilih...</option>
-                      <option value="hpp">Ada</option>
-                      <option value="hpp">Tidak Ada</option>
-                    </select>
-                  </div>
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Penyakit Lainnya</label>
-                    <input type="text" class="form-control">
-                  </div>
-                  <div class="col-12 mb-3">
-                    <div class="row mb-3 align-items-end">
-                      <div class="col-auto">
-                        <label for="alergiSelect" class="form-label">Alergi Obat</label>
-                        <select class="form-select" id="alergiSelect" style="min-width: 120px;">
-                          <option value="">Pilih...</option>
-                          <option value="tidak">Ada</option>
-                          <option value="ada">Tidak Ada</option>
-                        </select>
-                      </div>
-                      <div class="col">
-                        <label for="alergiInput" class="form-label">Jenis Obat</label>
-                        <input type="text" class="form-control" id="alergiInput" placeholder="Contoh: Methylpredisolone, Dexamentason" enabled>
-                      </div>
+            <div class="tab-content" id="pills-tabContent">
+              <!-- Tab Pasien Baru -->
+              <div class="tab-pane fade show active" id="pills-baru" role="tabpanel" aria-labelledby="pills-baru-tab">
+                <form action="#" method="post">
+                  <div class="card mx-4">
+                    <div class="card-header">
+                      <h6 class="mb-0">Data Diri Pasien</h6>
                     </div>
-
-                  </div>
-                  <div class="col-12 mb-3">
-                    <div class="row mb-3 align-items-end">
-                      <div class="col-auto">
-                        <label for="alergiSelect" class="form-label">Alergi Makanan</label>
-                        <select class="form-select" id="alergiSelect" style="min-width: 120px;">
-                          <option value="">Pilih...</option>
-                          <option value="tidak">Ada</option>
-                          <option value="ada">Tidak Ada</option>
-                        </select>
-                      </div>
-                      <div class="col">
-                        <label for="alergiInput" class="form-label">Jenis Alergi</label>
-                        <input type="text" class="form-control" id="alergiInput" placeholder="Contoh: Udang, Kacang" disabled>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Nama Lengkap</label>
+                          <input type="text" name="namaLengkap" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Tempat Tanggal Lahir</label>
+                          <input type="text" name="ttl" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label for="jenis_Kelamin" class="form-label">Jenis Kelamin</label>
+                          <select class="form-select" id="jenis_Kelamin" name="jenisKelamin" required>
+                            <option value="">Pilih opsi</option>
+                            <option value="Laki-Laki">Laki-Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                          </select>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Pekerjaan</label>
+                          <input type="text" name="Pekerjaan" class="form-control" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label for="statusPernikahan" class="form-label">Status Pernikahan</label>
+                          <select class="form-select" id="statusPernikahan" name="statusPernikahan" required>
+                            <option value="">Pilih status pernikahan</option>
+                            <option value="Belum Menikah">Belum Menikah</option>
+                            <option value="Menikah">Menikah</option>
+                            <option value="Cerai">Cerai</option>
+                            <option value="Janda/Duda">Janda/Duda</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Alamat</label>
+                          <input type="text" name="Alamat" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">No Hp</label>
+                          <input type="text" name="noHp" class="form-control" required>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+
+                  <div class="card mx-4 mt-3">
+                    <div class="card-header">
+                      <h6 class="mb-0">Data Medik Pasien</h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Golongan Darah</label>
+                          <select name="golDarah" class="form-select" required>
+                            <option value="">Pilih...</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Tekanan Darah</label>
+                          <input type="text" name="tekananDarah" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Penyakit Jantung</label>
+                          <select name="penyakitJantung" class="form-select" required>
+                            <option value="">Pilih...</option>
+                            <option value="1">Ada</option>
+                            <option value="0">Tidak Ada</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Diabetes</label>
+                          <select name="diabetes" class="form-select" required>
+                            <option value="">Pilih...</option>
+                            <option value="1">Ada</option>
+                            <option value="0">Tidak Ada</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Haemophilia/Kelainan Darah</label>
+                          <select name="kelainanDarah" class="form-select" required>
+                            <option value="">Pilih...</option>
+                            <option value="1">Ada</option>
+                            <option value="0">Tidak Ada</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Hepatitis</label>
+                          <select name="hepatitis" class="form-select" required>
+                            <option value="">Pilih...</option>
+                            <option value="1">Ada</option>
+                            <option value="0">Tidak Ada</option>
+                          </select>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Penyakit Lainnya</label>
+                          <input type="text" name="penyakitLainnya" class="form-control">
+                        </div>
+                        <div class="row mb-4">
+                          <div class="col-md-6">
+                            <label for="alergiObatStatus" class="form-label">Alergi Obat</label>
+                            <select class="form-select mb-2" id="alergiObatStatus" name="alergiObatStatus" onchange="toggleAlergiObatInput()">
+                              <option value="">Pilih opsi</option>
+                              <option value="Ada">Ada</option>
+                              <option value="Tidak">Tidak</option>
+                            </select>
+                            <textarea class="form-control" id="alergiObatDetail" name="alergiObatDetail" rows="2" placeholder="Sebutkan obat yang menyebabkan alergi" style="display: none;"></textarea>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="alergiMakananStatus" class="form-label">Alergi Makanan</label>
+                            <select class="form-select mb-2" id="alergiMakananStatus" name="alergiMakananStatus" onchange="toggleAlergiMakananInput()">
+                              <option value="">Pilih opsi</option>
+                              <option value="Ada">Ada</option>
+                              <option value="Tidak">Tidak</option>
+                            </select>
+                            <textarea class="form-control" id="alergiMakananDetail" name="alergiMakananDetail" rows="2" placeholder="Sebutkan makanan yang menyebabkan alergi" style="display: none;"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card mx-4 mt-3">
+                    <div class="card-header">
+                      <h6 class="mb-0">Data Reservasi Pasien</h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Dokter Praktik</label>
+                          <select class="form-select" name="dokter" required>
+                            <option value="">Pilih Dokter</option>
+                            <option value="1">Dr. Ahmad Zaki (Senin-Rabu 08:00-12:00)</option>
+                            <option value="2">Dr. Bella Arista (Selasa-Kamis 13:00-17:00)</option>
+                            <option value="3">Dr. Citra Dewi (Jumat-Minggu 09:00-15:00)</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Tanggal Reservasi</label>
+                          <input type="date" class="form-control" name="tgl" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Waktu Reservasi</label>
+                          <input type="time" class="form-control" name="waktu" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Keluhan</label>
+                          <textarea class="form-control" name="keluhan" rows="3"></textarea>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Rencana Perawatan</label>
+                          <select class="form-select" name="rencanaPerawatan">
+                            <option value="">Pilih Rencana Perawatan</option>
+                            <option value="1">Pemeriksaan Rutin</option>
+                            <option value="2">Perawatan Gigi</option>
+                            <option value="3">Konsultasi Spesialis</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col d-flex justify-content-end mx-4 my-3">
+                    <button type="submit" class="btn btn-primary px-3">Simpan</button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Tab Pasien Lama -->
+              <div class="tab-pane fade" id="pills-lama" role="tabpanel" aria-labelledby="pills-lama-tab">
+                <form action="#" method="post">
+                  <div class="card mx-4">
+                    <div class="card-header">
+                      <h6 class="mb-0">Data Reservasi Pasien</h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Cari Nama Pasien</label>
+                          <select class="form-select" name="pasienLama" required>
+                            <option value="">Pilih Pasien</option>
+                            <option value="1">Ahmad Zaki - 001</option>
+                            <option value="2">Bella Arista - 002</option>
+                            <option value="3">Citra Dewi - 003</option>
+                            <option value="4">Dian Pratama - 004</option>
+                          </select>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Dokter Praktik</label>
+                          <select class="form-select" name="dokterLama" required>
+                            <option value="">Pilih Dokter</option>
+                            <option value="1">Dr. Ahmad Zaki (Senin-Rabu 08:00-12:00)</option>
+                            <option value="2">Dr. Bella Arista (Selasa-Kamis 13:00-17:00)</option>
+                            <option value="3">Dr. Citra Dewi (Jumat-Minggu 09:00-15:00)</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Tanggal Reservasi</label>
+                          <input type="date" class="form-control" name="tglLama" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Waktu Reservasi</label>
+                          <input type="time" class="form-control" name="waktuLama" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Keluhan</label>
+                          <textarea class="form-control" name="keluhanLama" rows="3"></textarea>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Rencana Perawatan</label>
+                          <select class="form-select" name="rencanaPerawatanLama">
+                            <option value="">Pilih Rencana Perawatan</option>
+                            <option value="1">Pemeriksaan Rutin</option>
+                            <option value="2">Perawatan Gigi</option>
+                            <option value="3">Konsultasi Spesialis</option>
+                            <option value="4">Kontrol Ulang</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary px-3 mb-3">Simpan</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
-
-            <div class="card mx-4">
-              <div class="card-header">
-                <h6 class="mb-0">Data Resevasi Pasien</h6>
-              </div>
-
-              <div class="card-body">
-                <div class="row">
-
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Dokter Praktik</label>
-                    <select class="form-select" id="select-pasien">
-                      <option value="">Pilih Dokter</option>
-                      <option value="1">Ahmad Zaki</option>
-                      <option value="2">Bella Arista</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Tanggal Reservasi</label>
-                    <input type="date" class="form-control">
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Waktu Reservasi</label>
-                    <input type="time" class="form-control">
-                  </div>
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Keluhan</label>
-                    <textarea class="form-control"></textarea>
-                  </div>
-                </div>
-                <div class="col d-flex justify-content-end">
-                  <button type="button" class="btn btn-primary px-2 mb-3">Simpan</button>
-                </div>
-              </div>
-            </div>
-            </di>
           </div>
-          <!-- Tab Pasien Lama -->
-          <div class="tab-pane fade" id="primary-pills-lama" role="tabpanel">
-            <div class="card mx-4">
-              <div class="card-header">
-                <h6 class="mb-0">Data Reservasi Pasien</h6>
-              </div>
-              <!-- Dropdown Select -->
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Cari Nama Pasien</label>
-                    <select class="form-select" id="select-pasien">
-                      <option value="">Pilih Pasien</option>
-                      <option value="1">Ahmad Zaki</option>
-                      <option value="2">Bella Arista</option>
-                    </select>
-                  </div>
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Dokter Praktik</label>
-                    <select class="form-select" id="select-pasien">
-                      <option value="">Pilih Dokter</option>
-                      <option value="1">Ahmad Zaki</option>
-                      <option value="2">Bella Arista</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Tanggal Reservasi</label>
-                    <input type="date" class="form-control">
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Waktu Reservasi</label>
-                    <input type="time" class="form-control">
-                  </div>
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Keluhan</label>
-                    <textarea class="form-control"></textarea>
-                  </div>
-                </div>
-                <div class="col d-flex justify-content-end">
-                  <button type="button" class="btn btn-primary px-2 mb-3">Simpan</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
+
     </div>
     <!--start footer-->
     <?php $this->load->view("admin/_templates/footer.php") ?>
@@ -328,6 +350,37 @@
   <!-- Main JS-->
   <script src="<?= base_url('assets/js/main.js') ?>"></script>
 
+  <script>
+    //Toggle alergi obat input
+    function toggleAlergiObatInput() {
+      const status = document.getElementById('alergiObatStatus').value;
+      const detail = document.getElementById('alergiObatDetail');
+
+      if (status === 'Ada') {
+        detail.style.display = 'block';
+        detail.required = true;
+      } else {
+        detail.style.display = 'none';
+        detail.required = false;
+        detail.value = '';
+      }
+    }
+
+    // Toggle alergi makanan input
+    function toggleAlergiMakananInput() {
+      const status = document.getElementById('alergiMakananStatus').value;
+      const detail = document.getElementById('alergiMakananDetail');
+
+      if (status === 'Ada') {
+        detail.style.display = 'block';
+        detail.required = true;
+      } else {
+        detail.style.display = 'none';
+        detail.required = false;
+        detail.value = '';
+      }
+    }
+  </script>
 
 </body>
 

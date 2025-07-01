@@ -27,6 +27,40 @@
     <!-- Main CSS File -->
     <link href="<?= base_url('depan/css/main.css') ?>" rel="stylesheet">
 
+    <style>
+        .btn-submit {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            color: white;
+            background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            color: white;
+            background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+        }
+    </style>
+
     <!-- =======================================================
   * Template Name: BizPage
   * Template URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
@@ -74,65 +108,160 @@
         <div class="container" data-aos="fade-up">
 
             <div class="card shadow p-4 mb-4" style="border-radius: 20px;">
-                <div class="row">
-                    <div class="col-md-4 text-center">
-                        <img src="<?= base_url('depan/img/default-profile.png') ?>" class="img-fluid rounded-circle mb-3" style="width: 150px;" alt="Foto Profil">
-                        <h5 class="fw-bold">Amanda</h5>
-                        <p class="text-muted">Pasien</p>
-                    </div>
+                <div class="form-container">
+                    <h2 class="text-center mb-4" style="color: #333; font-weight: 700;">Form Data Pasien</h2>
 
-                    <div class="col-md-8">
-                        <table class="table table-borderless">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Nama Lengkap</th>
-                                    <td>: Amanda</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Email</th>
-                                    <td>: amanda@example.com</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">No. HP</th>
-                                    <td>: 0812-3456-7890</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Alamat</th>
-                                    <td>: Jl. Senyum Sehat No. 88, Pekanbaru</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Tempat Lahir</th>
-                                    <td>: Dubai</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Tanggal Lahir</th>
-                                    <td>: 12 Januari 1995</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Jenis Kelamin</th>
-                                    <td>: -</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Pekerjaan</th>
-                                    <td>: -</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Status Pernikahan</th>
-                                    <td>: -</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <form id="patientForm">
+                        <!-- Data Pribadi -->
+                        <div class="section-title">Data Pribadi</div>
 
-                        <div class="d-flex justify-content-end mt-4">
-                            <a href="<?= base_url('akun/edit') ?>" class="btn btn-primary me-2" style="border-radius: 25px;">Edit Profil</a>
-                            <a class="btn btn-success me-2" style="border-radius: 25px;">Simpan</a>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="namaLengkap" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="namaLengkap" value="Amanda" placeholder="Masukkan nama lengkap">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" value="amanda@example.com" placeholder="Masukkan email">
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="noHP" class="form-label">No. HP</label>
+                                <input type="tel" class="form-control" id="noHP" value="0812-3456-7890" placeholder="Masukkan nomor HP">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="jenisKelamin" class="form-label">Jenis Kelamin</label>
+                                <select class="form-select" id="jenisKelamin">
+                                    <option value="">Pilih jenis kelamin</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="tempatLahir" class="form-label">Tempat Lahir</label>
+                                <input type="text" class="form-control" id="tempatLahir" value="Dubai" placeholder="Masukkan tempat lahir">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="tanggalLahir" class="form-label">Tanggal Lahir</label>
+                                <input type="date" class="form-control" id="tanggalLahir" value="1995-01-12">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="pekerjaan" class="form-label">Pekerjaan</label>
+                                <input type="text" class="form-control" id="pekerjaan" placeholder="Masukkan pekerjaan">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="statusPernikahan" class="form-label">Status Pernikahan</label>
+                                <select class="form-select" id="statusPernikahan">
+                                    <option value="">Pilih status pernikahan</option>
+                                    <option value="Belum Menikah">Belum Menikah</option>
+                                    <option value="Menikah">Menikah</option>
+                                    <option value="Cerai">Cerai</option>
+                                    <option value="Janda/Duda">Janda/Duda</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="alamat" class="form-label">Alamat</label>
+                                <textarea class="form-control" id="alamat" rows="3" placeholder="Masukkan alamat lengkap">Jl. Senyum Sehat No. 88, Pekanbaru</textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="golonganDarah" class="form-label">Golongan Darah</label>
+                                <select class="form-select" id="golonganDarah">
+                                    <option value="">Pilih golongan darah</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="AB">AB</option>
+                                    <option value="O">O</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Riwayat Kesehatan -->
+                        <div class="section-title">Riwayat Kesehatan</div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="penyakitJantung" class="form-label">Penyakit Jantung</label>
+                                <select class="form-select" id="penyakitJantung">
+                                    <option value="">Pilih opsi</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="diabetes" class="form-label">Diabetes</label>
+                                <select class="form-select" id="diabetes">
+                                    <option value="">Pilih opsi</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="haemophilia" class="form-label">Haemophilia / Kelainan Darah</label>
+                                <select class="form-select" id="haemophilia">
+                                    <option value="">Pilih opsi</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="hepatitis" class="form-label">Hepatitis</label>
+                                <select class="form-select" id="hepatitis">
+                                    <option value="">Pilih opsi</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="alergiObatStatus" class="form-label">Alergi Obat</label>
+                                <select class="form-select mb-2" id="alergiObatStatus" onchange="toggleAlergiObatInput()">
+                                    <option value="">Pilih opsi</option>
+                                    <option value="Ada">Ada</option>
+                                    <option value="Tidak">Tidak</option>
+                                </select>
+                                <textarea class="form-control" id="alergiObatDetail" rows="2" placeholder="Sebutkan obat yang menyebabkan alergi" style="display: none;"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="alergiMakananStatus" class="form-label">Alergi Makanan</label>
+                                <select class="form-select mb-2" id="alergiMakananStatus" onchange="toggleAlergiMakananInput()">
+                                    <option value="">Pilih opsi</option>
+                                    <option value="Ada">Ada</option>
+                                    <option value="Tidak">Tidak</option>
+                                </select>
+                                <textarea class="form-control" id="alergiMakananDetail" rows="2" placeholder="Sebutkan makanan yang menyebabkan alergi" style="display: none;"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-submit btn-sm">
+                                <i class="fas fa-save me-2"></i>Simpan Data
+                            </button>
+                            <button type="button" class="btn btn-edit btn-sm ms-3">
+                                <i class="fas fa-edit me-2"></i>Edit Profile
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
             <div class="text-center mt-5">
-                <a href="<?= base_url('riwayat') ?>" class="btn btn-outline-secondary" style="border-radius: 25px;">Lihat Riwayat Reservasi</a>
+                <a href="<?= base_url('riwayat') ?>" class="btn btn-outline-primary" style="border-radius: 25px;">Lihat Riwayat Reservasi</a>
             </div>
 
         </div>
@@ -229,6 +358,38 @@
 
     <!-- Main JS File -->
     <script src="<?= base_url('depan/js/main.js') ?>"></script>
+
+    <script>
+        //Toggle alergi obat input
+        function toggleAlergiObatInput() {
+            const status = document.getElementById('alergiObatStatus').value;
+            const detail = document.getElementById('alergiObatDetail');
+
+            if (status === 'Ada') {
+                detail.style.display = 'block';
+                detail.required = true;
+            } else {
+                detail.style.display = 'none';
+                detail.required = false;
+                detail.value = '';
+            }
+        }
+
+        // Toggle alergi makanan input
+        function toggleAlergiMakananInput() {
+            const status = document.getElementById('alergiMakananStatus').value;
+            const detail = document.getElementById('alergiMakananDetail');
+
+            if (status === 'Ada') {
+                detail.style.display = 'block';
+                detail.required = true;
+            } else {
+                detail.style.display = 'none';
+                detail.required = false;
+                detail.value = '';
+            }
+        }
+    </script>
 
 </body>
 

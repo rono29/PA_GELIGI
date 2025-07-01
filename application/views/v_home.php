@@ -38,6 +38,25 @@
 
 <body class="index-page">
 
+  <!-- Modal Notifikasi Profil -->
+  <div class="modal fade" id="profileNotificationModal" tabindex="-1" aria-labelledby="profileNotificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="profileNotificationModalLabel">Lengkapi Profil Anda</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Anda belum melengkapi data profil. Silakan lengkapi terlebih dahulu untuk dapat menggunakan layanan kami sepenuhnya.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nanti Saja</button>
+          <a href="<?= base_url('profile') ?>" class="btn btn-primary">Lengkapi Sekarang</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
@@ -281,8 +300,13 @@
                     <!-- Dropdown -->
                     <select class="form-select mb-3">
                       <option selected disabled>Pilih Jenis Layanan</option>
-                      <option>Scaling</option>
-                      <option>Cabut Gigi</option>
+                      <option>pencabutan gigi (exondontic)</option>
+                      <option>Pembersihan Karang Gigi (Scalling)</option>
+                      <option>Penambalan Gigi (Restorasi)</option>
+                      <option>Perawatan Saluran Akar</option>
+                      <option>Pembuatan Gigi Palsu (Protesa)</option>
+                      <option>Merapikan Gigi (Orthodontic)</option>
+                      <option>Veneer + Bleaching</option>
                     </select>
 
                     <!-- Tombol Reservasi -->
@@ -768,6 +792,22 @@
 
   <!-- Main JS File -->
   <script src="<?= base_url('depan/js/main.js') ?>"></script>
+
+  <script>
+    // Script untuk menampilkan modal notifikasi profil
+    document.addEventListener('DOMContentLoaded', function() {
+      // Cek apakah pengguna sudah login dan belum melengkapi profil
+      // Ini adalah contoh, Anda perlu menyesuaikan dengan logika aplikasi Anda
+      const isLoggedIn = true; // Ganti dengan kondisi sebenarnya
+      const isProfileComplete = false; // Ganti dengan kondisi sebenarnya
+
+      if (isLoggedIn && !isProfileComplete) {
+        // Tampilkan modal setelah halaman selesai dimuat
+        const profileModal = new bootstrap.Modal(document.getElementById('profileNotificationModal'));
+        profileModal.show();
+      }
+    });
+  </script>
 
 </body>
 

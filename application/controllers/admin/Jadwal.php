@@ -1,7 +1,15 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Jadwal extends CI_Controller {
+/**
+ * @property CI_Input $input
+ * @property CI_Upload $upload
+ * @property CI_DB $db
+ */
+
+
+class Jadwal extends CI_Controller
+{
 
 	public function index()
 	{
@@ -18,5 +26,15 @@ class Jadwal extends CI_Controller {
 	public function edit()
 	{
 		$this->load->view('admin/penjadwalan/v_editjadwal');
+	}
+
+	public function simpan()
+	{
+		$this->load->database();
+		$this->db->insert('datadokter', [
+			'namaDokter'      => $this->input->post('namaDokter', true),
+			'Jadwal'          => $this->input->post('Jadwal', true),
+			'Status'		  => 1,
+		]);
 	}
 }

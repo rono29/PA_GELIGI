@@ -44,17 +44,28 @@
 
 
                 <div class="card">
-                    <div class="card-body">
-                        <label class="form-label">Nama Dokter</label>
-                        <input class="form-control mb-3" type="text" aria-label="default input example">
+                    <form action="<?= base_url('admin/jadwal/simpan') ?>" method="post">
 
-                        <label class="form-label">Jam Praktik</label>
-                        <input class="form-control mb-3" type="time" aria-label="default input example">
+                        <div class="card-body">
+                            <label class="form-label">Nama Dokter</label>
+                            <select class="form-select mb-3" name="namaDokter">
+                                <option value="">Pilih Nama Dokter</option>
+                                <option value="1">Dr. Chewing Shinlong</option>
+                                <option value="2">Dr. Chewing Shinlong</option>
+                                <option value="3">Dr. Chewing Shinlong</option>
+                                <option value="4">Dr. Chewing Shinlong</option>
+                            </select>
 
-                    </div>
-                    <div class="col d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary px-2 m-3">Simpan</button>
-                    </div>
+                            <label class="form-label">Jam Praktik</label>
+                            <input class="form-control mb-3" type="time" aria-label="default input example" name="Jadwal">
+
+                            <label class="form-label">Hari / Tanggal</label>
+                            <input class="form-control mb-3" type="date" aria-label="default input example" name="date">
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary px-2 m-3">Simpan</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
