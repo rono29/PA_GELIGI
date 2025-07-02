@@ -54,9 +54,9 @@
 											Suasana klinik juga nyaman dan bikin tenang."</td>
 										<td>
 											<div class="col">
-												<button type="button" class="btn btn-sm btn-off">
+												<button type="submit" class="btn btn-sm btn-off">
 													<ion-icon name="arrow-up-circle-sharp"></ion-icon>Unggah</button>
-												<button type="button" class="btn btn-sm btn-danger extra-small-btn ">
+												<button type="submit" class="btn btn-sm btn-danger extra-small-btn ">
 													<ion-icon name="trash-sharp"></ion-icon></button>
 											</div>
 											<div style="align-self: flex-end; font-size: 9px; color: #999; font-style: italic; margin-top: 4px;">
@@ -73,9 +73,9 @@
 										<td>
 
 											<div class="col">
-												<button type="button" class="btn btn-sm btn-off ">
+												<button type="submit" class="btn btn-sm btn-off ">
 													<ion-icon name="arrow-up-circle-sharp"></ion-icon>Unggah</button>
-												<button type="button" class="btn btn-sm btn-danger extra-small-btn ">
+												<button type="submit" class="btn btn-sm btn-danger extra-small-btn ">
 													<ion-icon name="trash-sharp"></ion-icon></button>
 											</div>
 											<div style="align-self: flex-end; font-size: 9px; color: #999; font-style: italic; margin-top: 4px;">
@@ -92,10 +92,10 @@
 										<td>
 											<div class="col">
 												<input type="file" id="uploadFile" style="display: none;" />
-												<button type="button" class="btn btn-sm btn-primary extra-small-btn" onclick="document.getElementById('uploadFile').click();">
+												<button type="submit" class="btn btn-sm btn-primary extra-small-btn">
 													<ion-icon name="arrow-up-circle-sharp"></ion-icon> Unggah
 												</button>
-												<button type="button" class="btn btn-sm btn-danger extra-small-btn ">
+												<button type="submit" class="btn btn-sm btn-danger extra-small-btn ">
 													<ion-icon name="trash-sharp"></ion-icon></button>
 											</div>
 
