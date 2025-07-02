@@ -6,29 +6,21 @@
 </head>
 
 <body>
-
-
   <!--start wrapper-->
   <div class="wrapper">
-
     <!--start sidebar -->
     <?php $this->load->view("admin/_templates/sidebar.php") ?>
     <!--end sidebar -->
-
     <!--start top header-->
     <?php $this->load->view("admin/_templates/topbar.php") ?>
     <!--end top header-->
-
     <!--start sidebar -->
     <?php $this->load->view("admin/_templates/sidebar.php") ?>
     <!--end sidebar -->
-
-
     <!-- start page content wrapper-->
     <div class="page-content-wrapper">
       <!-- start page content-->
       <div class="page-content">
-
         <!--start breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
           <div class="breadcrumb-title pe-3">Data Reservasi</div>
@@ -40,14 +32,9 @@
             </nav>
           </div>
         </div>
-
         <!--end breadcrumb-->
-
-
       </div>
       <!--end page content wrapper-->
-
-
       <div class="container mt-4">
         <div class="card">
           <div class="card-body">
@@ -249,7 +236,6 @@
                       </div>
                     </div>
                   </div>
-
                   <div class="col d-flex justify-content-end mx-4 my-3">
                     <button type="submit" class="btn btn-primary px-3">Simpan</button>
                   </div>
@@ -321,31 +307,17 @@
           </div>
         </div>
       </div>
-
     </div>
     <!--start footer-->
     <?php $this->load->view("admin/_templates/footer.php") ?>
     <!--end footer-->
-
-
-
-
     <!--Start Back To Top Button-->
     <<a href="javaScript:;" class="back-to-top"><ion-icon name="arrow-up-outline"></ion-icon></a>
-
-
-
       <!--start overlay-->
       <div class="overlay"></div>
       <!--end overlay-->
-
   </div>
   <!--end wrapper-->
-
-
-
-
-
   <!-- JS Files-->
   <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
   <script src="<?= base_url('assets/plugins/simplebar/js/simplebar.min.js') ?>"></script>

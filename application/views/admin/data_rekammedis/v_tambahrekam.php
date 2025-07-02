@@ -9,23 +9,18 @@
 </head>
 
 <body>
-
-
   <!--start wrapper-->
   <div class="wrapper">
     <!--start topbar-->
     <?php $this->load->view("admin/_templates/topbar.php") ?>
     <!--end topbar-->
-
     <!--start sidebar -->
     <?php $this->load->view("admin/_templates/sidebar.php") ?>
     <!--end sidebar -->
-
     <!-- start page content wrapper-->
     <div class="page-content-wrapper">
       <!-- start page content-->
       <div class="page-content">
-
         <!--start breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
           <div class="breadcrumb-title pe-3">Data Rekam Medis</div>
@@ -37,14 +32,9 @@
             </nav>
           </div>
         </div>
-
         <!--end breadcrumb-->
-
-
       </div>
       <!--end page content wrapper-->
-
-
       <form action="<?= base_url('admin/rekammedis/simpan') ?>" method="post">
         <div class="card mx-4">
           <div class="card-header">
@@ -52,33 +42,43 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-12 mb-3">
-                <label class="form-label">Nama Lengkap</label>
-                <input type="text" name="namaLengkap" class="form-control" required>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Tempat Lahir</label>
+                <input type="text" name="tempat_lahir" class="form-control" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label">Tempat Tanggal Lahir</label>
-                <input type="text" name="ttl" class="form-control" required>
+                <label class="form-label">Tanggal Lahir</label>
+                <input type="date" name="tgl_lahir" class="form-control" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label">Jenis Kelamin</label>
-                <input type="text" name="jenisKelamin" class="form-control" required>
+                <label for="jenis_Kelamin" class="form-label">Jenis Kelamin</label>
+                <select class="form-select" id="jenis_Kelamin" name="jenisKelamin" required>
+                  <option value="">Pilih opsi</option>
+                  <option value="Laki-Laki">Laki-Laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
               </div>
-              <div class="col-12 mb-3">
+              <div class="col-6 mb-3">
                 <label class="form-label">Pekerjaan</label>
                 <input type="text" name="Pekerjaan" class="form-control" required>
               </div>
-              <div class="col-12 mb-3">
-                <label class="form-label">Status Pernikahan</label>
-                <input type="text" name="statusPernikahan" class="form-control" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Alamat</label>
-                <input type="text" name="Alamat" class="form-control" required>
+              <div class="col-6 mb-3">
+                <label for="statusPernikahan" class="form-label">Status Pernikahan</label>
+                <select class="form-select" id="statusPernikahan" name="statusPernikahan" required>
+                  <option value="">Pilih status pernikahan</option>
+                  <option value="Belum Menikah">Belum Menikah</option>
+                  <option value="Menikah">Menikah</option>
+                  <option value="Cerai">Cerai</option>
+                  <option value="Janda/Duda">Janda/Duda</option>
+                </select>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">No Hp</label>
-                <input type="text" name="noHp" class="form-control" required>
+                <input type="number" name="noHp" class="form-control" required>
+              </div>
+              <div class="col-12 mb-3">
+                <label class="form-label">Alamat</label>
+                <textarea class="form-control" name="alamat" rows="3"></textarea>
               </div>
             </div>
           </div>
@@ -140,16 +140,24 @@
                 <label class="form-label">Penyakit Lainnya</label>
                 <input type="text" name="penyakitLainnya" class="form-control">
               </div>
-              <div class="col-12 mb-3">
-                <div class="row mb-3 align-items-end">
-                  <div class="col-auto">
-                    <label class="form-label">Alergi Obat</label>
-                    <input type="text" name="alergiObat" class="form-control">
-                  </div>
-                  <div class="col">
-                    <label class="form-label">Alergi Makanan</label>
-                    <input type="text" name="alergiMakanan" class="form-control">
-                  </div>
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <label for="alergiObatStatus" class="form-label">Alergi Obat</label>
+                  <select class="form-select mb-2" id="alergiObatStatus" name="alergiObatStatus" onchange="toggleAlergiObatInput()">
+                    <option value="">Pilih opsi</option>
+                    <option value="Ada">Ada</option>
+                    <option value="Tidak">Tidak</option>
+                  </select>
+                  <textarea class="form-control" id="alergiObatDetail" name="alergiObatDetail" rows="2" placeholder="Sebutkan obat yang menyebabkan alergi" style="display: none;"></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="alergiMakananStatus" class="form-label">Alergi Makanan</label>
+                  <select class="form-select mb-2" id="alergiMakananStatus" name="alergiMakananStatus" onchange="toggleAlergiMakananInput()">
+                    <option value="">Pilih opsi</option>
+                    <option value="Ada">Ada</option>
+                    <option value="Tidak">Tidak</option>
+                  </select>
+                  <textarea class="form-control" id="alergiMakananDetail" name="alergiMakananDetail" rows="2" placeholder="Sebutkan makanan yang menyebabkan alergi" style="display: none;"></textarea>
                 </div>
               </div>
             </div>
@@ -193,16 +201,13 @@
                 <textarea class="form-control" name="keterangan"></textarea>
               </div>
             </div>
+            <div class="col d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary px-3">Simpan</button>
+            </div>
           </div>
         </div>
+      </form>
     </div>
-
-    <div class="col d-flex justify-content-end mx-4 my-3">
-      <button type="submit" class="btn btn-primary px-3">Simpan</button>
-    </div>
-    </form>
-  </div>
-
   </div>
 
   <!--start footer-->
@@ -241,6 +246,37 @@
     <!-- Main JS-->
     <script src="<?= base_url('assets/js/main.js') ?>"></script>
 
+    <script>
+      //Toggle alergi obat input
+      function toggleAlergiObatInput() {
+        const status = document.getElementById('alergiObatStatus').value;
+        const detail = document.getElementById('alergiObatDetail');
+
+        if (status === 'Ada') {
+          detail.style.display = 'block';
+          detail.required = true;
+        } else {
+          detail.style.display = 'none';
+          detail.required = false;
+          detail.value = '';
+        }
+      }
+
+      // Toggle alergi makanan input
+      function toggleAlergiMakananInput() {
+        const status = document.getElementById('alergiMakananStatus').value;
+        const detail = document.getElementById('alergiMakananDetail');
+
+        if (status === 'Ada') {
+          detail.style.display = 'block';
+          detail.required = true;
+        } else {
+          detail.style.display = 'none';
+          detail.required = false;
+          detail.value = '';
+        }
+      }
+    </script>
 
 </body>
 
