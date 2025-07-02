@@ -85,8 +85,12 @@
                           <input type="text" name="namaLengkap" class="form-control" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                          <label class="form-label">Tempat Tanggal Lahir</label>
-                          <input type="text" name="ttl" class="form-control" required>
+                          <label class="form-label">Tempat Lahir</label>
+                          <input type="text" name="tempat_lahir" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Tanggal Lahir</label>
+                          <input type="date" name="tgl_lahir" class="form-control" required>
                         </div>
                         <div class="col-md-6 mb-3">
                           <label for="jenis_Kelamin" class="form-label">Jenis Kelamin</label>
@@ -96,11 +100,11 @@
                             <option value="Perempuan">Perempuan</option>
                           </select>
                         </div>
-                        <div class="col-12 mb-3">
+                        <div class="col-6 mb-3">
                           <label class="form-label">Pekerjaan</label>
                           <input type="text" name="Pekerjaan" class="form-control" required>
                         </div>
-                        <div class="col-12 mb-3">
+                        <div class="col-6 mb-3">
                           <label for="statusPernikahan" class="form-label">Status Pernikahan</label>
                           <select class="form-select" id="statusPernikahan" name="statusPernikahan" required>
                             <option value="">Pilih status pernikahan</option>
@@ -111,12 +115,12 @@
                           </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                          <label class="form-label">Alamat</label>
-                          <input type="text" name="Alamat" class="form-control" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
                           <label class="form-label">No Hp</label>
-                          <input type="text" name="noHp" class="form-control" required>
+                          <input type="number" name="noHp" class="form-control" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Alamat</label>
+                          <textarea class="form-control" name="alamat" rows="3"></textarea>
                         </div>
                       </div>
                     </div>
@@ -233,9 +237,13 @@
                           <label class="form-label">Rencana Perawatan</label>
                           <select class="form-select" name="rencanaPerawatan">
                             <option value="">Pilih Rencana Perawatan</option>
-                            <option value="1">Pemeriksaan Rutin</option>
-                            <option value="2">Perawatan Gigi</option>
-                            <option value="3">Konsultasi Spesialis</option>
+                            <option value="Pencabutan gigi (exondontic)">Pencabutan gigi (exondontic)</option>
+                            <option value="Pembersihan Karang Gigi (Scalling)">Pembersihan Karang Gigi (Scalling)</option>
+                            <option value="Penambalan Gigi (Restorasi)">Penambalan Gigi (Restorasi)</option>
+                            <option value="Perawatan Saluran Akar">Perawatan Saluran Akar</option>
+                            <option value="Pembuatan Gigi Palsu (Protesa)">Pembuatan Gigi Palsu (Protesa)</option>
+                            <option value="Merapikan Gigi (Orthodontic)">Merapikan Gigi (Orthodontic)</option>
+                            <option value="Veneer + Bleaching">Veneer + Bleaching</option>
                           </select>
                         </div>
                       </div>
@@ -261,10 +269,10 @@
                           <label class="form-label">Cari Nama Pasien</label>
                           <select class="form-select" name="pasienLama" required>
                             <option value="">Pilih Pasien</option>
-                            <option value="1">Ahmad Zaki - 001</option>
-                            <option value="2">Bella Arista - 002</option>
-                            <option value="3">Citra Dewi - 003</option>
-                            <option value="4">Dian Pratama - 004</option>
+                            <option value="Ahmad Zaki - 001">Ahmad Zaki - 001</option>
+                            <option value="Bella Arista - 002">Bella Arista - 002</option>
+                            <option value="Citra Dewi - 003">Citra Dewi - 003</option>
+                            <option value="Dian Pratama - 004">Dian Pratama - 004</option>
                           </select>
                         </div>
                         <div class="col-12 mb-3">
@@ -292,10 +300,13 @@
                           <label class="form-label">Rencana Perawatan</label>
                           <select class="form-select" name="rencanaPerawatanLama">
                             <option value="">Pilih Rencana Perawatan</option>
-                            <option value="1">Pemeriksaan Rutin</option>
-                            <option value="2">Perawatan Gigi</option>
-                            <option value="3">Konsultasi Spesialis</option>
-                            <option value="4">Kontrol Ulang</option>
+                            <option value="Pencabutan gigi (exondontic)">Pencabutan gigi (exondontic)</option>
+                            <option value="Pembersihan Karang Gigi (Scalling)">Pembersihan Karang Gigi (Scalling)</option>
+                            <option value="Penambalan Gigi (Restorasi)">Penambalan Gigi (Restorasi)</option>
+                            <option value="Perawatan Saluran Akar">Perawatan Saluran Akar</option>
+                            <option value="Pembuatan Gigi Palsu (Protesa)">Pembuatan Gigi Palsu (Protesa)</option>
+                            <option value="Merapikan Gigi (Orthodontic)">Merapikan Gigi (Orthodontic)</option>
+                            <option value="Veneer + Bleaching">Veneer + Bleaching</option>
                           </select>
                         </div>
                       </div>

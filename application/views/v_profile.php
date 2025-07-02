@@ -29,7 +29,7 @@
 
     <style>
         .btn-submit {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            background: linear-gradient(135deg, #a94b87 0%, #a94b87 100%);
             border: none;
             padding: 12px 30px;
             border-radius: 8px;
@@ -41,11 +41,11 @@
         .btn-submit:hover {
             transform: translateY(-2px);
             color: white;
-            background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+            background: linear-gradient(135deg, #d63384 0%, #d63384 100%);
         }
 
         .btn-edit {
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            background: linear-gradient(135deg, #20c997 0%, #20c997 100%);
             border: none;
             padding: 12px 30px;
             border-radius: 8px;
@@ -57,7 +57,7 @@
         .btn-edit:hover {
             transform: translateY(-2px);
             color: white;
-            background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+            background: linear-gradient(135deg, #198754 0%, #198754 100%);
         }
     </style>
 
@@ -89,7 +89,8 @@
                     <li><a href="<?= base_url('jadwaldokter') ?>">Jadwal Dokter</a></li>
                     <li><a href="<?= base_url('home/#portfolio') ?>">Artikel</a></li>
                     <li><a href="<?= base_url('home/#contact') ?>">Kontak</a></li>
-                    <li><a href="" class="">FAQ</a></li>
+                    <li><a href="<?= base_url('faq') ?>">FAQ</a></li>
+                    <a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

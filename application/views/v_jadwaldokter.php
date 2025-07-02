@@ -56,6 +56,8 @@
           <li><a href="<?= base_url('home/#portfolio') ?>">Artikel</a></li>
           <li><a href="<?= base_url('home/#contact') ?>">Kontak</a></li>
           <li><a href="<?= base_url('faq') ?>">FAQ</a></li>
+          <a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a>
+
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

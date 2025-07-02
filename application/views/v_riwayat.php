@@ -55,7 +55,8 @@
                     <li><a href="<?= base_url('jadwaldokter') ?>">Jadwal Dokter</a></li>
                     <li><a href="<?= base_url('home/#portfolio') ?>">Artikel</a></li>
                     <li><a href="<?= base_url('home/#contact') ?>">Kontak</a></li>
-                    <li><a href="" class="">FAQ</a></li>
+                    <li><a href="<?= base_url('faq') ?>">FAQ</a></li>
+                    <a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -78,10 +79,12 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Dokter</th>
-                            <th>Poli</th>
-                            <th>Tanggal Reservasi</th>
-                            <th>Waktu</th>
+                            <th>Har / Tanggal</th>
+                            <th>Jam</th>
+                            <th>Keluhan</th>
+                            <th>Rencana Perawatan</th>
                             <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,9 +94,10 @@
                                 <tr>
                                     <td><?= $no++ ?></td>
                                     <td><?= $r->nama_dokter ?></td>
-                                    <td><?= $r->poli ?></td>
                                     <td><?= date('d M Y', strtotime($r->tanggal)) ?></td>
                                     <td><?= $r->jam ?></td>
+                                    <td><?= $r->keluhan ?></td>
+                                    <td><?= $r->rencana_perawatan ?></td>
                                     <td>
                                         <?php if ($r->status == 'selesai') : ?>
                                             <span class="badge bg-success">Selesai</span>
@@ -101,6 +105,17 @@
                                             <span class="badge bg-warning text-dark">Diproses</span>
                                         <?php else : ?>
                                             <span class="badge bg-secondary">Dibatalkan</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($r->status == 'proses') : ?>
+                                        <a href="<?= base_url('admin/reservasi/batalkan/' . $r->id) ?>" 
+                                            class="btn btn-sm btn-danger" 
+                                            onclick="return confirm('Yakin ingin membatalkan reservasi ini?');">
+                                            Batalkan
+                                        </a>
+                                        <?php else : ?>
+                                        <button class="btn btn-sm btn-secondary" disabled>--</button>
                                         <?php endif; ?>
                                     </td>
                                 </tr>

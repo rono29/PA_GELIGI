@@ -26,6 +26,7 @@
 
   <!-- Main CSS File -->
   <link href="<?= base_url('depan/css/main.css') ?>" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <!-- =======================================================
   * Template Name: BizPage
@@ -262,7 +263,7 @@
                   </div>
                   <div class="bottom-content">
                     <ul>
-                      <li><a href="#"><i class="icon_calendar"></i> Jadwal</a></li>
+                      <li><a href="<?= base_url('jadwaldokter') ?>"><i class="icon_calendar"></i> Jadwal</a></li>
                       <li>
                         <a href="#" data-bs-toggle="modal" data-bs-target="#bookingModal">
                           <i class="icon_phone"></i> Buat Janji
@@ -299,7 +300,7 @@
 
                     <!-- Dropdown -->
                     <select class="form-select mb-3">
-                      <option selected disabled>Pilih Jenis Layanan</option>
+                      <option selected disabled>Pilih Rencana Perawatan</option>
                       <option>pencabutan gigi (exondontic)</option>
                       <option>Pembersihan Karang Gigi (Scalling)</option>
                       <option>Penambalan Gigi (Restorasi)</option>
@@ -694,7 +695,29 @@
             </div>
 
             <div class="col-md-12">
-              <input type="text" class="form-control" name="subject" placeholder="Beri Penilaian Pengalaman Anda..." required="">
+              <label style="margin-bottom: 8px; display: block;">Beri Penilaian Pengalaman Anda:</label>
+              <div style="direction: rtl; display: flex; justify-content: flex-end; gap: 5px;">
+                <input type="radio" name="rating" id="star5" value="5" required style="display: none;">
+                <label for="star5" title="5 bintang" style="font-size: 1.8rem; color: #ccc; cursor: pointer; transition: color 0.2s;">
+                  <i class="fas fa-star"></i>
+                </label>
+                <input type="radio" name="rating" id="star4" value="4" style="display: none;">
+                <label for="star4" title="4 bintang" style="font-size: 1.8rem; color: #ccc; cursor: pointer; transition: color 0.2s;">
+                  <i class="fas fa-star"></i>
+                </label>
+                <input type="radio" name="rating" id="star3" value="3" style="display: none;">
+                <label for="star3" title="3 bintang" style="font-size: 1.8rem; color: #ccc; cursor: pointer; transition: color 0.2s;">
+                  <i class="fas fa-star"></i>
+                </label>
+                <input type="radio" name="rating" id="star2" value="2" style="display: none;">
+                <label for="star2" title="2 bintang" style="font-size: 1.8rem; color: #ccc; cursor: pointer; transition: color 0.2s;">
+                  <i class="fas fa-star"></i>
+                </label>
+                <input type="radio" name="rating" id="star1" value="1" style="display: none;">
+                <label for="star1" title="1 bintang" style="font-size: 1.8rem; color: #ccc; cursor: pointer; transition: color 0.2s;">
+                  <i class="fas fa-star"></i>
+                </label>
+              </div>
             </div>
 
             <div class="col-md-12">
@@ -806,6 +829,18 @@
         const profileModal = new bootstrap.Modal(document.getElementById('profileNotificationModal'));
         profileModal.show();
       }
+    });
+  </script>
+
+  <script>
+    document.querySelectorAll('input[name="rating"]').forEach((input) => {
+      input.addEventListener('change', function () {
+        const stars = document.querySelectorAll('label[for^="star"]');
+        let selected = parseInt(this.value);
+        stars.forEach((label, index) => {
+          label.querySelector('i').style.color = (5 - index) <= selected ? '#ffc107' : '#ccc';
+        });
+      });
     });
   </script>
 
