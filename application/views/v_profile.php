@@ -103,7 +103,7 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2 style="color: #A94B87;">Hi, Amanda</h2>
+            <h2 style="color: #A94B87;">Hi, <?= $profile->nama ?></h2>
         </div><!-- End Section Title -->
 
         <div class="container" data-aos="fade-up">
@@ -111,33 +111,32 @@
             <div class="card shadow p-4 mb-4" style="border-radius: 20px;">
                 <div class="form-container">
                     <h2 class="text-center mb-4" style="color: #333; font-weight: 700;">Form Data Pasien</h2>
+                    <pre><?php print_r($profile); ?></pre>
 
-                    <form id="patientForm">
-                        <!-- Data Pribadi -->
-                        <div class="section-title">Data Pribadi</div>
-
+                    <form id="patientForm" method="post" action="<?= base_url('profile/simpan') ?>">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="namaLengkap" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="namaLengkap" value="Amanda" placeholder="Masukkan nama lengkap">
+                                <input type="text" class="form-control" name="namaLengkap" id="namaLengkap" value="<?= isset($profile->nama) ? $profile->nama : '' ?>">
                             </div>
                             <div class="col-md-6">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" value="amanda@example.com" placeholder="Masukkan email">
+                                <input type="email" class="form-control" name="email" id="email"
+                                    value="<?= isset($profile) && isset($profile->email) ? $profile->email : '' ?>" readonly>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="noHP" class="form-label">No. HP</label>
-                                <input type="tel" class="form-control" id="noHP" value="0812-3456-7890" placeholder="Masukkan nomor HP">
+                                <input type="text" class="form-control" name="noHP" id="noHP" value="<?= isset($profile->no_hp) ? $profile->no_hp : '' ?>">
                             </div>
                             <div class="col-md-6">
                                 <label for="jenisKelamin" class="form-label">Jenis Kelamin</label>
-                                <select class="form-select" id="jenisKelamin">
+                                <select class="form-select" name="jenisKelamin" id="jenisKelamin">
                                     <option value="">Pilih jenis kelamin</option>
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="" <?= (isset($profile->jk) && $profile->jk == 'pria') ? 'selected' : '' ?>>pria</option>
+                                    <option value="wanita" <?= (isset($profile->jk) && $profile->jk == 'wanita') ? 'selected' : '' ?>>wanita</option>
                                 </select>
                             </div>
                         </div>
@@ -145,27 +144,27 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="tempatLahir" class="form-label">Tempat Lahir</label>
-                                <input type="text" class="form-control" id="tempatLahir" value="Dubai" placeholder="Masukkan tempat lahir">
+                                <input type="text" class="form-control" name="tempatLahir" id="tempatLahir" value="<?= isset($profile->tmpt_lahir) ? $profile->tmpt_lahir : '' ?>">
                             </div>
                             <div class="col-md-6">
                                 <label for="tanggalLahir" class="form-label">Tanggal Lahir</label>
-                                <input type="date" class="form-control" id="tanggalLahir" value="1995-01-12">
+                                <input type="date" class="form-control" name="tanggalLahir" id="tanggalLahir" value="<?= isset($profile->tgl_lahir) ? $profile->tgl_lahir : '' ?>">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="pekerjaan" class="form-label">Pekerjaan</label>
-                                <input type="text" class="form-control" id="pekerjaan" placeholder="Masukkan pekerjaan">
+                                <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" value="<?= isset($profile->pekerjaan) ? $profile->pekerjaan : '' ?>">
                             </div>
                             <div class="col-md-6">
                                 <label for="statusPernikahan" class="form-label">Status Pernikahan</label>
-                                <select class="form-select" id="statusPernikahan">
-                                    <option value="">Pilih status pernikahan</option>
-                                    <option value="Belum Menikah">Belum Menikah</option>
-                                    <option value="Menikah">Menikah</option>
-                                    <option value="Cerai">Cerai</option>
-                                    <option value="Janda/Duda">Janda/Duda</option>
+                                <select class="form-select" name="statusPernikahan" id="statusPernikahan">
+                                    <option value="">Pilih status</option>
+                                    <option value="Belum Menikah" <?= (isset($profile->status) && $profile->status == 'Belum Menikah') ? 'selected' : '' ?>>Belum Menikah</option>
+                                    <option value="Menikah" <?= (isset($profile->status) && $profile->status == 'Menikah') ? 'selected' : '' ?>>Menikah</option>
+                                    <option value="Cerai" <?= (isset($profile->status) && $profile->status == 'Cerai') ? 'selected' : '' ?>>Cerai</option>
+                                    <option value="Janda/Duda" <?= (isset($profile->status) && $profile->status == 'Janda/Duda') ? 'selected' : '' ?>>Janda/Duda</option>
                                 </select>
                             </div>
                         </div>
@@ -173,89 +172,83 @@
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <label for="alamat" class="form-label">Alamat</label>
-                                <textarea class="form-control" id="alamat" rows="3" placeholder="Masukkan alamat lengkap">Jl. Senyum Sehat No. 88, Pekanbaru</textarea>
+                                <textarea class="form-control" name="alamat" id="alamat" rows="3"><?= isset($profile->alamat) ? $profile->alamat : '' ?></textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="golonganDarah" class="form-label">Golongan Darah</label>
-                                <select class="form-select" id="golonganDarah">
-                                    <option value="">Pilih golongan darah</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="AB">AB</option>
-                                    <option value="O">O</option>
+                                <select class="form-select" name="golonganDarah" id="golonganDarah">
+                                    <option value="">Pilih</option>
+                                    <option value="A" <?= (isset($profile->goldar) && $profile->goldar == 'A') ? 'selected' : '' ?>>A</option>
+                                    <option value="B" <?= (isset($profile->goldar) && $profile->goldar == 'B') ? 'selected' : '' ?>>B</option>
+                                    <option value="AB" <?= (isset($profile->goldar) && $profile->goldar == 'AB') ? 'selected' : '' ?>>AB</option>
+                                    <option value="O" <?= (isset($profile->goldar) && $profile->goldar == 'O') ? 'selected' : '' ?>>O</option>
                                 </select>
                             </div>
                         </div>
 
-                        <!-- Riwayat Kesehatan -->
                         <div class="section-title">Riwayat Kesehatan</div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="penyakitJantung" class="form-label">Penyakit Jantung</label>
-                                <select class="form-select" id="penyakitJantung">
-                                    <option value="">Pilih opsi</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
+                                <select class="form-select" name="penyakitJantung" id="penyakitJantung">
+                                    <option value="">Pilih</option>
+                                    <option value="Ya" <?= (isset($profile->jantung) && $profile->jantung == 'Ya') ? 'selected' : '' ?>>Ya</option>
+                                    <option value="Tidak" <?= (isset($profile->jantung) && $profile->jantung == 'Tidak') ? 'selected' : '' ?>>Tidak</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <label for="diabetes" class="form-label">Diabetes</label>
-                                <select class="form-select" id="diabetes">
-                                    <option value="">Pilih opsi</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
+                                <select class="form-select" name="diabetes" id="diabetes">
+                                    <option value="">Pilih</option>
+                                    <option value="Ya" <?= (isset($profile->diabetes) && $profile->diabetes == 'Ya') ? 'selected' : '' ?>>Ya</option>
+                                    <option value="Tidak" <?= (isset($profile->diabetes) && $profile->diabetes == 'Tidak') ? 'selected' : '' ?>>Tidak</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="haemophilia" class="form-label">Haemophilia / Kelainan Darah</label>
-                                <select class="form-select" id="haemophilia">
-                                    <option value="">Pilih opsi</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
+                                <label for="haemophilia" class="form-label">Haemophilia</label>
+                                <select class="form-select" name="haemophilia" id="haemophilia">
+                                    <option value="">Pilih</option>
+                                    <option value="Ya" <?= (isset($profile->haemophilia) && $profile->haemophilia == 'Ya') ? 'selected' : '' ?>>Ya</option>
+                                    <option value="Tidak" <?= (isset($profile->haemophilia) && $profile->haemophilia == 'Tidak') ? 'selected' : '' ?>>Tidak</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <label for="hepatitis" class="form-label">Hepatitis</label>
-                                <select class="form-select" id="hepatitis">
-                                    <option value="">Pilih opsi</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
+                                <select class="form-select" name="hepatitis" id="hepatitis">
+                                    <option value="">Pilih</option>
+                                    <option value="Ya" <?= (isset($profile->hepatitis) && $profile->hepatitis == 'Ya') ? 'selected' : '' ?>>Ya</option>
+                                    <option value="Tidak" <?= (isset($profile->hepatitis) && $profile->hepatitis == 'Tidak') ? 'selected' : '' ?>>Tidak</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="row mb-4">
+                        <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="alergiObatStatus" class="form-label">Alergi Obat</label>
-                                <select class="form-select mb-2" id="alergiObatStatus" onchange="toggleAlergiObatInput()">
-                                    <option value="">Pilih opsi</option>
-                                    <option value="Ada">Ada</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
-                                <textarea class="form-control" id="alergiObatDetail" rows="2" placeholder="Sebutkan obat yang menyebabkan alergi" style="display: none;"></textarea>
+                                <label for="alergiObatDetail" class="form-label">Alergi Obat</label>
+                                <textarea class="form-control" name="alergiObatDetail" id="alergiObatDetail" rows="2"><?= isset($profile->alergi_obat) ? $profile->alergi_obat : '' ?></textarea>
                             </div>
                             <div class="col-md-6">
-                                <label for="alergiMakananStatus" class="form-label">Alergi Makanan</label>
-                                <select class="form-select mb-2" id="alergiMakananStatus" onchange="toggleAlergiMakananInput()">
-                                    <option value="">Pilih opsi</option>
-                                    <option value="Ada">Ada</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
-                                <textarea class="form-control" id="alergiMakananDetail" rows="2" placeholder="Sebutkan makanan yang menyebabkan alergi" style="display: none;"></textarea>
+                                <label for="alergiMakananDetail" class="form-label">Alergi Makanan</label>
+                                <textarea class="form-control" name="alergiMakananDetail" id="alergiMakananDetail" rows="2"><?= isset($profile->alergi_makanan) ? $profile->alergi_makanan : '' ?></textarea>
                             </div>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-submit btn-sm">
-                                <i class="fas fa-save me-2"></i>Simpan Data
-                            </button>
-                            <button type="button" class="btn btn-edit btn-sm ms-3">
-                                <i class="fas fa-edit me-2"></i>Edit Profile
-                            </button>
+                            <div class="d-flex justify-content-center align-items-center mt-3">
+                                <!-- Tombol Simpan -->
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-save me-1"></i> Simpan Data
+                                </button>
+
+                                <!-- Tombol Edit -->
+                                <button type="button" class="btn btn-outline-secondary btn-sm ms-2">
+                                    <i class="bi bi-pencil-square me-1"></i> Edit Profile
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -276,67 +269,60 @@
             <div class="row gy-4">
                 <div class="col-lg-4 col-md-6 footer-about">
                     <a href="index.html" class="logo d-flex align-items-center">
-                        <span class="sitename">BizPage</span>
+                        <span class="sitename">Geligi</span>
                     </a>
                     <div class="footer-contact pt-3">
-                        <p>A108 Adam Street</p>
-                        <p>New York, NY 535022</p>
-                        <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                        <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        <p class="mt-3"><strong>Operasional Klinik</strong></p>
+                        <p>Senin - Jumat</p>
+                        <p>09.00 - 21.00 WIB</p>
+                        <p>Jl. Sembilang, Rumbai</p>
                     </div>
                     <div class="social-links d-flex mt-4">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
+                        <a href=""><i class="bi bi-whatsapp"></i></a>
                         <a href=""><i class="bi bi-facebook"></i></a>
                         <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Useful Links</h4>
+                    <h4>Tautan Penting</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Terms of service</a></li>
-                        <li><a href="#">Privacy policy</a></li>
+                        <li><a href="#hero">Beranda</a></li>
+                        <li><a href="#about">Tentang Kami</a></li>
+                        <li><a href="#services">Layanan</a></li>
+                        <li><a href="#portofolio">Artikel</a></li>
+                        <li><a href="#contact">Hubungi Kami</a></li>
+                        <li><a href="<?= base_url('faq') ?>">FAQ</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><a href="#">Web Design</a></li>
-                        <li><a href="#">Web Development</a></li>
-                        <li><a href="#">Product Management</a></li>
-                        <li><a href="#">Marketing</a></li>
-                        <li><a href="#">Graphic Design</a></li>
-                    </ul>
+
                 </div>
 
-                <div class="col-lg-4 col-md-12 footer-newsletter">
-                    <h4>Our Newsletter</h4>
-                    <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-                    <form action="forms/newsletter.php" method="post" class="php-email-form">
-                        <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-                    </form>
+                <div class="col-lg-4 col-md-12 footer-newsletter text-center text-lg-start">
+
+                    <!-- Logo -->
+                    <a href="#hero" class="d-inline-flex align-items-center mb-3">
+                        <img src="<?= base_url('depan/img/logodental.png') ?>" alt="Logo Dental" style="max-width: 200px; height: auto;">
+                    </a>
+
+                    <!-- Kontak Email -->
+                    <p class="mt-3 mb-0" style="font-size: 14px; color: #f8f9fa;">
+                        <strong>Email:</strong>
+                        <a href="mailto:geligidentalcare@gmail.com" class="text-decoration-none text-light ms-1">
+                            geligidentalcare@gmail.com
+                        </a>
+                    </p>
+
                 </div>
 
             </div>
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">BizPage</strong> <span>All Rights Reserved</span></p>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you've purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-            </div>
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">Geligi</strong> <span>All Rights Reserved</span></p>
+        </div>
         </div>
 
     </footer>

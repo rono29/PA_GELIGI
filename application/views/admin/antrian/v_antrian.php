@@ -39,7 +39,7 @@
                 <div class="d-flex align-items-center">
                   <div class="">
                     <p class="mb-1">Total Data Reservasi</p>
-                    <h4 class="mb-0 text-info">1.5M</h4>
+                    <h4 class="mb-0 text-info"><?= $total_reservasi ?></h4>
                   </div>
                   <div class="ms-auto text-info fs-2">
                     <ion-icon name="people-sharp"></ion-icon>
@@ -55,7 +55,7 @@
                 <div class="d-flex align-items-center">
                   <div class="">
                     <p class="mb-1">Total Rekam Medis</p>
-                    <h4 class="mb-0 text-info">1.5M</h4>
+                    <h4 class="mb-0 text-info"><?= $total_rekammedis ?></h4>
                   </div>
                   <div class="ms-auto text-info fs-2">
                     <ion-icon name="people-sharp"></ion-icon>
@@ -79,20 +79,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <?php foreach ($antrian as $a): ?>
+                      <tr>
+                        <td><?= $a->no_antrian ?></td>
+                        <td>
+                          <?php if ($a->status === 'Dalam Proses'): ?>
+                            <span class="badge alert-warning">Dalam Proses</span>
+                          <?php elseif ($a->status === 'Selesai'): ?>
+                            <span class="badge alert-success">Selesai</span>
+                          <?php else: ?>
+                            <span class="badge bg-secondary">Menunggu</span>
+                          <?php endif; ?>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
 
-                      <td>1</td>
-                      <td><span class="badge alert-warning">Dalam Proses</span></td>
-                    </tr>
-                    <tr>
-
-                      <td>2</td>
-                      <td><span class="badge alert-warning">Dalam Proses</span></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td><span class="badge alert-success">Selesai</span></td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -104,10 +105,10 @@
             <div class="card radius-10 text-center">
               <div class="card-body d-flex flex-column justify-content-center align-items-center" style="min-height: 250px;">
                 <p class="mb-2 fs-5">Antrian Sekarang</p>
-                <h1 class="fw-bold mb-4">50</h1>
-                <button type="button" class="btn btn-primary px-4 py-2 fw-bold" style="background-color: #a94b8f; border: none;">
+                <h1 class="fw-bold mb-4"><?= $antrian_sekarang ? $antrian_sekarang->no_antrian : '-' ?></h1>
+                <a href="<?= base_url('admin/antrian/lanjut') ?>" class="btn btn-primary px-4 py-2 fw-bold" style="background-color: #a94b8f; border: none;">
                   Lanjut
-                </button>
+                </a>
               </div>
             </div>
           </div>

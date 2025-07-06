@@ -47,17 +47,18 @@
                     <form action="<?= base_url('admin/jadwal/simpan') ?>" method="post">
 
                         <div class="card-body">
-                            <label class="form-label">Nama Dokter</label>
-                            <select class="form-select mb-3" name="namaDokter">
-                                <option value="">Pilih Nama Dokter</option>
-                                <option value="1">Dr. Chewing Shinlong</option>
-                                <option value="2">Dr. Chewing Shinlong</option>
-                                <option value="3">Dr. Chewing Shinlong</option>
-                                <option value="4">Dr. Chewing Shinlong</option>
-                            </select>
+                            <div class="col-12 mb-3">
+                                <label class="form-label">Dokter Praktik</label>
+                                <select class="form-select" name="dokterLama" required>
+                                    <option value="">Pilih Dokter</option>
+                                    <?php foreach ($dokter as $d) : ?>
+                                        <option value="<?= $d->id_user ?>"><?= $d->nama ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
 
                             <label class="form-label">Jam Praktik</label>
-                            <input class="form-control mb-3" type="time" aria-label="default input example" name="Jadwal">
+                            <input class="form-control mb-3" type="time" aria-label="default input example" name="waktu">
 
                             <label class="form-label">Hari / Tanggal</label>
                             <input class="form-control mb-3" type="date" aria-label="default input example" name="date">

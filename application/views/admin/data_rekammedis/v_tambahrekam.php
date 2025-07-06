@@ -43,6 +43,10 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-6 mb-3">
+                <label class="form-label">Nama Lengkap</label>
+                <input type="text" name="namaLengkap" class="form-control" required>
+              </div>
+              <div class="col-md-6 mb-3">
                 <label class="form-label">Tempat Lahir</label>
                 <input type="text" name="tempat_lahir" class="form-control" required>
               </div>
@@ -52,10 +56,10 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="jenis_Kelamin" class="form-label">Jenis Kelamin</label>
-                <select class="form-select" id="jenis_Kelamin" name="jenisKelamin" required>
+                <select class="form-select" id="jenis_Kelamin" name="jenis_kelamin" required>
                   <option value="">Pilih opsi</option>
-                  <option value="Laki-Laki">Laki-Laki</option>
-                  <option value="Perempuan">Perempuan</option>
+                  <option value="pria">pria</option>
+                  <option value="wanita">wanita</option>
                 </select>
               </div>
               <div class="col-6 mb-3">
@@ -108,32 +112,32 @@
                 <label class="form-label">Penyakit Jantung</label>
                 <select name="penyakitJantung" class="form-select" required>
                   <option value="">Pilih...</option>
-                  <option value="1">Ada</option>
-                  <option value="0">Tidak Ada</option>
+                  <option value="ya">Ada</option>
+                  <option value="tidak">Tidak Ada</option>
                 </select>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Diabetes</label>
                 <select name="diabetes" class="form-select" required>
                   <option value="">Pilih...</option>
-                  <option value="1">Ada</option>
-                  <option value="0">Tidak Ada</option>
+                  <option value="ya">Ada</option>
+                  <option value="tidak">Tidak Ada</option>
                 </select>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Haemophilia/Kelainan Darah</label>
                 <select name="kelainanDarah" class="form-select" required>
                   <option value="">Pilih...</option>
-                  <option value="1">Ada</option>
-                  <option value="0">Tidak Ada</option>
+                  <option value="ya">Ada</option>
+                  <option value="tidak">Tidak Ada</option>
                 </select>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Hepatitis</label>
                 <select name="hepatitis" class="form-select" required>
                   <option value="">Pilih...</option>
-                  <option value="1">Ada</option>
-                  <option value="0">Tidak Ada</option>
+                  <option value="ya">Ada</option>
+                  <option value="tidak">Tidak Ada</option>
                 </select>
               </div>
               <div class="col-12 mb-3">
@@ -143,21 +147,21 @@
               <div class="row mb-4">
                 <div class="col-md-6">
                   <label for="alergiObatStatus" class="form-label">Alergi Obat</label>
-                  <select class="form-select mb-2" id="alergiObatStatus" name="alergiObatStatus" onchange="toggleAlergiObatInput()">
+                  <select class="form-select mb-2" id="alergiObatStatus" name="alergi_obat" onchange="toggleAlergiObatInput()">
                     <option value="">Pilih opsi</option>
                     <option value="Ada">Ada</option>
                     <option value="Tidak">Tidak</option>
                   </select>
-                  <textarea class="form-control" id="alergiObatDetail" name="alergiObatDetail" rows="2" placeholder="Sebutkan obat yang menyebabkan alergi" style="display: none;"></textarea>
+                  <textarea class="form-control" id="alergiObatDetail" name="alergi_obat" rows="2" placeholder="Sebutkan obat yang menyebabkan alergi" style="display: none;"></textarea>
                 </div>
                 <div class="col-md-6">
                   <label for="alergiMakananStatus" class="form-label">Alergi Makanan</label>
-                  <select class="form-select mb-2" id="alergiMakananStatus" name="alergiMakananStatus" onchange="toggleAlergiMakananInput()">
+                  <select class="form-select mb-2" id="alergiMakananStatus" name="alergi_makanan" onchange="toggleAlergiMakananInput()">
                     <option value="">Pilih opsi</option>
                     <option value="Ada">Ada</option>
                     <option value="Tidak">Tidak</option>
                   </select>
-                  <textarea class="form-control" id="alergiMakananDetail" name="alergiMakananDetail" rows="2" placeholder="Sebutkan makanan yang menyebabkan alergi" style="display: none;"></textarea>
+                  <textarea class="form-control" id="alergiMakananDetail" name="alergi_makanan" rows="2" placeholder="Sebutkan makanan yang menyebabkan alergi" style="display: none;"></textarea>
                 </div>
               </div>
             </div>
@@ -173,17 +177,19 @@
             <div class="row">
               <div class="col-12 mb-3">
                 <label class="form-label">Tanggal Pemeriksaan</label>
-                <input type="datetime-local" class="form-control" name="tglWaktu">
+                <input type="date" class="form-control" name="tgl">
               </div>
+
               <div class="col-12 mb-3">
                 <label class="form-label">Dokter Praktik</label>
-                <select class="form-select" id="select-pasien" name="dokter" required>
+                <select class="form-select" name="dokterLama" required>
                   <option value="">Pilih Dokter</option>
-                  <?php foreach ($dokter as $d): ?>
-                    <option value="<?= $d->id ?>"><?= htmlspecialchars($d->namaDokter) ?> (<?= htmlspecialchars($d->Jadwal) ?>)</option>
+                  <?php foreach ($dokter as $d) : ?>
+                    <option value="<?= $d->id_user ?>"><?= $d->nama ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
+
               <div class="col-12 mb-3">
                 <label class="form-label">Gigi</label>
                 <input type="text" class="form-control" name="gigi">

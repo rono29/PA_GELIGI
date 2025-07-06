@@ -60,7 +60,9 @@
             <div class="tab-content" id="pills-tabContent">
               <!-- Tab Pasien Baru -->
               <div class="tab-pane fade show active" id="pills-baru" role="tabpanel" aria-labelledby="pills-baru-tab">
-                <form action="#" method="post">
+                <form action="<?= base_url('admin/reservasi/simpan') ?>" method="post">
+                  <input type="hidden" name="tipe_pasien" value="baru">
+
                   <div class="card mx-4">
                     <div class="card-header">
                       <h6 class="mb-0">Data Diri Pasien</h6>
@@ -81,10 +83,10 @@
                         </div>
                         <div class="col-md-6 mb-3">
                           <label for="jenis_Kelamin" class="form-label">Jenis Kelamin</label>
-                          <select class="form-select" id="jenis_Kelamin" name="jenisKelamin" required>
+                          <select class="form-select" id="jenis_Kelamin" name="jenis_kelamin" required>
                             <option value="">Pilih opsi</option>
-                            <option value="Laki-Laki">Laki-Laki</option>
-                            <option value="Perempuan">Perempuan</option>
+                            <option value="pria">pria</option>
+                            <option value="wanita">wanita</option>
                           </select>
                         </div>
                         <div class="col-6 mb-3">
@@ -137,32 +139,32 @@
                           <label class="form-label">Penyakit Jantung</label>
                           <select name="penyakitJantung" class="form-select" required>
                             <option value="">Pilih...</option>
-                            <option value="1">Ada</option>
-                            <option value="0">Tidak Ada</option>
+                            <option value="ya">Ada</option>
+                            <option value="tidak">Tidak Ada</option>
                           </select>
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Diabetes</label>
                           <select name="diabetes" class="form-select" required>
                             <option value="">Pilih...</option>
-                            <option value="1">Ada</option>
-                            <option value="0">Tidak Ada</option>
+                            <option value="ya">Ada</option>
+                            <option value="tidak">Tidak Ada</option>
                           </select>
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Haemophilia/Kelainan Darah</label>
                           <select name="kelainanDarah" class="form-select" required>
                             <option value="">Pilih...</option>
-                            <option value="1">Ada</option>
-                            <option value="0">Tidak Ada</option>
+                            <option value="ya">Ada</option>
+                            <option value="tidak">Tidak Ada</option>
                           </select>
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Hepatitis</label>
                           <select name="hepatitis" class="form-select" required>
                             <option value="">Pilih...</option>
-                            <option value="1">Ada</option>
-                            <option value="0">Tidak Ada</option>
+                            <option value="ya">Ada</option>
+                            <option value="tidak">Tidak Ada</option>
                           </select>
                         </div>
                         <div class="col-12 mb-3">
@@ -172,21 +174,21 @@
                         <div class="row mb-4">
                           <div class="col-md-6">
                             <label for="alergiObatStatus" class="form-label">Alergi Obat</label>
-                            <select class="form-select mb-2" id="alergiObatStatus" name="alergiObatStatus" onchange="toggleAlergiObatInput()">
+                            <select class="form-select mb-2" id="alergiObatStatus" name="alergi_obat" onchange="toggleAlergiObatInput()">
                               <option value="">Pilih opsi</option>
                               <option value="Ada">Ada</option>
                               <option value="Tidak">Tidak</option>
                             </select>
-                            <textarea class="form-control" id="alergiObatDetail" name="alergiObatDetail" rows="2" placeholder="Sebutkan obat yang menyebabkan alergi" style="display: none;"></textarea>
+                            <textarea class="form-control" id="alergiObatDetail" name="alergi_obat" rows="2" placeholder="Sebutkan obat yang menyebabkan alergi" style="display: none;"></textarea>
                           </div>
                           <div class="col-md-6">
                             <label for="alergiMakananStatus" class="form-label">Alergi Makanan</label>
-                            <select class="form-select mb-2" id="alergiMakananStatus" name="alergiMakananStatus" onchange="toggleAlergiMakananInput()">
+                            <select class="form-select mb-2" id="alergiMakananStatus" name="alergi_makanan" onchange="toggleAlergiMakananInput()">
                               <option value="">Pilih opsi</option>
                               <option value="Ada">Ada</option>
                               <option value="Tidak">Tidak</option>
                             </select>
-                            <textarea class="form-control" id="alergiMakananDetail" name="alergiMakananDetail" rows="2" placeholder="Sebutkan makanan yang menyebabkan alergi" style="display: none;"></textarea>
+                            <textarea class="form-control" id="alergiMakananDetail" name="alergi_makanan" rows="2" placeholder="Sebutkan makanan yang menyebabkan alergi" style="display: none;"></textarea>
                           </div>
                         </div>
                       </div>
@@ -201,11 +203,11 @@
                       <div class="row">
                         <div class="col-12 mb-3">
                           <label class="form-label">Dokter Praktik</label>
-                          <select class="form-select" name="dokter" required>
+                          <select class="form-select" name="dokterLama" required>
                             <option value="">Pilih Dokter</option>
-                            <option value="1">Dr. Ahmad Zaki (Senin-Rabu 08:00-12:00)</option>
-                            <option value="2">Dr. Bella Arista (Selasa-Kamis 13:00-17:00)</option>
-                            <option value="3">Dr. Citra Dewi (Jumat-Minggu 09:00-15:00)</option>
+                            <?php foreach ($dokter as $d) : ?>
+                              <option value="<?= $d->id_user ?>"><?= $d->nama ?></option>
+                            <?php endforeach; ?>
                           </select>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -216,11 +218,7 @@
                           <label class="form-label">Waktu Reservasi</label>
                           <input type="time" class="form-control" name="waktu" required>
                         </div>
-                        <div class="col-12 mb-3">
-                          <label class="form-label">Keluhan</label>
-                          <textarea class="form-control" name="keluhan" rows="3"></textarea>
-                        </div>
-                        <div class="col-12 mb-3">
+                        <div class="col-6 mb-3">
                           <label class="form-label">Rencana Perawatan</label>
                           <select class="form-select" name="rencanaPerawatan">
                             <option value="">Pilih Rencana Perawatan</option>
@@ -233,6 +231,18 @@
                             <option value="Veneer + Bleaching">Veneer + Bleaching</option>
                           </select>
                         </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Jenis Reservasi</label>
+                          <select class="form-select" name="jenis_reservasi" required>
+                            <option value="">Pilih Jenis Reservasi</option>
+                            <option value="reguler">Reguler</option>
+                            <option value="kontrol">Kontrol Ulang</option>
+                          </select>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label class="form-label">Keluhan</label>
+                          <textarea class="form-control" name="keluhan" rows="3"></textarea>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -244,7 +254,8 @@
 
               <!-- Tab Pasien Lama -->
               <div class="tab-pane fade" id="pills-lama" role="tabpanel" aria-labelledby="pills-lama-tab">
-                <form action="#" method="post">
+                <form action="<?= base_url('admin/reservasi/simpan') ?>" method="post">
+                  <input type="hidden" name="tipe_pasien" value="lama">
                   <div class="card mx-4">
                     <div class="card-header">
                       <h6 class="mb-0">Data Reservasi Pasien</h6>
@@ -255,21 +266,21 @@
                           <label class="form-label">Cari Nama Pasien</label>
                           <select class="form-select" name="pasienLama" required>
                             <option value="">Pilih Pasien</option>
-                            <option value="Ahmad Zaki - 001">Ahmad Zaki - 001</option>
-                            <option value="Bella Arista - 002">Bella Arista - 002</option>
-                            <option value="Citra Dewi - 003">Citra Dewi - 003</option>
-                            <option value="Dian Pratama - 004">Dian Pratama - 004</option>
+                            <?php foreach ($pasien as $p): ?>
+                              <option value="<?= $p->id_user ?>"><?= $p->nama ?> - <?= $p->id_user ?></option>
+                            <?php endforeach; ?>
                           </select>
                         </div>
                         <div class="col-12 mb-3">
                           <label class="form-label">Dokter Praktik</label>
                           <select class="form-select" name="dokterLama" required>
                             <option value="">Pilih Dokter</option>
-                            <option value="1">Dr. Ahmad Zaki (Senin-Rabu 08:00-12:00)</option>
-                            <option value="2">Dr. Bella Arista (Selasa-Kamis 13:00-17:00)</option>
-                            <option value="3">Dr. Citra Dewi (Jumat-Minggu 09:00-15:00)</option>
+                            <?php foreach ($dokter as $d) : ?>
+                              <option value="<?= $d->id_user ?>"><?= $d->nama ?></option>
+                            <?php endforeach; ?>
                           </select>
                         </div>
+
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Tanggal Reservasi</label>
                           <input type="date" class="form-control" name="tglLama" required>
@@ -281,6 +292,14 @@
                         <div class="col-12 mb-3">
                           <label class="form-label">Keluhan</label>
                           <textarea class="form-control" name="keluhanLama" rows="3"></textarea>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Jenis Reservasi</label>
+                          <select class="form-select" name="jenis_reservasi" required>
+                            <option value="">Pilih Jenis Reservasi</option>
+                            <option value="reguler">Reguler</option>
+                            <option value="kontrol">Kontrol Ulang</option>
+                          </select>
                         </div>
                         <div class="col-12 mb-3">
                           <label class="form-label">Rencana Perawatan</label>

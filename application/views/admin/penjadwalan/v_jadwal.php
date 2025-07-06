@@ -48,43 +48,28 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>drg. Maudy Ayunda</td>
-										<td>12:00</td>
-										<td><span class="badge alert-danger">TIdak AKtif</span></td>
-										<td>
-											<div class="d-flex align-items-center gap-3 fs-6">
-												<a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit" aria-label="Edit"><ion-icon name="pencil-sharp"></ion-icon></a>
-												<a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Hapus" aria-label="Delete"><ion-icon name="trash-sharp"></ion-icon></a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>drg. Thesi Kurnia Ayudia</td>
-										<td>14:00</td>
-										<td><span class="badge alert-success">Aktif</span></td>
-										<td>
-											<div class="d-flex align-items-center gap-3 fs-6">
-												<a href="<?php echo base_url('admin/jadwal/edit'); ?>"
-													class="text-warning"
-													data-bs-toggle="tooltip"
-													data-bs-placement="bottom"
-													title="Edit"
-													aria-label="Edit">
-													<ion-icon name="pencil-sharp"></ion-icon>
-												</a>
-												<a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Hapus" aria-label="Delete"><ion-icon name="trash-sharp"></ion-icon></a>
-											</div>
-										</td>
-									</tr>
+									<?php $no = 1;
+									foreach ($reservasi as $row): ?>
+										<tr>
+											<td><?= $row->nama ?></td>
+											<td><?= $row->waktu ?></td>
+											<td><span class="badge alert-danger">TIdak AKtif</span></td>
+											<td>
+												<div class="d-flex align-items-center gap-3 fs-6">
+													<a href="<?= base_url('admin/jadwal/edit/' . $row->id_jadwal) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" aria-label="Edit">
+														<ion-icon name="pencil-sharp"></ion-icon>
+													</a>
+													<a href="<?= base_url('admin/jadwal/delete/' . $row->id_jadwal) ?>" onclick="return confirm('Yakin ingin menghapus jadwal ini?');" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus" aria-label="Delete">
+														<ion-icon name="trash-sharp"></ion-icon>
+													</a>
+
+												</div>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+
 								</tbody>
 								<tfoot>
-									<tr>
-										<th>Nama Dokter</th>
-										<th>Jam Praktik</th>
-										<th>Status</th>
-										<th>Aksi</th>
-									</tr>
 								</tfoot>
 							</table>
 						</div>

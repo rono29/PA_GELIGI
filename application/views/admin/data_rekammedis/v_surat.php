@@ -53,7 +53,7 @@
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">JENIS KELAMIN</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">PEREMPUAN</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;">wanita</td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">PEKERJAAN</td>

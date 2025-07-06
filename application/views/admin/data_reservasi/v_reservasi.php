@@ -1,128 +1,127 @@
 <!doctype html>
 <html lang="en" class="light-theme">
-  <head>
-    <?php $this->load->view("admin/_templates/header.php")?>
-  </head>
-  <body>
-    
 
- <!--start wrapper-->
-    <div class="wrapper">
+<head>
+  <?php $this->load->view("admin/_templates/header.php") ?>
+</head>
 
-        <!--start topbar-->
-        <?php $this->load->view("admin/_templates/topbar.php")?>
-        <!--end topbar-->
-
-        <!--start sidebar -->
-        <?php $this->load->view("admin/_templates/sidebar.php")?>
-        <!--end sidebar -->
+<body>
 
 
-        <!-- start page content wrapper-->
-        <div class="page-content-wrapper">
-          <!-- start page content-->
-         <div class="page-content">
+  <!--start wrapper-->
+  <div class="wrapper">
 
-          <!--start breadcrumb-->
-          <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Data Reservasi</div>
+    <!--start topbar-->
+    <?php $this->load->view("admin/_templates/topbar.php") ?>
+    <!--end topbar-->
+
+    <!--start sidebar -->
+    <?php $this->load->view("admin/_templates/sidebar.php") ?>
+    <!--end sidebar -->
+
+
+    <!-- start page content wrapper-->
+    <div class="page-content-wrapper">
+      <!-- start page content-->
+      <div class="page-content">
+
+        <!--start breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+          <div class="breadcrumb-title pe-3">Data Reservasi</div>
+        </div>
+        <br>
+        <div class="col">
+          <a class="btn btn-primary px-5" href="<?php echo base_url() . 'admin/reservasi/tambah' ?>">Tambah Data</a>
+        </div>
+
+        <br><br>
+        <!--end breadcrumb-->
+
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal Input</th>
+                    <th>Nama Lengkap</th>
+                    <th>Umur</th>
+                    <th>Alamat</th>
+                    <th class="wrap-text">Tanggal Reservasi</th>
+                    <th class="wrap-text">Waktu Reservasi</th>
+                    <th class="wrap-text">No Antrian</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $no = 1;
+                  foreach ($reservasi as $row): ?>
+                    <tr>
+                      <td><?= $no++ ?></td>
+                      <td><?= $row->created_at ?></td>
+                      <td><?= $row->nama ?></td>
+                      <td><?= $row->umur ?> Tahun</td>
+                      <td><?= $row->alamat ?></td>
+                      <td><?= $row->tgl_input ?></td>
+                      <td><?= $row->jam_res ?></td>
+                      <td><?= $row->no_antrian ?></td>
+                      <td><?= $row->status ?></td>
+
+                      <td>
+                        <div class="d-flex align-items-center gap-3 fs-6">
+                          <a href="<?= base_url('admin/reservasi/preview/' . $row->id_res) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Rincian">
+                            <ion-icon name="eye-sharp"></ion-icon>
+                          </a>
+
+                          <a href="<?= base_url('admin/reservasi/delete/' . $row->id_res) ?>"
+                            class="text-danger"
+                            onclick="return confirm('Yakin ingin menghapus data ini?')"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="Hapus">
+                            <ion-icon name="trash-sharp"></ion-icon>
+                          </a>
+
+                        </div>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                </tbody>
+
+              </table>
+            </div>
           </div>
-          <br>
-          <div class="col">
-			<a class="btn btn-primary px-5" href="<?php echo base_url() . 'admin/reservasi/tambah'?>">Tambah Data</a>
-		</div>
-
- <br><br>
-          <!--end breadcrumb-->
-
-				<div class="card">
-					<div class="card-body">
-						<div class="table-responsive">
-							<table id="example" class="table table-striped table-bordered" style="width:100%">
-								<thead>
-									<tr>
-										<th>Tanggal Input</th>
-										<th>Nama Lengkap</th>
-										<th >Umur</th>
-										<th>Alamat</th>
-										<th class="wrap-text">Tanggal Reservasi</th>
-										<th class="wrap-text">Waktu Reservasi</th>
-										<th class="wrap-text">No Antrian</th>
-										<th>Status</th>
-										<th>Aksi</th>
-
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>2025-06-07</td>
-										<td>Lila Loliana</td>
-										<td>21 Tahun</td>
-										<td>Umban Sari, Rumbai</td>
-										<td>2025-06-08</td>
-										<td>20:30</td>
-										<td>A05</td>
-										 <td><span class="badge alert-success">Selesai</span></td>
-						
-										<td>
-											<div class="d-flex align-items-center gap-3 fs-6">
-												<a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Rincian" aria-label="Edit"><ion-icon name="eye-sharp"></ion-icon></a>
-												
-												<a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Hapus" aria-label="Delete"><ion-icon name="trash-sharp"></ion-icon></a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>2025-06-05</td>
-										<td>Lila Loliana</td>
-										<td>21 Tahun</td>
-										<td>Umban Sari, Rumbai</td>
-										<td>2025-06-08</td>
-										<td>20:30</td>
-										<td>A06</td>
-										<td><span class="badge alert-warning">Dalam Proses</span></td>
-						
-										<td>
-											<div class="d-flex align-items-center gap-3 fs-6">
-												<a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Rincian" aria-label="Edit"><ion-icon name="eye-sharp"></ion-icon></a>
-												
-												<a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Hapus" aria-label="Delete"><ion-icon name="trash-sharp"></ion-icon></a>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							
-							</table>
-						</div>
-					</div>
-				</div>
-          <!-- end page content-->
-         </div>
-		    <!--end page content wrapper-->
-   </div>
+        </div>
+        <!-- end page content-->
+      </div>
+      <!--end page content wrapper-->
+    </div>
   </div>
-</div>
+  </div>
 
-          <!--start footer-->
-          <?php $this->load->view("admin/_templates/footer.php")?>
-          <!--end footer-->
-         
-
-
-         <!--Start Back To Top Button-->
-		     <<a href="javaScript:;" class="back-to-top"><ion-icon name="arrow-up-outline"></ion-icon></a>
-	
+  <!--start footer-->
+  <?php $this->load->view("admin/_templates/footer.php") ?>
+  <!--end footer-->
 
 
-         <!--start overlay-->
-          <div class="overlay"></div>
-         <!--end overlay-->
 
-     </div>
-  <!--end wrapper-->
+  <!--Start Back To Top Button-->
+  <<a href="javaScript:;" class="back-to-top"><ion-icon name="arrow-up-outline"></ion-icon></a>
 
 
-  
+
+    <!--start overlay-->
+    <div class="overlay"></div>
+    <!--end overlay-->
+
+    </div>
+    <!--end wrapper-->
+
+
+
 
 
     <!-- JS Files-->
@@ -141,5 +140,6 @@
     <script src="<?= base_url('assets/js/main.js') ?>"></script>
 
 
-  </body>
+</body>
+
 </html>

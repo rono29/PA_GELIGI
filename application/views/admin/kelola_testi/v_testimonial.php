@@ -46,62 +46,40 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>ini@email.com</td>
-										<td>5</td>
-										<td class="wrap-text">"Saya datang untuk perawatan behel, dokternya sabar banget jelasin prosesnya.
-											Prosedur cepat, hasilnya memuaskan.
-											Suasana klinik juga nyaman dan bikin tenang."</td>
-										<td>
-											<div class="col">
-												<button type="submit" class="btn btn-sm btn-off">
-													<ion-icon name="arrow-up-circle-sharp"></ion-icon>Unggah</button>
-												<button type="submit" class="btn btn-sm btn-danger extra-small-btn ">
-													<ion-icon name="trash-sharp"></ion-icon></button>
-											</div>
-											<div style="align-self: flex-end; font-size: 9px; color: #999; font-style: italic; margin-top: 4px;">
-												Diunggah oleh Amanda • 2025-06-08 20:15:34
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>itu@gmail.com</td>
-										<td>4</td>
-										<td class="wrap-text">"Pelayanannya luar biasa! Dokternya ramah, proses scalling-nya nyaman,
-											dan ruangannya bersih banget. Saya jadi nggak takut ke dokter gigi lagi.
-											Recommended banget buat perawatan gigi!"</td>
-										<td>
+									<?php foreach ($testi as $row): ?>
+										<tr>
+											<td><?= htmlspecialchars($row->email) ?></td>
+											<td><?= htmlspecialchars($row->rating) ?></td>
+											<td class="wrap-text"><?= nl2br(htmlspecialchars($row->testimonial)) ?></td>
+											<td>
+												<div class="col">
+													<?php if ($row->status === 'pending'): ?>
+														<a href="<?= base_url('admin/testimonial/unggah/' . $row->id_testimonial) ?>"
+															class="btn btn-sm btn-primary extra-small-btn"
+															onclick="return confirm('Yakin ingin mengunggah testimonial ini?')">
+															<ion-icon name="arrow-up-circle-sharp"></ion-icon> Unggah
+														</a>
+													<?php else: ?>
+														<button class="btn btn-sm btn-secondary" disabled>
+															<ion-icon name="checkmark-circle-sharp"></ion-icon> Sudah Diunggah
+														</button>
+													<?php endif; ?>
 
-											<div class="col">
-												<button type="submit" class="btn btn-sm btn-off ">
-													<ion-icon name="arrow-up-circle-sharp"></ion-icon>Unggah</button>
-												<button type="submit" class="btn btn-sm btn-danger extra-small-btn ">
-													<ion-icon name="trash-sharp"></ion-icon></button>
-											</div>
-											<div style="align-self: flex-end; font-size: 9px; color: #999; font-style: italic; margin-top: 4px;">
-												Diunggah oleh Amanda • 2025-06-08 20:15:34
-											</div>
-										</td>
 
-									</tr>
-									<tr>
-										<td>ii@examples.com</td>
-										<td>5</td>
-										<td class="wrap-text">"Kliniknya bersih, stafnya ramah, dan hasil tambal gigi saya rapi.
-											Selebihnya oke banget!"</td>
-										<td>
-											<div class="col">
-												<input type="file" id="uploadFile" style="display: none;" />
-												<button type="submit" class="btn btn-sm btn-primary extra-small-btn">
-													<ion-icon name="arrow-up-circle-sharp"></ion-icon> Unggah
-												</button>
-												<button type="submit" class="btn btn-sm btn-danger extra-small-btn ">
-													<ion-icon name="trash-sharp"></ion-icon></button>
-											</div>
+													<button type="submit" class="btn btn-sm btn-danger extra-small-btn">
+														<ion-icon name="trash-sharp"></ion-icon>
+													</button>
+												</div>
+												<div style="align-self: flex-end; font-size: 9px; color: #999; font-style: italic; margin-top: 4px;">
+													Status: <?= ucfirst($row->status) ?> •
+													Diunggah oleh <?= $row->updated_by ?? '—' ?> •
+													<?= date('Y-m-d H:i:s', strtotime($row->updated_at ?? $row->created_at)) ?>
+												</div>
 
-										</td>
 
-									</tr>
+											</td>
+										</tr>
+									<?php endforeach; ?>
 								</tbody>
 
 							</table>

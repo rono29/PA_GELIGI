@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Profile - Geligi Dental Care</title>
+    <title>Detail Artikel - Geligi Dental Care</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -65,83 +65,54 @@
     </header>
 
     <!-- Faq Section -->
-    <section id="riwayat" class="faq section light-background">
+    <section class="faq section light-background">
+        <div class="container" data-aos="fade-up">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
 
-        <div class="container section-title" data-aos="fade-up">
-            <h2 style="color: #A94B87;">Riwayat Reservasi</h2>
-            <p>Berikut adalah daftar reservasi Anda di Geligi Dental Care.</p>
-        </div>
+                    <!-- Judul dan Tanggal -->
+                    <h1 class="fw-bold mb-3" style="color:#A94B87;">Cara Menjaga Kebersihan Gigi Anak Sejak Dini</h1>
+                    <p class="text-muted mb-4">Dipublikasikan pada 01 Juli 2025</p>
 
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped align-middle shadow-sm">
-                    <thead class="table-dark text-center">
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Dokter</th>
-                            <th>Hari / Tanggal</th>
-                            <th>Jam</th>
-                            <th>Keluhan</th>
-                            <th>Rencana Perawatan</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <?php if (!empty($reservasi)) : ?>
-                            <?php $no = 1;
-                            foreach ($reservasi as $r) : ?>
-                                <tr>
-                                    <td><?= $no++ ?></td>
-                                    <td><?= $r->nama_dokter ?></td>
-                                    <td><?= date('l, d M Y', strtotime($r->tgl_input)) ?></td>
-                                    <td><?= $r->jam_res ?></td>
-                                    <td><?= $r->keluhan ?></td>
-                                    <td><?= $r->rencana_perawatan ?></td>
-                                    <td>
-                                        <?php if ($r->status == 'selesai') : ?>
-                                            <span class="badge bg-success">Selesai</span>
-                                        <?php elseif ($r->status == 'proses') : ?>
-                                            <span class="badge bg-warning text-dark">Diproses</span>
-                                        <?php else : ?>
-                                            <span class="badge bg-secondary">Dibatalkan</span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <?php if ($r->status == 'proses') : ?>
-                                            <a href="<?= base_url('admin/reservasi/batalkan/' . $r->id) ?>"
-                                                class="btn btn-sm btn-outline-danger"
-                                                onclick="return confirm('Yakin ingin membatalkan reservasi ini?');">
-                                                Batalkan
-                                            </a>
-                                        <?php else : ?>
-                                            <span class="text-muted">—</span>
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else : ?>
-                            <tr>
-                                <td colspan="8" class="text-center text-muted py-4">
-                                    Belum ada data reservasi.
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
+                    <!-- Gambar Artikel -->
+                    <div class="mb-4 text-center">
+                        <img src="<?= base_url('depan/img/portfolio/berita-1.jpeg') ?>"
+                            class="img-fluid rounded shadow-sm"
+                            alt="Gigi Anak"
+                            style="max-width: 400px; height: auto;">
+                    </div>
 
-            <!-- Tombol Kembali -->
-            <div class="text-end mt-4">
-                <a href="<?= base_url('profile') ?>" class="btn btn-primary">
-                    <i class="bi bi-arrow-left me-1"></i> Kembali ke Profil
-                </a>
+                    <!-- Konten Artikel -->
+                    <div class="article-content fs-6">
+                        <p>Menjaga kebersihan gigi anak sejak usia dini merupakan langkah penting untuk mencegah berbagai masalah gigi seperti gigi berlubang dan gusi bengkak. Anak-anak yang diajarkan untuk merawat giginya dengan benar akan tumbuh menjadi pribadi yang sadar akan pentingnya kesehatan mulut.</p>
+
+                        <h5 class="mt-4">Mengapa Perlu Merawat Gigi Sejak Dini?</h5>
+                        <p>Kesehatan gigi yang baik di masa kecil membantu perkembangan bicara, nutrisi, serta kepercayaan diri anak. Gigi susu yang sehat juga menjadi penuntun bagi pertumbuhan gigi permanen.</p>
+
+                        <h5 class="mt-4">Tips Menjaga Kebersihan Gigi Anak</h5>
+                        <ul>
+                            <li>Menyikat gigi dua kali sehari dengan pasta gigi berfluoride.</li>
+                            <li>Menghindari konsumsi makanan dan minuman manis berlebihan.</li>
+                            <li>Memperkenalkan anak pada kunjungan rutin ke dokter gigi sejak usia 1 tahun.</li>
+                            <li>Menggunakan sikat gigi khusus anak dan teknik menyikat yang lembut.</li>
+                        </ul>
+
+                        <h5 class="mt-4">Kapan Harus Membawa Anak ke Dokter Gigi?</h5>
+                        <p>Disarankan membawa anak ke dokter gigi pertama kali sebelum usia 1 tahun, atau saat gigi pertamanya tumbuh. Selanjutnya, kontrol rutin setiap 6 bulan sekali dapat membantu mendeteksi masalah lebih awal.</p>
+
+                        <p>Dengan membiasakan kebiasaan baik sejak dini, anak akan tumbuh dengan senyum sehat dan percaya diri. Jangan ragu untuk berkonsultasi dengan dokter gigi kami untuk mendapatkan panduan yang tepat.</p>
+                    </div>
+
+                    <!-- Tombol Kembali -->
+                    <div class="mt-5">
+                        <a href="<?= base_url('home#portfolio') ?>" class="btn btn-outline-primary"><i class="bi bi-arrow-left"></i> Kembali ke Artikel</a>
+                    </div>
+
+                </div>
             </div>
         </div>
-
     </section>
 
-    <!-- /Faq Section -->
 
     <footer id="footer" class="footer purple-background">
 

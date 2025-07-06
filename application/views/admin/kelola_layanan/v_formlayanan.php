@@ -43,61 +43,63 @@
         <!--end page content wrapper-->
 
 
-        <div class="card">
-          <div class="card-body">
-            <label class="form-label">Judul</label>
-            <input class="form-control mb-3" type="text" aria-label="default input example">
+        <form action="<?= base_url('admin/layanan/simpan') ?>" method="post" enctype="multipart/form-data">
+          <div class="card">
+            <div class="card-body">
+              <label class="form-label">Judul</label>
+              <input class="form-control mb-3" type="text" name="judul" required>
 
-            <label class="form-label">Deskripsi</label>
-            <textarea class="form-control mb-3" rows="4" cols="4"></textarea>
+              <label class="form-label">Deskripsi</label>
+              <textarea class="form-control mb-3" name="deskripsi" rows="4" cols="4" required></textarea>
 
-            <label class="form-label">Gambar</label>
-            <input type="file" class="form-control mb-3" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+              <label class="form-label">Gambar</label>
+              <input type="file" class="form-control mb-3" name="gambar" required>
+            </div>
+            <div class="col d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary px-2 m-3">Simpan</button>
+            </div>
           </div>
-          <div class="col d-flex justify-content-end">
-            <button type="button" class="btn btn-primary px-2 m-3">Simpan</button>
-          </div>
-        </div>
+        </form>
+
+
+
+
+        <!--start footer-->
+        <?php $this->load->view("admin/_templates/footer.php") ?>
+        <!--end footer-->
+
+
+
+        <!--Start Back To Top Button-->
+        <a href="javaScript:;" class="back-to-top"><ion-icon name="arrow-up-outline"></ion-icon></a>
+
+
+
+        <!--start overlay-->
+        <div class="overlay"></div>
+        <!--end overlay-->
+
       </div>
-
-
-
-      <!--start footer-->
-      <?php $this->load->view("admin/_templates/footer.php") ?>
-      <!--end footer-->
-
-
-
-      <!--Start Back To Top Button-->
-      <a href="javaScript:;" class="back-to-top"><ion-icon name="arrow-up-outline"></ion-icon></a>
-
-
-
-      <!--start overlay-->
-      <div class="overlay"></div>
-      <!--end overlay-->
-
-    </div>
-    <!--end wrapper-->
+      <!--end wrapper-->
 
 
 
 
 
-    <!-- JS Files-->
-    <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
-    <script src="<?= base_url('assets/plugins/simplebar/js/simplebar.min.js') ?>"></script>
-    <script src="<?= base_url('assets/plugins/metismenu/js/metisMenu.min.js') ?>"></script>
-    <script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <!--plugins-->
-    <script src="<?= base_url('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') ?>"></script>
-    <script src="<?= base_url('assets/plugins/datatable/js/jquery.dataTables.min.js') ?>"></script>
-    <script src="<?= base_url('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') ?>"></script>
-    <script src="<?= base_url('assets/js/table-datatable.js') ?>"></script>
+      <!-- JS Files-->
+      <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
+      <script src="<?= base_url('assets/plugins/simplebar/js/simplebar.min.js') ?>"></script>
+      <script src="<?= base_url('assets/plugins/metismenu/js/metisMenu.min.js') ?>"></script>
+      <script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <!--plugins-->
+      <script src="<?= base_url('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') ?>"></script>
+      <script src="<?= base_url('assets/plugins/datatable/js/jquery.dataTables.min.js') ?>"></script>
+      <script src="<?= base_url('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') ?>"></script>
+      <script src="<?= base_url('assets/js/table-datatable.js') ?>"></script>
 
-    <!-- Main JS-->
-    <script src="<?= base_url('assets/js/main.js') ?>"></script>
+      <!-- Main JS-->
+      <script src="<?= base_url('assets/js/main.js') ?>"></script>
 
 
 </body>

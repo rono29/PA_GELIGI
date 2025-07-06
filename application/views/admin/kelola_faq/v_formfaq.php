@@ -44,17 +44,21 @@
         <!--end page content wrapper-->
 
 
-        <div class="card">
-          <div class="card-body">
-            <label class="form-label">Pertanyaan</label>
-            <input class="form-control mb-3" type="text" aria-label="default input example">
-            <label class="form-label">Penjelasan</label>
-            <textarea class="form-control" rows="4" cols="4"></textarea>
+        <form action="<?= base_url('admin/faq/simpan') ?>" method="post">
+          <div class="card">
+            <div class="card-body">
+              <label class="form-label">Pertanyaan</label>
+              <input class="form-control mb-3" type="text" name="pertanyaan" required>
+
+              <label class="form-label">Penjelasan</label>
+              <textarea class="form-control" name="jawaban" rows="4" cols="4" required></textarea>
+            </div>
+            <div class="col d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary px-2 m-3">Simpan</button>
+            </div>
           </div>
-          <div class="col d-flex justify-content-end">
-            <button type="button" class="btn btn-primary px-2 m-3">Simpan</button>
-          </div>
-        </div>
+        </form>
+
       </div>
 
     </div>

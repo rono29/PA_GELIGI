@@ -41,10 +41,10 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="<?= base_url('home') ?>"class="logo d-flex align-items-center">
+      <a href="<?= base_url('home') ?>" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="<?= base_url('depan/img/logodental.png')?>"  alt="">
-       <!-- <h1 class="sitename">Geligi Dental Care</h1> -->
+        <img src="<?= base_url('depan/img/logodental.png') ?>" alt="">
+        <!-- <h1 class="sitename">Geligi Dental Care</h1> -->
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -55,7 +55,7 @@
           <li><a href="<?= base_url('jadwaldokter') ?>">Jadwal Dokter</a></li>
           <li><a href="<?= base_url('home/#portfolio') ?>">Artikel</a></li>
           <li><a href="<?= base_url('home/#contact') ?>">Kontak</a></li>
-          <li><a href=""class="active">FAQ</a></li>
+          <li><a href="" class="active">FAQ</a></li>
           <a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -64,88 +64,106 @@
     </div>
   </header>
 
-      <!-- Faq Section -->
-    <section id="faq" class="faq section light-background">
+  <!-- Faq Section -->
+  <section id="faq" class="faq section light-background">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Frequently Asked Questions</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Pertanyaan yang Sering Diajukan</h2>
+      <p class="text-muted">Informasi penting yang sering ditanyakan oleh pasien seputar layanan di Geligi Dental Care.</p>
+    </div><!-- End Section Title -->
 
-      <div class="container">
+    <section id="faq" class="faq section bg-light py-5">
+      <div class="container" data-aos="fade-up">
 
-        <div class="row">
+        <div class="accordion" id="faqAccordion">
 
-          <div class="col-lg-12 mb-3" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="faq-container">
-
-              <div class="faq-item">
-                <h3>Non consectetur a erat nam at lectus urna duis?</h3>
-                <div class="faq-content">
-                  <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Feugiat scelerisque varius morbi enim nunc faucibus?</h3>
-                <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
-                <div class="faq-content">
-                  <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
+          <div class="accordion-item mb-3 border rounded shadow-sm">
+            <h2 class="accordion-header" id="faq1Heading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                Apakah harus membuat janji temu terlebih dahulu sebelum datang?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse" aria-labelledby="faq1Heading" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Ya, kami sangat menyarankan untuk membuat janji terlebih dahulu melalui website atau WhatsApp agar pelayanan lebih cepat dan teratur.
+              </div>
             </div>
+          </div>
 
-          </div><!-- End Faq Column-->
-
-          <div class="col-lg-12 mb-3" data-aos="fade-up" data-aos-delay="200">
-
-            <div class="faq-container">
-
-              <div class="faq-item">
-                <h3>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</h3>
-                <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Tempus quam pellentesque nec nam aliquam sem et tortor?</h3>
-                <div class="faq-content">
-                  <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Perspiciatis quod quo quos nulla quo illum ullam?</h3>
-                <div class="faq-content">
-                  <p>Enim ea facilis quaerat voluptas quidem et dolorem. Quis et consequatur non sed in suscipit sequi. Distinctio ipsam dolore et.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
+          <div class="accordion-item mb-3 border rounded shadow-sm">
+            <h2 class="accordion-header" id="faq2Heading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                Apa saja layanan yang tersedia di Geligi Dental Care?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faq2Heading" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Pemeriksaan gigi, scaling (pembersihan karang gigi), tambal, cabut, PSA (perawatan saluran akar), pasang behel, veneer, bleaching, dan konsultasi gigi lainnya.
+              </div>
             </div>
+          </div>
 
-          </div><!-- End Faq Column-->
+          <div class="accordion-item mb-3 border rounded shadow-sm">
+            <h2 class="accordion-header" id="faq3Heading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                Apakah tersedia layanan untuk anak-anak?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faq3Heading" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Ya, kami memiliki dokter gigi anak (pedodontis) yang berpengalaman menangani anak-anak dengan pendekatan yang ramah dan menyenangkan.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-3 border rounded shadow-sm">
+            <h2 class="accordion-header" id="faq4Heading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                Bagaimana cara melihat jadwal dokter?
+              </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" aria-labelledby="faq4Heading" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Silakan kunjungi halaman <a href="<?= base_url('jadwaldokter') ?>">Jadwal Dokter</a> di website kami. Jadwal diperbarui secara berkala.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-3 border rounded shadow-sm">
+            <h2 class="accordion-header" id="faq5Heading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                Apakah Geligi Dental Care menerima BPJS atau asuransi?
+              </button>
+            </h2>
+            <div id="faq5" class="accordion-collapse collapse" aria-labelledby="faq5Heading" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Saat ini kami belum menerima BPJS. Namun, kami menerima beberapa asuransi swasta dan mendukung pembayaran via transfer, QRIS, maupun kartu debit.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-3 border rounded shadow-sm">
+            <h2 class="accordion-header" id="faq6Heading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                Apakah tersedia layanan darurat untuk nyeri gigi mendadak?
+              </button>
+            </h2>
+            <div id="faq6" class="accordion-collapse collapse" aria-labelledby="faq6Heading" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Ya, kami menyediakan layanan darurat. Mohon hubungi kami terlebih dahulu melalui WhatsApp agar kami dapat mempersiapkan penanganan segera.
+              </div>
+            </div>
+          </div>
 
         </div>
-
       </div>
+    </section>
 
-    </section><!-- /Faq Section --> 
+
+    </div>
+
+  </section><!-- /Faq Section -->
 
   <footer id="footer" class="footer purple-background">
 
@@ -153,67 +171,60 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">BizPage</span>
+            <span class="sitename">Geligi</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
+            <p class="mt-3"><strong>Operasional Klinik</strong></p>
+            <p>Senin - Jumat</p>
+            <p>09.00 - 21.00 WIB</p>
+            <p>Jl. Sembilang, Rumbai</p>
           </div>
           <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-whatsapp"></i></a>
             <a href=""><i class="bi bi-facebook"></i></a>
             <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
           </div>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Useful Links</h4>
+          <h4>Tautan Penting</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#hero">Beranda</a></li>
+            <li><a href="#about">Tentang Kami</a></li>
+            <li><a href="#services">Layanan</a></li>
+            <li><a href="#portofolio">Artikel</a></li>
+            <li><a href="#contact">Hubungi Kami</a></li>
+            <li><a href="<?= base_url('faq') ?>">FAQ</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
+
         </div>
 
-        <div class="col-lg-4 col-md-12 footer-newsletter">
-          <h4>Our Newsletter</h4>
-          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-          <form action="forms/newsletter.php" method="post" class="php-email-form">
-            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-          </form>
+        <div class="col-lg-4 col-md-12 footer-newsletter text-center text-lg-start">
+
+          <!-- Logo -->
+          <a href="#hero" class="d-inline-flex align-items-center mb-3">
+            <img src="<?= base_url('depan/img/logodental.png') ?>" alt="Logo Dental" style="max-width: 200px; height: auto;">
+          </a>
+
+          <!-- Kontak Email -->
+          <p class="mt-3 mb-0" style="font-size: 14px; color: #f8f9fa;">
+            <strong>Email:</strong>
+            <a href="mailto:geligidentalcare@gmail.com" class="text-decoration-none text-light ms-1">
+              geligidentalcare@gmail.com
+            </a>
+          </p>
+
         </div>
 
       </div>
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">BizPage</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com" target="_blank" >ThemeWagon</a>
-      </div>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Geligi</strong> <span>All Rights Reserved</span></p>
+    </div>
     </div>
 
   </footer>

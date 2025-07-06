@@ -76,117 +76,119 @@
     <div class="container">
 
       <div class="row">
-
-        <div class="col-lg-12 mb-3" data-aos="fade-up" data-aos-delay="100">
-
-          <div class="card">
+        <!-- Kartu Dokter 1 -->
+        <div class="col-lg-12 mb-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card shadow-sm rounded-4">
             <div class="card-body">
 
-              <div class="row g-0">
+              <div class="row g-0 align-items-center">
+                <!-- FOTO DOKTER -->
                 <div class="col-12 col-lg-5">
-                  <div class="image-zoom-section">
-                    <div class="product-gallery owl-carousel owl-theme border rounded mb-3 p-3">
-                      <div class="item">
-                        <img src="assets/images/product-gallery/01.png" class="img-fluid" alt="">
-                      </div>
-                    </div>
-                    <div class="item">
-                      <h3 class="mt-3 mt-lg-0 mb-0">Dr. Susi Astuti</h3>
-                    </div>
+                  <div class="image-zoom-section text-center p-3">
+                    <img src="<?= base_url('depan/img/doc.jpg') ?>" class="img-fluid rounded border mb-3" alt="Foto Dokter" style="max-height: 280px; object-fit: cover;">
+                    <h4 class="fw-bold mb-0">Dr. Susi Astuti</h4>
                   </div>
                 </div>
-                <div class="col-12 col-lg-7"><br>
-                  <div class="product-info-section p-3">
+
+                <!-- FORM RESERVASI -->
+                <div class="col-12 col-lg-7" data-aos="fade-up" data-aos-delay="150">
+                  <div class="p-3">
                     <div class="mb-3">
-                      <input type="date" class="form-control">
-                    </div><br>
-                    <div class="row row-cols-auto g-3">
-                      <div class="col">
-                        <button type="button" class="btn btn-outline-primary px-5 radius-30">11.00</button>
-                      </div>
-                      <div class="col">
-                        <button type="button" class="btn btn-outline-primary px-5 radius-30">12.00</button>
-                      </div>
-                      <div class="col">
-                        <button type="button" class="btn btn-outline-primary px-5 radius-30">14.00</button>
-                      </div>
-                      <div class="col">
-                        <button type="button" class="btn btn-outline-primary px-5 radius-30">16.00</button>
-                      </div>
-                      <div class="col">
-                        <button type="button" class="btn btn-outline-primary px-5 radius-30">18.00</button>
-                      </div>
-                      <div class="col">
-                        <button type="button" class="btn btn-outline-primary px-5 radius-30">20.00</button>
+                      <label class="form-label">Pilih Tanggal</label>
+                      <input type="date" class="form-control rounded-3">
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label">Pilih Jam</label>
+                      <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">11.00</button>
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">12.00</button>
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">14.00</button>
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">16.00</button>
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">18.00</button>
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">20.00</button>
                       </div>
                     </div>
-                  </div>
-                  <div class="col d-flex justify-content-end mt-3">
-                    <button type="button" class="btn btn-primary px-5 radius-30">Reservasi</button>
+
+                    <div class="d-flex justify-content-end mt-3">
+                      <button type="button" class="btn btn-primary px-5 rounded-pill" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                        Reservasi
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                <!--end row-->
-              </div>
+              </div><!-- end row -->
+
             </div>
           </div>
-          <!--end row-->
         </div>
-      </div>
 
-      <div class="card">
-        <div class="card-body">
+        <!-- Kartu Dokter 2 -->
+        <div class="col-lg-12 mb-4" data-aos="fade-up" data-aos-delay="150">
+          <div class="card shadow-sm rounded-4">
+            <div class="card-body">
 
-          <div class="row g-0">
-            <div class="col-12 col-lg-5">
-              <div class="image-zoom-section">
-                <div class="product-gallery owl-carousel owl-theme border rounded mb-3 p-3">
-                  <div class="item">
-                    <img src="assets/images/product-gallery/01.png" class="img-fluid" alt="">
+              <div class="row g-0 align-items-center">
+                <!-- FOTO DOKTER -->
+                <div class="col-12 col-lg-5">
+                  <div class="image-zoom-section text-center p-3">
+                    <img src="<?= base_url('depan/img/doc.jpg') ?>" class="img-fluid rounded border mb-3" alt="Foto Dokter" style="max-height: 280px; object-fit: cover;">
+                    <h4 class="fw-bold mb-0">Dr. Dodi Firmawan</h4>
                   </div>
                 </div>
-                <div class="item">
-                  <h3 class="mt-3 mt-lg-0 mb-0">Dr. Dodi Firmawan</h3>
+
+                <!-- FORM RESERVASI -->
+                <div class="col-12 col-lg-7">
+                  <div class="p-3">
+                    <div class="mb-3">
+                      <label class="form-label">Pilih Tanggal</label>
+                      <input type="date" class="form-control rounded-3">
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label">Pilih Jam</label>
+                      <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">11.00</button>
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">12.00</button>
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">14.00</button>
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">16.00</button>
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">18.00</button>
+                        <button type="button" class="btn btn-outline-primary px-4 rounded-pill">20.00</button>
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-3">
+                      <button type="button" class="btn btn-primary px-5 rounded-pill" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                        Reservasi
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
+
+              </div><!-- end row -->
+
             </div>
-            <div class="col-12 col-lg-7"><br>
-              <div class="product-info-section p-3">
-                <div class="mb-3">
-                  <input type="date" class="form-control">
-                </div><br>
-                <div class="row row-cols-auto g-3">
-                  <div class="col">
-                    <button type="button" class="btn btn-outline-primary px-5 radius-30">11.00</button>
-                  </div>
-                  <div class="col">
-                    <button type="button" class="btn btn-outline-primary px-5 radius-30">12.00</button>
-                  </div>
-                  <div class="col">
-                    <button type="button" class="btn btn-outline-primary px-5 radius-30">14.00</button>
-                  </div>
-                  <div class="col">
-                    <button type="button" class="btn btn-outline-primary px-5 radius-30">16.00</button>
-                  </div>
-                  <div class="col">
-                    <button type="button" class="btn btn-outline-primary px-5 radius-30">18.00</button>
-                  </div>
-                  <div class="col">
-                    <button type="button" class="btn btn-outline-primary px-5 radius-30">20.00</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col d-flex justify-content-end mt-3">
-                <button type="button" class="btn btn-primary px-5 radius-30">Reservasi</button>
-              </div>
-            </div>
-
-            <!--end row-->
           </div>
         </div>
       </div>
-      <!--end row-->
+
+      <!-- MODAL KONFIRMASI -->
+      <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content text-center p-4 rounded-4">
+            <h5 class="fw-bold mb-3">Konfirmasi Reservasi</h5>
+            <p>Apakah Anda yakin ingin melakukan reservasi?</p>
+            <div class="d-flex justify-content-around mt-3">
+              <button class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tidak</button>
+              <button class="btn btn-primary rounded-pill px-4" onclick="submitReservasi()">Iya</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+
     </div>
 
 
@@ -203,73 +205,65 @@
 
   </section><!-- /Faq Section -->
 
-  <footer id="footer" class="footer dark-background">
-
+  <footer id="footer" class="footer purple-background">
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">BizPage</span>
+            <span class="sitename">Geligi</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
+            <p class="mt-3"><strong>Operasional Klinik</strong></p>
+            <p>Senin - Jumat</p>
+            <p>09.00 - 21.00 WIB</p>
+            <p>Jl. Sembilang, Rumbai</p>
           </div>
           <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-whatsapp"></i></a>
             <a href=""><i class="bi bi-facebook"></i></a>
             <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
           </div>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Useful Links</h4>
+          <h4>Tautan Penting</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#hero">Beranda</a></li>
+            <li><a href="#about">Tentang Kami</a></li>
+            <li><a href="#services">Layanan</a></li>
+            <li><a href="#portofolio">Artikel</a></li>
+            <li><a href="#contact">Hubungi Kami</a></li>
+            <li><a href="<?= base_url('faq') ?>">FAQ</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
+
         </div>
 
-        <div class="col-lg-4 col-md-12 footer-newsletter">
-          <h4>Our Newsletter</h4>
-          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-          <form action="forms/newsletter.php" method="post" class="php-email-form">
-            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-          </form>
+        <div class="col-lg-4 col-md-12 footer-newsletter text-center text-lg-start">
+
+          <!-- Logo -->
+          <a href="#hero" class="d-inline-flex align-items-center mb-3">
+            <img src="<?= base_url('depan/img/logodental.png') ?>" alt="Logo Dental" style="max-width: 200px; height: auto;">
+          </a>
+
+          <!-- Kontak Email -->
+          <p class="mt-3 mb-0" style="font-size: 14px; color: #f8f9fa;">
+            <strong>Email:</strong>
+            <a href="mailto:geligidentalcare@gmail.com" class="text-decoration-none text-light ms-1">
+              geligidentalcare@gmail.com
+            </a>
+          </p>
+
         </div>
 
       </div>
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">BizPage</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-      </div>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Geligi</strong> <span>All Rights Reserved</span></p>
+    </div>
     </div>
 
   </footer>

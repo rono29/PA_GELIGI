@@ -44,28 +44,34 @@
         <!--end page content wrapper-->
 
 
-        <div class="card">
-          <div class="card-body">
-            <label class="form-label">Nama</label>
-            <input class="form-control mb-3" type="text" aria-label="default input example">
-            <label class="form-label">Email</label>
-            <input class="form-control mb-3" type="text" aria-label="default input example">
-            <label class="form-label">Password</label>
-            <input class="form-control mb-3" type="text" aria-label="default input example">
+        <form action="<?= base_url('admin/akun/simpan') ?>" method="post">
+          <div class="card">
+            <div class="card-body">
+              <label class="form-label">Nama</label>
+              <input class="form-control mb-3" type="text" name="nama" required>
 
-            <div class="mb-3">
-              <label class="form-label">Role</label>
-              <select class="form-select" id="select-pasien">
-                <option value="">Pilih...</option>
-                <option value="1">Dokter</option>
-                <option value="2">Karyawan</option>
-              </select>
+              <label class="form-label">Email</label>
+              <input class="form-control mb-3" type="email" name="email" required>
+
+              <label class="form-label">Password</label>
+              <input class="form-control mb-3" type="password" name="password" required>
+
+              <div class="mb-3">
+                <label class="form-label">Role</label>
+                <select class="form-select" name="role" required>
+                  <option value="">Pilih...</option>
+                  <option value="1">Dokter</option>
+                  <option value="2">Karyawan</option>
+                </select>
+              </div>
+
               <div class="col d-flex justify-content-end">
-                <button type="button" class="btn btn-primary px-2 mt-2">Simpan</button>
+                <button type="submit" class="btn btn-primary px-2 mt-2">Simpan</button>
               </div>
             </div>
           </div>
-        </div>
+        </form>
+
       </div>
 
 
