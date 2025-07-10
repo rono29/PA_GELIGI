@@ -83,9 +83,9 @@
                       <tr>
                         <td><?= $a->no_antrian ?></td>
                         <td>
-                          <?php if ($a->status === 'Dalam Proses'): ?>
+                          <?php if ($a->status === 'dalam proses'): ?>
                             <span class="badge alert-warning">Dalam Proses</span>
-                          <?php elseif ($a->status === 'Selesai'): ?>
+                          <?php elseif ($a->status === 'selesai'): ?>
                             <span class="badge alert-success">Selesai</span>
                           <?php else: ?>
                             <span class="badge bg-secondary">Menunggu</span>

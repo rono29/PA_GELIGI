@@ -27,4 +27,33 @@ class Testimonial extends CI_Controller
 
 		redirect('admin/testimonial');
 	}
+
+	public function simpan()
+	{
+		$this->load->database();
+
+		$email     = $this->input->post('email', true);
+		$rating    = $this->input->post('rating', true);
+		$message   = $this->input->post('message', true);
+		$nama_pengirim = $this->input->post('nama_pengirim', true); // optional field jika kamu tambahkan di form
+
+		if (!$email || !$rating || !$message) {
+			$this->session->set_flashdata('error', 'Semua field wajib diisi.');
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+
+		$data = [
+			'email'          => $email,
+			'rating'         => $rating,
+			'testimonial'    => $message, // Ganti dari 'message' ke 'testimonial'
+			'status'         => 'pending',
+			'created_at'     => date('Y-m-d H:i:s'),
+			'nama_pengirim'  => $nama_pengirim ?? NULL,
+		];
+
+		$this->db->insert('datatestimonial', $data);
+
+		$this->session->set_flashdata('success', 'Testimoni berhasil dikirim. Menunggu persetujuan admin.');
+		redirect($_SERVER['HTTP_REFERER']);
+	}
 }

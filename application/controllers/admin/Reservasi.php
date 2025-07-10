@@ -117,6 +117,96 @@ class Reservasi extends CI_Controller
 		redirect('admin/reservasi');
 	}
 
+	public function simpanLangsung()
+	{
+		if (!$this->session->userdata('id_user')) {
+			redirect('masuk');
+		}
+
+		$this->load->database();
+
+		$id_user = $this->session->userdata('id_user');
+
+		// Ambil id_pasien dari user login
+		$pasien = $this->db->get_where('datapasien', ['id_user' => $id_user])->row();
+		if (!$pasien) {
+			$this->session->set_flashdata('error', 'Data pasien belum lengkap.');
+			redirect('home');
+		}
+		$id_pasien = $pasien->id_pasien;
+
+		$dokter = $this->input->post('dokterLama', true);
+		$tgl = $this->input->post('tglLama', true);
+		$jam = $this->input->post('waktuLama', true);
+		$keluhan = $this->input->post('keluhanLama', true);
+		$rencana_perawatan = $this->input->post('rencanaPerawatanLama', true);
+		$jenis_reservasi = $this->input->post('jenis_reservasiLama', true) ?? 'reguler';
+
+		if (!$tgl || !$jam || !$dokter || !$keluhan || !$rencana_perawatan) {
+			$this->session->set_flashdata('error', 'Lengkapi semua data!');
+			redirect('home');
+		}
+
+		// Hitung antrian
+		$this->db->where('tgl_input', $tgl);
+		$this->db->where('jam_res', $jam);
+		$reservasi = $this->db->get('datareservasi')->result();
+
+		$jumlah_kontrol = 0;
+		$jumlah_reguler = 0;
+		foreach ($reservasi as $r) {
+			if ($r->jenis_reservasi === 'kontrol') $jumlah_kontrol++;
+			else $jumlah_reguler++;
+		}
+
+		if ($jenis_reservasi === 'kontrol') {
+			$no_antrian = ($jumlah_kontrol < 3) ? $jumlah_kontrol + 1 : $jumlah_kontrol + $jumlah_reguler + 1;
+		} else {
+			$no_antrian = $jumlah_kontrol + $jumlah_reguler + 1;
+		}
+		$no_antrian = 'A' . str_pad($no_antrian, 2, '0', STR_PAD_LEFT);
+
+		// Insert reservasi
+		$this->db->insert('datareservasi', [
+			'id_pasien' => $id_pasien,
+			'id_dok' => $dokter,
+			'tgl_input' => $tgl,
+			'keluhan' => $keluhan,
+			'jam_res' => $jam,
+			'no_antrian' => $no_antrian,
+			'jenis_reservasi' => $jenis_reservasi,
+			'rencana_perawatan' => $rencana_perawatan
+		]);
+
+		$this->session->set_flashdata('success', 'Reservasi berhasil dibuat!');
+		redirect('home');
+	}
+
+	public function batalkan($id_res)
+	{
+		// Pastikan ID ada
+		$reservasi = $this->db->get_where('datareservasi', ['id_res' => $id_res])->row();
+		if (!$reservasi) {
+			$this->session->set_flashdata('error', 'Reservasi tidak ditemukan.');
+			redirect('riwayat');
+		}
+
+		// Hanya bisa batalkan jika status masih proses
+		if ($reservasi->status !== 'dalam proses') {
+			$this->session->set_flashdata('error', 'Reservasi sudah tidak bisa dibatalkan.');
+			redirect('riwayat');
+		}
+
+		// Update status jadi dibatalkan
+		$this->db->where('id_res', $id_res);
+		$this->db->update('datareservasi', ['status' => 'batal']);
+
+		$this->session->set_flashdata('success', 'Reservasi berhasil dibatalkan.');
+		redirect('riwayat');
+	}
+
+
+
 
 	public function preview($id_reservasi)
 	{

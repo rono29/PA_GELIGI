@@ -53,22 +53,30 @@ class reservasiModel extends CI_Model
 
     public function lanjutkan_antrian()
     {
-        // Set antrian sebelumnya menjadi "Selesai"
+        // Ambil 1 data yang sedang Dalam Proses
         $this->db->where('status', 'Dalam Proses');
-        $this->db->update('datareservasi', ['status' => 'Selesai']);
+        $this->db->order_by('no_antrian', 'ASC');
+        $antrian_sekarang = $this->db->get('datareservasi')->row();
 
-        // Ambil pasien dengan status 'Menunggu' berikutnya
+        if ($antrian_sekarang) {
+            // Tandai sebagai selesai
+            $this->db->where('id_res', $antrian_sekarang->id_res);
+            $this->db->update('datareservasi', ['status' => 'Selesai']);
+        }
+
+        // Ambil 1 antrian Menunggu berikutnya
         $this->db->where('status', 'Menunggu');
         $this->db->order_by('no_antrian', 'ASC');
-        $this->db->limit(1);
-        $next = $this->db->get('datareservasi')->row();
+        $antrian_berikut = $this->db->get('datareservasi')->row();
 
-        if ($next) {
-            // Ubah status ke 'Dalam Proses'
-            $this->db->where('id', $next->id); // pastikan ada kolom `id` sebagai primary key
+        if ($antrian_berikut) {
+            // Ubah status menjadi Dalam Proses
+            $this->db->where('id_res', $antrian_berikut->id_res);
             $this->db->update('datareservasi', ['status' => 'Dalam Proses']);
         }
     }
+
+
 
     public function get_all_jadwal()
     {

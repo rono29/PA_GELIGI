@@ -55,7 +55,7 @@
 									<?php $no = 1;
 									foreach ($rm as $row): ?>
 										<tr>
-											<td>RM<?= $no++ ?></td>
+											<td>RM<?= $row->no_rekammedis ?></td>
 											<td><?= $row->nama_pasien ?></td>
 											<td><?= $row->umur ?> Tahun</td>
 											<td style="position: relative;">
@@ -74,6 +74,8 @@
 													<a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unduh">
 														<ion-icon name="download-outline"></ion-icon>
 													</a>
+													<a href="<?= base_url('admin/rekammedis/edit/' . $row->id_RM) ?>" class="btn btn-sm btn-primary">Edit</a>
+
 													<a href="<?= base_url('admin/rekammedis/delete/' . $row->id_RM) ?>"
 														class="text-danger"
 														onclick="return confirm('Yakin ingin menghapus data ini?')"
@@ -89,13 +91,13 @@
 								</tbody>
 							</table>
 
+						</div>
 					</div>
 				</div>
+				<!-- end page content-->
 			</div>
-			<!-- end page content-->
+			<!--end page content wrapper-->
 		</div>
-		<!--end page content wrapper-->
-	</div>
 	</div>
 	</div>
 

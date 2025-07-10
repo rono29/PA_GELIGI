@@ -101,15 +101,17 @@
                                     <td>
                                         <?php if ($r->status == 'selesai') : ?>
                                             <span class="badge bg-success">Selesai</span>
-                                        <?php elseif ($r->status == 'proses') : ?>
+                                        <?php elseif ($r->status == 'dalam proses') : ?>
                                             <span class="badge bg-warning text-dark">Diproses</span>
+                                        <?php elseif ($r->status == 'batal') : ?>
+                                            <span class="badge bg-danger">Dibatalkan</span>
                                         <?php else : ?>
-                                            <span class="badge bg-secondary">Dibatalkan</span>
+                                            <span class="badge bg-secondary">Tidak Diketahui</span>
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <?php if ($r->status == 'proses') : ?>
-                                            <a href="<?= base_url('admin/reservasi/batalkan/' . $r->id) ?>"
+                                        <?php if ($r->status == 'dalam proses') : ?>
+                                            <a href="<?= base_url('admin/reservasi/batalkan/' . $r->id_res) ?>"
                                                 class="btn btn-sm btn-outline-danger"
                                                 onclick="return confirm('Yakin ingin membatalkan reservasi ini?');">
                                                 Batalkan
@@ -127,6 +129,20 @@
                                 </td>
                             </tr>
                         <?php endif; ?>
+                        <?php if ($this->session->flashdata('success')) : ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= $this->session->flashdata('success'); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($this->session->flashdata('error')) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= $this->session->flashdata('error'); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
+
                     </tbody>
                 </table>
             </div>

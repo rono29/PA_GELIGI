@@ -74,91 +74,32 @@
     </div><!-- End Section Title -->
 
     <section id="faq" class="faq section bg-light py-5">
-      <div class="container" data-aos="fade-up">
+  <div class="container" data-aos="fade-up">
 
-        <div class="accordion" id="faqAccordion">
-
+    <div class="accordion" id="faqAccordion">
+      <?php if (!empty($faq)): ?>
+        <?php $i = 1; foreach ($faq as $row): ?>
           <div class="accordion-item mb-3 border rounded shadow-sm">
-            <h2 class="accordion-header" id="faq1Heading">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
-                Apakah harus membuat janji temu terlebih dahulu sebelum datang?
+            <h2 class="accordion-header" id="faqHeading<?= $i ?>">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq<?= $i ?>" aria-expanded="false" aria-controls="faq<?= $i ?>">
+                <?= htmlspecialchars($row->pertanyaan) ?>
               </button>
             </h2>
-            <div id="faq1" class="accordion-collapse collapse" aria-labelledby="faq1Heading" data-bs-parent="#faqAccordion">
+            <div id="faq<?= $i ?>" class="accordion-collapse collapse" aria-labelledby="faqHeading<?= $i ?>" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                Ya, kami sangat menyarankan untuk membuat janji terlebih dahulu melalui website atau WhatsApp agar pelayanan lebih cepat dan teratur.
+                <?= nl2br(htmlspecialchars($row->jawaban)) ?>
               </div>
             </div>
           </div>
+        <?php $i++; endforeach; ?>
+      <?php else: ?>
+        <p class="text-muted">Belum ada pertanyaan yang tersedia.</p>
+      <?php endif; ?>
+    </div>
 
-          <div class="accordion-item mb-3 border rounded shadow-sm">
-            <h2 class="accordion-header" id="faq2Heading">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
-                Apa saja layanan yang tersedia di Geligi Dental Care?
-              </button>
-            </h2>
-            <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faq2Heading" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                Pemeriksaan gigi, scaling (pembersihan karang gigi), tambal, cabut, PSA (perawatan saluran akar), pasang behel, veneer, bleaching, dan konsultasi gigi lainnya.
-              </div>
-            </div>
-          </div>
+  </div>
+</section>
 
-          <div class="accordion-item mb-3 border rounded shadow-sm">
-            <h2 class="accordion-header" id="faq3Heading">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                Apakah tersedia layanan untuk anak-anak?
-              </button>
-            </h2>
-            <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faq3Heading" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                Ya, kami memiliki dokter gigi anak (pedodontis) yang berpengalaman menangani anak-anak dengan pendekatan yang ramah dan menyenangkan.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item mb-3 border rounded shadow-sm">
-            <h2 class="accordion-header" id="faq4Heading">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
-                Bagaimana cara melihat jadwal dokter?
-              </button>
-            </h2>
-            <div id="faq4" class="accordion-collapse collapse" aria-labelledby="faq4Heading" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                Silakan kunjungi halaman <a href="<?= base_url('jadwaldokter') ?>">Jadwal Dokter</a> di website kami. Jadwal diperbarui secara berkala.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item mb-3 border rounded shadow-sm">
-            <h2 class="accordion-header" id="faq5Heading">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
-                Apakah Geligi Dental Care menerima BPJS atau asuransi?
-              </button>
-            </h2>
-            <div id="faq5" class="accordion-collapse collapse" aria-labelledby="faq5Heading" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                Saat ini kami belum menerima BPJS. Namun, kami menerima beberapa asuransi swasta dan mendukung pembayaran via transfer, QRIS, maupun kartu debit.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item mb-3 border rounded shadow-sm">
-            <h2 class="accordion-header" id="faq6Heading">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
-                Apakah tersedia layanan darurat untuk nyeri gigi mendadak?
-              </button>
-            </h2>
-            <div id="faq6" class="accordion-collapse collapse" aria-labelledby="faq6Heading" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                Ya, kami menyediakan layanan darurat. Mohon hubungi kami terlebih dahulu melalui WhatsApp agar kami dapat mempersiapkan penanganan segera.
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
 
 
     </div>

@@ -89,7 +89,11 @@
           <li><a href="#portfolio">Artikel</a></li>
           <li><a href="#contact">Kontak</a></li>
           <li><a href="<?= base_url('faq') ?>">FAQ</a></li>
-          <a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a>
+           <?php if ($this->session->userdata('id_user')): ?>
+      <li><a href="<?= base_url('profile') ?>" class="btn-login">Profil</a></li>
+    <?php else: ?>
+      <li><a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a></li>
+    <?php endif; ?>
         </ul>
 
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -290,9 +294,18 @@
                       <a href="<?= base_url('jadwaldokter') ?>" class="text-decoration-none text-primary d-flex align-items-center gap-1">
                         <i class="bi bi-calendar-event"></i> Jadwal
                       </a>
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#bookingModal" class="text-decoration-none text-success d-flex align-items-center gap-1">
-                        <i class="bi bi-telephone"></i> Buat Janji
+                      <a href="#"
+                        class="btn-buat-janji"
+                        data-bs-toggle="modal"
+                        data-bs-target="#bookingModal"
+                        data-id="<?= $dokter->id_user ?>"
+                        data-nama="<?= $dokter->nama ?>"
+                        data-tanggal="<?= $dokter->tgl ?>"
+                        data-jam="<?= date('H:i', strtotime($dokter->waktu)) ?>">
+                        Buat Janji
                       </a>
+
+
                     </div>
                   </div>
                 <?php endforeach; ?>
@@ -304,35 +317,36 @@
 
 
             <!-- Modal Booking Awal -->
+            <!-- Modal Buat Janji -->
             <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content rounded-4 p-4 shadow" style="max-width: 500px; margin: auto;">
-
-                  <div class="modal-body text-center">
+                  <form action="<?= base_url('admin/reservasi/simpanLangsung') ?>" method="POST" class="modal-body text-center">
 
                     <!-- Foto Dokter -->
-                    <img src="<?= base_url('depan/img/doc.jpg') ?>" class="rounded-circle mb-3 shadow" alt="Foto Dokter" style="width: 100px; height: 100px; object-fit: cover;">
+                    <img src="<?= base_url('depan/img/doc.jpg') ?>" class="rounded-circle mb-3 shadow" style="width: 100px; height: 100px; object-fit: cover;">
 
                     <!-- Nama Dokter -->
-                    <h5 class="fw-bold mb-3 text-dark">drg. Redha Fauzana</h5>
+                    <h5 id="modalNamaDokter" class="fw-bold mb-3 text-dark">drg. ...</h5>
 
-                    <!-- Pilih Tanggal -->
-                    <input type="date" class="form-control form-control-sm w-75 mx-auto mb-3 rounded-pill text-center border-secondary">
+                    <!-- Hidden: ID Dokter -->
+                    <input type="hidden" name="dokterLama" id="inputIdDokter">
 
-                    <!-- Pilih Jam -->
-                    <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
-                      <button class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #b65dba;">08.00</button>
-                      <button class="btn btn-sm btn-outline-secondary rounded-pill px-4">10.00</button>
-                      <button class="btn btn-sm btn-outline-secondary rounded-pill px-4">13.00</button>
-                      <button class="btn btn-sm btn-outline-secondary rounded-pill px-4">15.00</button>
-                      <button class="btn btn-sm btn-outline-secondary rounded-pill px-4">17.00</button>
+                    <!-- Tanggal -->
+                    <input type="text" id="modalTanggal" class="form-control form-control-sm w-75 mx-auto mb-3 rounded-pill text-center border-secondary" readonly>
+                    <input type="hidden" name="tglLama" id="inputTanggal">
+
+                    <!-- Pilihan Jam -->
+                    <div id="pilihanJam" class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                      <!-- tombol jam akan diisi dengan JavaScript -->
                     </div>
+                    <input type="hidden" name="waktuLama" id="inputJam">
 
                     <!-- Keluhan -->
-                    <textarea class="form-control mb-3 rounded-3 border-secondary" rows="3" placeholder="Tuliskan keluhan Anda..."></textarea>
+                    <textarea name="keluhanLama" class="form-control mb-3 rounded-3 border-secondary" rows="3" placeholder="Tuliskan keluhan Anda..." required></textarea>
 
                     <!-- Rencana Perawatan -->
-                    <select class="form-select mb-4 border-secondary">
+                    <select name="rencanaPerawatanLama" class="form-select mb-4 border-secondary" required>
                       <option selected disabled>Pilih Rencana Perawatan</option>
                       <option>Pencabutan Gigi (Exodontic)</option>
                       <option>Pembersihan Karang Gigi (Scaling)</option>
@@ -343,12 +357,23 @@
                       <option>Veneer + Bleaching</option>
                     </select>
 
-                    <!-- Tombol Reservasi -->
-                    <button class="btn w-100 text-white rounded-pill fw-semibold" style="background-color: #b65dba;" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                    <!-- Jenis Reservasi -->
+                    <input type="hidden" name="tipe_pasien" value="lama">
+                    <div class="col-md-6 mb-3 mx-auto">
+                      <label class="form-label">Jenis Reservasi</label>
+                      <select class="form-select" name="jenis_reservasi" required>
+                        <option value="">Pilih Jenis Reservasi</option>
+                        <option value="reguler">Reguler</option>
+                        <option value="kontrol">Kontrol Ulang</option>
+                      </select>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="btn w-100 text-white rounded-pill fw-semibold" style="background-color: #b65dba;">
                       Reservasi
                     </button>
-                  </div>
 
+                  </form>
                 </div>
               </div>
             </div>
@@ -425,41 +450,41 @@
 
     <!-- Portfolio Section -->
     <!-- Section Title -->
-<div class="container section-title" data-aos="fade-up">
-  <h2>Artikel</h2>
-  <p>Temukan berbagai artikel informatif seputar kesehatan gigi dan mulut yang dapat membantu Anda dan keluarga merawat senyum sehat setiap hari.</p>
-</div><!-- End Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Artikel</h2>
+      <p>Temukan berbagai artikel informatif seputar kesehatan gigi dan mulut yang dapat membantu Anda dan keluarga merawat senyum sehat setiap hari.</p>
+    </div><!-- End Section Title -->
 
-<div class="container">
-  <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-    <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+    <div class="container">
+      <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+        <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-      <?php if (!empty($artikel)) : ?>
-        <?php foreach ($artikel as $a) : ?>
-          <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-            <img src="data:image/jpeg;base64,<?= base64_encode($a->gambar) ?>" class="img-fluid" alt="Artikel <?= htmlspecialchars($a->judul) ?>">
-            <div class="portfolio-info">
-              <h4><?= htmlspecialchars($a->judul) ?></h4>
-              <p><?= character_limiter(strip_tags($a->deskripsi), 100) ?></p>
-              <a href="data:image/jpeg;base64,<?= base64_encode($a->gambar) ?>" title="<?= htmlspecialchars($a->judul) ?>" data-gallery="portfolio-gallery-book" class="glightbox preview-link">
-                <i class="bi bi-zoom-in"></i>
-              </a>
-              <a href="<?= base_url('detailberita/' . $a->id_artikel) ?>" title="Selengkapnya" class="details-link">
-                <i class="bi bi-link-45deg"></i>
-              </a>
+          <?php if (!empty($artikel)) : ?>
+            <?php foreach ($artikel as $a) : ?>
+              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+                <img src="data:image/jpeg;base64,<?= base64_encode($a->gambar) ?>" class="img-fluid" alt="Artikel <?= htmlspecialchars($a->judul) ?>">
+                <div class="portfolio-info">
+                  <h4><?= htmlspecialchars($a->judul) ?></h4>
+                  <p><?= character_limiter(strip_tags($a->deskripsi), 100) ?></p>
+                  <a href="data:image/jpeg;base64,<?= base64_encode($a->gambar) ?>" title="<?= htmlspecialchars($a->judul) ?>" data-gallery="portfolio-gallery-book" class="glightbox preview-link">
+                    <i class="bi bi-zoom-in"></i>
+                  </a>
+                  <a href="<?= base_url('detailberita/' . $a->id_artikel) ?>" title="Selengkapnya" class="details-link">
+                    <i class="bi bi-link-45deg"></i>
+                  </a>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          <?php else : ?>
+            <div class="col-12 text-center text-muted">
+              <p>Belum ada artikel yang tersedia.</p>
             </div>
-          </div>
-        <?php endforeach; ?>
-      <?php else : ?>
-        <div class="col-12 text-center text-muted">
-          <p>Belum ada artikel yang tersedia.</p>
-        </div>
-      <?php endif; ?>
+          <?php endif; ?>
 
-    </div><!-- End Portfolio Container -->
-  </div>
-</div>
-</section><!-- /Portfolio Section --><!-- /Portfolio Section -->
+        </div><!-- End Portfolio Container -->
+      </div>
+    </div>
+    </section><!-- /Portfolio Section --><!-- /Portfolio Section -->
 
 
 
@@ -490,88 +515,27 @@
             }
           </script>
           <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="<?= base_url('depan/img/testimonials/testimonials-1.jpg') ?>" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            <?php foreach ($testimoni as $row): ?>
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <img src="<?= base_url('depan/img/testimonials/testimonials-5.jpg') ?>" class="testimonial-img" alt="">
+                  <h3><?= $row->nama_pengirim ? htmlspecialchars($row->nama_pengirim) : 'Pasien Geligi' ?></h3>
+                  <h4><?= htmlspecialchars($row->email) ?></h4>
+                  <div class="stars">
+                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                      <i class="bi <?= $i <= $row->rating ? 'bi-star-fill text-warning' : 'bi-star' ?>"></i>
+                    <?php endfor; ?>
+                  </div>
+                  <p>
+                    <i class="bi bi-quote quote-icon-left"></i>
+                    <span><?= nl2br(htmlspecialchars($row->testimonial)) ?></span>
+                    <i class="bi bi-quote quote-icon-right"></i>
+                  </p>
                 </div>
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Pelayanan di Geligi Dental Care sangat profesional dan ramah. Saya merasa nyaman sejak pertama datang hingga selesai perawatan. Klinik ini benar-benar menjaga standar pelayanan tinggi!</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
               </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="<?= base_url('depan/img/testimonials/testimonials-2.jpg') ?>" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Saya sangat puas dengan hasil scaling dan konsultasi di sini. Tempatnya bersih, dokter komunikatif, dan hasilnya terlihat nyata. Rekomendasi banget untuk keluarga!</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="<?= base_url('depan/img/testimonials/testimonials-3.jpg') ?>" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Gigi saya sensitif bertahun-tahun, tapi setelah perawatan di Geligi Dental Care, kini jauh lebih nyaman. Terima kasih atas perhatian dan solusinya!</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="<?= base_url('depan/img/testimonials/testimonials-4.jpg') ?>" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Dari pelayanan di resepsionis sampai tindakan dokter, semuanya luar biasa. Saya senang sekali akhirnya menemukan klinik gigi yang bisa dipercaya dan hasilnya memuaskan.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="<?= base_url('depan/img/testimonials/testimonials-5.jpg') ?>" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Reservasi online sangat mudah, dokter-dokternya juga ahli dan ramah. Sekarang saya rutin kontrol gigi di Geligi Dental Care setiap 6 bulan sekali!</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
+            <?php endforeach; ?>
           </div>
+
           <div class="swiper-pagination"></div>
         </div>
 
@@ -638,9 +602,14 @@
 
           <!-- Form Penilaian -->
           <div class="col-lg-6 d-flex">
-            <form action="forms/contact.php" method="post"
+            <form action="<?= base_url('admin/testimonial/simpan') ?>" method="post"
               class="php-email-form p-4 p-lg-5 bg-white rounded shadow-sm w-100 d-flex flex-column justify-content-between"
               data-aos="fade-up" data-aos-delay="200">
+              <div class="col-md-12">
+                <input type="text" class="form-control form-control-lg rounded-3"
+                  name="nama_pengirim" placeholder="Nama Anda (Opsional)">
+              </div>
+
 
               <div class="row gy-4 flex-grow-1">
                 <div class="col-md-12">
@@ -650,13 +619,15 @@
 
                 <div class="col-md-12">
                   <label class="form-label mt-3 mb-2 fw-semibold">Beri Penilaian Pengalaman Anda:</label>
-                  <div class="rating d-flex justify-content-start gap-2 fs-3 text-warning">
+                  <div class="rating d-flex justify-content-start gap-2 fs-3 text-warning position-relative">
                     <?php for ($i = 5; $i >= 1; $i--) : ?>
-                      <input type="radio" name="rating" id="star<?= $i ?>" value="<?= $i ?>" hidden required>
-                      <label for="star<?= $i ?>"><i class="fas fa-star"></i></label>
+                      <input type="radio" name="rating" id="star<?= $i ?>" value="<?= $i ?>" required
+                        style="position: absolute; opacity: 0; width: 1px; height: 1px;">
+                      <label for="star<?= $i ?>" style="cursor: pointer;"><i class="fas fa-star"></i></label>
                     <?php endfor; ?>
                   </div>
                 </div>
+
 
                 <div class="col-md-12">
                   <textarea class="form-control form-control-lg rounded-3"
@@ -775,7 +746,8 @@
   <script src="<?= base_url('depan/vendor/imagesloaded/imagesloaded.pkgd.min.js') ?>"></script>
   <script src="<?= base_url('depan/vendor/isotope-layout/isotope.pkgd.min.js') ?>"></script>
   <script src="<?= base_url('depan/vendor/swiper/swiper-bundle.min.js') ?>"></script>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Main JS File -->
   <script src="<?= base_url('depan/js/main.js') ?>"></script>
 
@@ -800,6 +772,43 @@
       });
     </script>
   <?php endif; ?>
+  <script>
+    $(document).ready(function() {
+      $('.btn-buat-janji').on('click', function(e) {
+        e.preventDefault();
+
+        const idDokter = $(this).data('id');
+        const namaDokter = $(this).data('nama');
+        const tanggal = $(this).data('tanggal');
+        const jam = $(this).data('jam');
+
+        $('#modalNamaDokter').text(namaDokter);
+        $('#inputIdDokter').val(idDokter);
+        $('#modalTanggal').val(tanggal);
+        $('#inputTanggal').val(tanggal);
+        $('#inputJam').val(jam);
+
+        // Buat tombol jam (kamu bisa kembangkan ini ke banyak jam jika mau)
+        let jamHtml = `<button type="button" class="btn btn-sm btn-primary pilih-jam" data-jam="${jam}">${jam}</button>`;
+        $('#pilihanJam').html(jamHtml);
+
+        // Show modal
+        $('#bookingModal').modal('show');
+      });
+
+      $(document).on('click', '.pilih-jam', function() {
+        $('.pilih-jam').removeClass('btn-primary').addClass('btn-outline-secondary');
+        $(this).addClass('btn-primary').removeClass('btn-outline-secondary');
+        const jam = $(this).data('jam');
+        $('#inputJam').val(jam);
+      });
+    });
+  </script>
+
+
+
+
+
 
 </body>
 

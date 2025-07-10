@@ -111,7 +111,6 @@
             <div class="card shadow p-4 mb-4" style="border-radius: 20px;">
                 <div class="form-container">
                     <h2 class="text-center mb-4" style="color: #333; font-weight: 700;">Form Data Pasien</h2>
-                    <pre><?php print_r($profile); ?></pre>
 
                     <form id="patientForm" method="post" action="<?= base_url('profile/simpan') ?>">
                         <div class="row mb-3">

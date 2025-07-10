@@ -68,6 +68,43 @@ class Home extends CI_Controller
 		$data['layanan'] = $this->db->get('datalayanan')->result();
 		// Ambil data artikel dari database
 		$data['artikel'] = $this->db->get('dataartikel')->result();
+
+		// Ambil testimonial yang sudah disetujui
+		$this->db->where('status', 'approved');
+		$this->db->order_by('created_at', 'DESC');
+		$data['testimoni'] = $this->db->get('datatestimonial')->result();
+
 		$this->load->view('v_home', $data);
+	}
+	public function cek_profil_lengkap()
+	{
+		$this->load->database();
+
+		if (!$this->session->userdata('id_user')) {
+			echo json_encode(['lengkap' => false]);
+			return;
+		}
+
+		$id_user = $this->session->userdata('id_user');
+		$pasien = $this->db->get_where('datapasien', ['id_user' => $id_user])->row();
+		$medik = $pasien ? $this->db->get_where('datamedik', ['id_pasien' => $pasien->id_pasien])->row() : null;
+
+		echo json_encode(['lengkap' => ($pasien && $medik)]);
+	}
+
+	public function get_jadwal_by_dokter()
+	{
+		$id_dokter = $this->input->post('id_dokter');
+		$tanggal = $this->input->post('tanggal');
+
+		$this->db->where('id_dok', $id_dokter);
+		if ($tanggal) {
+			$this->db->where('tgl', $tanggal);
+		}
+
+		$this->db->order_by('waktu', 'ASC');
+		$jadwal = $this->db->get('datajadwal')->result();
+
+		echo json_encode($jadwal);
 	}
 }
