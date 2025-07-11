@@ -50,12 +50,22 @@
                 <a href="<?= base_url('home') ?>">Kembali ke Home</a>
               </div>
 
-              <!-- Error Message -->
-              <?php if ($this->session->flashdata('error')): ?>
-                <div class="alert alert-danger mt-3">
-                  <?= $this->session->flashdata('error') ?>
+              <!-- Notifikasi Berhasil -->
+              <?php if ($this->session->flashdata('success')): ?>
+                <div class="alert alert-success alert-dismissible fade show rounded-3" role="alert">
+                  <?= $this->session->flashdata('success'); ?>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
               <?php endif; ?>
+
+              <!-- Notifikasi Error -->
+              <?php if ($this->session->flashdata('error')): ?>
+                <div class="alert alert-danger alert-dismissible fade show rounded-3 mt-3" role="alert">
+                  <?= $this->session->flashdata('error'); ?>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              <?php endif; ?>
+
 
               <form action="<?= base_url('masuk/login') ?>" method="post" class="row g-3">
                 <div class="col-12">

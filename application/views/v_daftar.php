@@ -17,6 +17,9 @@
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body style="background-color: #f5f6fa;">
@@ -41,6 +44,12 @@
         <div class="col-md-6 col-lg-5">
           <div class="card shadow-sm rounded-4 border-0">
             <div class="card-body p-4">
+              <?php if ($this->session->flashdata('error')): ?>
+                <div class="alert alert-danger alert-dismissible fade show rounded-3" role="alert">
+                  <?= $this->session->flashdata('error'); ?>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              <?php endif; ?>
 
               <div class="text-center mb-4">
                 <h4 class="fw-bold">Buat Akun Baru</h4>

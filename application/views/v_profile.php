@@ -27,6 +27,9 @@
     <!-- Main CSS File -->
     <link href="<?= base_url('depan/css/main.css') ?>" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <style>
         .btn-submit {
             background: linear-gradient(135deg, #a94b87 0%, #a94b87 100%);
@@ -138,8 +141,8 @@
                                 <label for="jenisKelamin" class="form-label">Jenis Kelamin</label>
                                 <select class="form-select" name="jenisKelamin" id="jenisKelamin">
                                     <option value="">Pilih jenis kelamin</option>
-                                    <option value="" <?= (isset($profile->jk) && $profile->jk == 'pria') ? 'selected' : '' ?>>pria</option>
-                                    <option value="wanita" <?= (isset($profile->jk) && $profile->jk == 'wanita') ? 'selected' : '' ?>>wanita</option>
+                                    <option value="Pria" <?= (isset($profile->jk) && $profile->jk == 'pria') ? 'selected' : '' ?>>Pria</option>
+                                    <option value="Wanita" <?= (isset($profile->jk) && $profile->jk == 'wanita') ? 'selected' : '' ?>>Wanita</option>
                                 </select>
                             </div>
                         </div>
@@ -380,6 +383,19 @@
             }
         }
     </script>
+
+    <?php if ($this->session->flashdata('success')): ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '<?= $this->session->flashdata('success'); ?>',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    <?php endif; ?>
+
 
 </body>
 

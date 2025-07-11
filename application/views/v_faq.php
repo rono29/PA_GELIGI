@@ -56,7 +56,11 @@
           <li><a href="<?= base_url('home/#portfolio') ?>">Artikel</a></li>
           <li><a href="<?= base_url('home/#contact') ?>">Kontak</a></li>
           <li><a href="" class="active">FAQ</a></li>
-          <a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a>
+          <?php if ($this->session->userdata('id_user')): ?>
+            <a href="<?= base_url('profile') ?>" class="btn-login">Profil</a>
+          <?php else: ?>
+            <a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a>
+          <?php endif; ?>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -74,36 +78,32 @@
     </div><!-- End Section Title -->
 
     <section id="faq" class="faq section bg-light py-5">
-  <div class="container" data-aos="fade-up">
+      <div class="container" data-aos="fade-up">
 
-    <div class="accordion" id="faqAccordion">
-      <?php if (!empty($faq)): ?>
-        <?php $i = 1; foreach ($faq as $row): ?>
-          <div class="accordion-item mb-3 border rounded shadow-sm">
-            <h2 class="accordion-header" id="faqHeading<?= $i ?>">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq<?= $i ?>" aria-expanded="false" aria-controls="faq<?= $i ?>">
-                <?= htmlspecialchars($row->pertanyaan) ?>
-              </button>
-            </h2>
-            <div id="faq<?= $i ?>" class="accordion-collapse collapse" aria-labelledby="faqHeading<?= $i ?>" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                <?= nl2br(htmlspecialchars($row->jawaban)) ?>
+        <div class="accordion" id="faqAccordion">
+          <?php if (!empty($faq)): ?>
+            <?php $i = 1;
+            foreach ($faq as $row): ?>
+              <div class="accordion-item mb-3 border rounded shadow-sm">
+                <h2 class="accordion-header" id="faqHeading<?= $i ?>">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq<?= $i ?>" aria-expanded="false" aria-controls="faq<?= $i ?>">
+                    <?= htmlspecialchars($row->pertanyaan) ?>
+                  </button>
+                </h2>
+                <div id="faq<?= $i ?>" class="accordion-collapse collapse" aria-labelledby="faqHeading<?= $i ?>" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <?= nl2br(htmlspecialchars($row->jawaban)) ?>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        <?php $i++; endforeach; ?>
-      <?php else: ?>
-        <p class="text-muted">Belum ada pertanyaan yang tersedia.</p>
-      <?php endif; ?>
-    </div>
-
-  </div>
-</section>
-
-
-
-    </div>
-
+            <?php $i++;
+            endforeach; ?>
+          <?php else: ?>
+            <p class="text-muted">Belum ada pertanyaan yang tersedia.</p>
+          <?php endif; ?>
+        </div>
+      </div>
+    </section>
   </section><!-- /Faq Section -->
 
   <footer id="footer" class="footer purple-background">

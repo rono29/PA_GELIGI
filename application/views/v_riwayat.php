@@ -114,7 +114,17 @@
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <?php if ($r->status == 'dalam proses') : ?>
+                                        <?php
+                                        // Gabungkan tanggal dan jam menjadi datetime
+                                        $reservasi_time = strtotime($r->tgl_input . ' ' . $r->jam_res);
+                                        $now = time();
+
+                                        // Hitung selisih waktu dalam detik
+                                        $selisih_detik = $reservasi_time - $now;
+                                        $selisih_menit = $selisih_detik / 60;
+                                        ?>
+
+                                        <?php if ($r->status == 'dalam proses' && $selisih_menit >= 30) : ?>
                                             <a href="<?= base_url('admin/reservasi/batalkan/' . $r->id_res) ?>"
                                                 class="btn btn-sm btn-outline-danger"
                                                 onclick="return confirm('Yakin ingin membatalkan reservasi ini?');">

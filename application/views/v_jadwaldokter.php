@@ -23,6 +23,7 @@
   <link href="<?= base_url('depan/vendor/aos/aos.css') ?>" rel="stylesheet">
   <link href="<?= base_url('depan/vendor/glightbox/css/glightbox.min.css') ?>" rel="stylesheet">
   <link href="<?= base_url('depan/vendor/swiper/swiper-bundle.min.css') ?>" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
   <!-- Main CSS File -->
   <link href="<?= base_url('depan/css/main.css') ?>" rel="stylesheet">
@@ -60,7 +61,11 @@
   </header>
 
 
-  <section id="jadwal" class="faq section light-background">
+  <section id="jadwal" class="faq section light-background" data-aos="fade-up" data-aos-delay="100">
+    <div class="container section-title">
+      <h2>Jadwal Dokter</h2>
+      <p class="text-muted">Lihat jadwal praktik dokter kami untuk merencanakan kunjungan Anda dengan lebih mudah dan nyaman.</p>
+    </div>
     <div class="container">
       <div class="row justify-content-center">
         <?php foreach ($dokter_dengan_jadwal as $dokter): ?>
@@ -217,6 +222,13 @@
 
         new bootstrap.Modal(document.getElementById('confirmModal')).show();
       });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800, // durasi animasi
+      once: true // animasi hanya terjadi satu kali saat scroll
     });
   </script>
 </body>

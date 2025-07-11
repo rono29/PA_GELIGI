@@ -27,6 +27,8 @@
   <!-- Main CSS File -->
   <link href="<?= base_url('depan/css/main.css') ?>" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+
 
   <!-- =======================================================
   * Template Name: BizPage
@@ -238,9 +240,7 @@
     </section>
 
     <!-- /Doctor Section -->
-
     <section id="doctor" class="about section">
-
       <!-- Section Title -->
       <div class="container section-title2" data-aos="fade-up" data-aos-delay="100">
         <h2>Dokter Kami</h2>
@@ -255,53 +255,59 @@
 
             <!-- Card Pertama -->
             <div class="row">
-              <?php foreach ($dokter_dengan_jadwal as $dokter): ?>
-                <div class="col-lg-4 col-md-6 doctor-block scale-card mb-4">
-                  <div class="inner-box shadow-sm rounded-4 overflow-hidden bg-white h-100 d-flex flex-column wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1500ms">
-
-                    <!-- Foto Dokter -->
-                    <div class="image position-relative">
-                      <img src="<?= base_url('depan/img/doc.jpg') ?>" alt="dokter" class="img-fluid w-100 custom-img" style="height: 300px; object-fit: cover;">
-                    </div>
-
-                    <!-- Konten -->
-                    <div class="lower-content p-3 d-flex flex-column flex-grow-1 justify-content-between">
-                      <div>
-                        <div class="top-content text-center mb-2">
-                          <div class="category text-muted small">Dokter Gigi Umum</div>
-                          <a href="#" class="text-decoration-none text-dark">
-                            <h5 class="fw-bold mb-1"><?= $dokter->nama ?></h5>
-                          </a>
-                          <div class="designation text-muted small"><?= $dokter->spesialisasi ?? 'D.N.Sc. – M.B.B.S, Ph.D' ?></div>
-                        </div>
-
-                        <div class="text-center small mb-2">
-                          <strong>Jadwal:</strong><br>
-                          <?= $dokter->hari ?>, <?= date('d M Y', strtotime($dokter->tgl)) ?> - <?= date('H:i', strtotime($dokter->waktu)) ?>
-                        </div>
-                      </div>
-
-                      <!-- Tombol Aksi -->
-                      <div class="bottom-content mt-3 d-flex justify-content-around border-top pt-3">
-                        <a href="<?= base_url('jadwaldokter') ?>" class="text-decoration-none text-primary d-flex align-items-center gap-1 small">
-                          <i class="bi bi-calendar-event"></i> Jadwal
-                        </a>
-                        <a href="#"
-                          class="btn-buat-janji text-success text-decoration-none d-flex align-items-center gap-1 small"
-                          data-bs-toggle="modal"
-                          data-bs-target="#bookingModal"
-                          data-id="<?= $dokter->id_user ?>"
-                          data-nama="<?= $dokter->nama ?>"
-                          data-tanggal="<?= $dokter->tgl ?>"
-                          data-jam="<?= date('H:i', strtotime($dokter->waktu)) ?>">
-                          <i class="bi bi-pencil-square"></i> Buat Janji
-                        </a>
-                      </div>
-                    </div>
-
-                  </div>
+              <?php if (empty($dokter_dengan_jadwal)): ?>
+                <div class="col-12 text-center">
+                  <i class="bi bi-emoji-frown fs-1 text-secondary"></i>
+                  <p class="mt-2 text-muted">Dokter belum tersedia untuk saat ini.</p>
                 </div>
-              <?php endforeach; ?>
+              <?php else: ?>
+                <?php foreach ($dokter_dengan_jadwal as $dokter): ?>
+                  <div class="col-lg-4 col-md-6 doctor-block scale-card mb-4">
+                    <div class="inner-box shadow-sm rounded-4 overflow-hidden bg-white h-100 d-flex flex-column wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1500ms">
+
+                      <!-- Foto Dokter -->
+                      <div class="image position-relative">
+                        <img src="<?= base_url('depan/img/doc.jpg') ?>" alt="dokter" class="img-fluid w-100 custom-img" style="height: 300px; object-fit: cover;">
+                      </div>
+
+                      <!-- Konten -->
+                      <div class="lower-content p-3 d-flex flex-column flex-grow-1 justify-content-between">
+                        <div>
+                          <div class="top-content text-center mb-2">
+                            <div class="category text-muted small">Dokter Gigi Umum</div>
+                            <a href="#" class="text-decoration-none text-dark">
+                              <h5 class="fw-bold mb-1"><?= $dokter->nama ?></h5>
+                            </a>
+                            <div class="designation text-muted small"><?= $dokter->spesialisasi ?? 'D.N.Sc. – M.B.B.S, Ph.D' ?></div>
+                          </div>
+
+                          <div class="text-center small mb-2">
+                            <strong>Jadwal:</strong><br>
+                            <?= $dokter->hari ?>, <?= date('d M Y', strtotime($dokter->tgl)) ?> - <?= date('H:i', strtotime($dokter->waktu)) ?>
+                          </div>
+                        </div>
+
+                        <!-- Tombol Aksi -->
+                        <div class="bottom-content mt-3 d-flex justify-content-around border-top pt-3">
+                          <a href="<?= base_url('jadwaldokter') ?>" class="text-decoration-none text-primary d-flex align-items-center gap-1 small">
+                            <i class="bi bi-calendar-event"></i> Jadwal
+                          </a>
+                          <a href="#"
+                            class="btn-buat-janji text-success text-decoration-none d-flex align-items-center gap-1 small"
+                            data-bs-toggle="modal"
+                            data-bs-target="#bookingModal"
+                            data-id="<?= $dokter->id_user ?>"
+                            data-nama="<?= $dokter->nama ?>"
+                            data-tanggal="<?= $dokter->tgl ?>"
+                            data-jam="<?= date('H:i', strtotime($dokter->waktu)) ?>">
+                            <i class="bi bi-pencil-square"></i> Buat Janji
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <?php endforeach; ?>
+              <?php endif; ?>
             </div>
 
             <!-- Modal Notifikasi Berhasil -->
@@ -395,11 +401,6 @@
                 </div>
               </div>
             </div>
-
-
-
-            <!-- Card Kedua-->
-
           </div>
         </div>
       </div>
@@ -448,12 +449,7 @@
 
     </section>
 
-    </section>
-    <!-- /Services Section -->
-
-
     <!-- Portfolio Section -->
-    <!-- Section Title -->
     <!-- Section Title -->
     <section id="portfolio" class="portfolio section">
       <div class="container section-title" data-aos="fade-up" id="portofolio">
@@ -485,12 +481,24 @@
 
                     <!-- Aksi -->
                     <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center px-3 pb-3">
-                      <a href="data:image/jpeg;base64,<?= base64_encode($a->gambar) ?>"
-                        title="<?= htmlspecialchars($a->judul) ?>"
-                        data-gallery="portfolio-gallery-book"
-                        class="glightbox text-decoration-none text-dark">
+                      <a href="#popup-artikel-<?= $a->id_artikel ?>"
+                        class="glightbox-custom text-decoration-none text-dark"
+                        data-glightbox="type: inline">
                         <i class="bi bi-zoom-in fs-5"></i>
                       </a>
+
+                      <!-- Popup Konten -->
+                      <div id="popup-artikel-<?= $a->id_artikel ?>" style="display: none;">
+                        <div class="container p-3 text-center"> <!-- tambahkan text-center di sini -->
+                          <img src="data:image/jpeg;base64,<?= base64_encode($a->gambar) ?>"
+                            class="img-fluid mb-3 rounded"
+                            alt="<?= htmlspecialchars($a->judul) ?>"
+                            style="max-height: 300px; object-fit: cover;">
+                          <h4 class="mb-2"><?= htmlspecialchars($a->judul) ?></h4>
+                          <p class="text-muted text-start"><?= $a->deskripsi ?></p>
+                        </div>
+                      </div>
+
                       <a href="<?= base_url('detailberita/' . $a->id_artikel) ?>"
                         title="Selengkapnya"
                         class="text-decoration-none text-dark">
@@ -506,12 +514,10 @@
                 <p>Belum ada artikel yang tersedia.</p>
               </div>
             <?php endif; ?>
-
           </div>
         </div>
       </div>
     </section>
-
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section lightpurple-background">
@@ -857,6 +863,13 @@
       });
     </script>
   <?php endif; ?>
+
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script>
+    const lightboxArtikel = GLightbox({
+      selector: '.glightbox-custom'
+    });
+  </script>
 
 </body>
 
