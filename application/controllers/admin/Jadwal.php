@@ -71,21 +71,35 @@ class Jadwal extends CI_Controller
 
 	public function delete($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('id_jadwal', $id);
 		$this->db->delete('datajadwal');
 
+		$this->session->set_flashdata('success', 'Data jadwal berhasil dihapus.');
 		redirect('admin/jadwal');
 	}
+
 	public function update($id)
 	{
-		$this->db->where('id', $id);
+		$this->load->database();
+
+		$id_dokter = $this->input->post('dokter', true);
+		$dokter = $this->db->get_where('datauser', ['id_user' => $id_dokter])->row();
+
+		if (!$dokter) {
+			show_error('Dokter tidak ditemukan.', 404);
+			return;
+		}
+
+		$this->db->where('id_jadwal', $id);
 		$this->db->update('datajadwal', [
-			'nama'  => $this->input->post('dokter', true),
-			'hari'  => $this->input->post('date', true),
-			'tgl'   => $this->input->post('date', true),
-			'waktu' => $this->input->post('waktu', true),
+			'id_dok'  => $id_dokter,
+			'nama'    => $dokter->nama,
+			'hari'    => $this->input->post('date', true),
+			'tgl'     => $this->input->post('date', true),
+			'waktu'   => $this->input->post('waktu', true),
 		]);
 
+		$this->session->set_flashdata('success', 'Data jadwal berhasil diperbarui.');
 		redirect('admin/jadwal');
 	}
 }

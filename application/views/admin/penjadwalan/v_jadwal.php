@@ -64,13 +64,12 @@
 											<?php if ($this->session->userdata('role') === 'staf'): ?>
 												<td>
 													<div class="d-flex align-items-center gap-3 fs-6">
-														<a href="<?= base_url('admin/jadwal/edit/' . $row->id_jadwal) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" aria-label="Edit">
+														<a href="<?= base_url('admin/jadwal/edit/' . $row->id_jadwal) ?>" class="text-warning">
 															<ion-icon name="pencil-sharp"></ion-icon>
 														</a>
-														<a href="<?= base_url('admin/jadwal/delete/' . $row->id_jadwal) ?>" onclick="return confirm('Yakin ingin menghapus jadwal ini?');" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus" aria-label="Delete">
+														<a href="<?= base_url('admin/jadwal/delete/' . $row->id_jadwal) ?>" onclick="return confirm('Yakin ingin menghapus jadwal ini?');" class="text-danger">
 															<ion-icon name="trash-sharp"></ion-icon>
 														</a>
-
 													</div>
 												</td>
 											<?php endif; ?>
@@ -121,6 +120,33 @@
 
 	<!-- Main JS-->
 	<script src="<?= base_url('assets/js/main.js') ?>"></script>
+
+	<?php if ($this->session->flashdata('success')): ?>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script>
+			Swal.fire({
+				icon: 'success',
+				title: 'Sukses!',
+				text: '<?= $this->session->flashdata('success') ?>',
+				timer: 2000,
+				showConfirmButton: false
+			});
+		</script>
+	<?php endif; ?>
+
+	<?php if ($this->session->flashdata('error')): ?>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script>
+			Swal.fire({
+				icon: 'error',
+				title: 'Gagal!',
+				text: '<?= $this->session->flashdata('error') ?>',
+				timer: 2000,
+				showConfirmButton: false
+			});
+		</script>
+	<?php endif; ?>
+
 
 
 </body>

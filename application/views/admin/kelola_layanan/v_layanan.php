@@ -66,17 +66,19 @@
 												<img src="<?= base_url('admin/layanan/gambar/' . $row->id_layanan) ?>" style="width: 100px;" alt="gambar">
 											</td>
 											<td>
-												<a href="<?= base_url('admin/layanan/edit/' . $row->id_layanan) ?>"
-													class="text-warning" title="Edit">
-													<ion-icon name="pencil-sharp"></ion-icon>
-												</a>
+												<div class="d-flex align-items-center gap-3 fs-6">
+													<a href="<?= base_url('admin/layanan/edit/' . $row->id_layanan) ?>"
+														class="text-warning" title="Edit">
+														<ion-icon name="pencil-sharp"></ion-icon>
+													</a>
 
-												<a href="<?= base_url('admin/layanan/delete/' . $row->id_layanan) ?>"
-													class="text-danger"
-													onclick="return confirm('Yakin ingin menghapus data ini?')"
-													title="Delete">
-													<ion-icon name="trash-sharp"></ion-icon>
-												</a>
+													<a href="<?= base_url('admin/layanan/delete/' . $row->id_layanan) ?>"
+														class="text-danger"
+														onclick="return confirm('Yakin ingin menghapus data ini?')"
+														title="Delete">
+														<ion-icon name="trash-sharp"></ion-icon>
+													</a>
+												</div>
 											</td>
 										</tr>
 									<?php endforeach; ?>
