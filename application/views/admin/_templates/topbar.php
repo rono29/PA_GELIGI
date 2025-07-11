@@ -139,9 +139,13 @@
                         <a class="dropdown-item" href="#">
                           <div class="d-flex flex-row align-items-center gap-2">
                             <img src="<?= base_url('assets/images/avatars/06.png') ?>" alt="" class="rounded-circle" width="54" height="54">
-                            <div class="">
-                              <h6 class="mb-0 dropdown-user-name">Manda</h6>
-                              <small class="mb-0 dropdown-user-designation text-secondary">Admin</small>
+                            <div>
+                              <h6 class="mb-0 dropdown-user-name">
+                                <?= $this->session->userdata('nama') ?? 'Pengguna' ?>
+                              </h6>
+                              <small class="mb-0 dropdown-user-designation text-secondary">
+                                <?= ucfirst($this->session->userdata('role') ?? 'Role') ?>
+                              </small>
                             </div>
                           </div>
                         </a>

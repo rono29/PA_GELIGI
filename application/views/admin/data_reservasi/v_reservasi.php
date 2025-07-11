@@ -29,10 +29,11 @@
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
           <div class="breadcrumb-title pe-3">Data Reservasi</div>
         </div>
-        <br>
-        <div class="col">
-          <a class="btn btn-primary px-5" href="<?php echo base_url() . 'admin/reservasi/tambah' ?>">Tambah Data</a>
-        </div>
+        <?php if ($this->session->userdata('role') === 'staf'): ?>
+          <div class="col">
+            <a class="btn btn-primary px-5" href="<?= base_url('admin/reservasi/tambah') ?>">Tambah Data</a>
+          </div>
+        <?php endif; ?>
 
         <br><br>
         <!--end breadcrumb-->
@@ -44,6 +45,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>Nama Dokter Praktik</th>
                     <th>Tanggal Input</th>
                     <th>Nama Lengkap</th>
                     <th>Umur</th>
@@ -52,7 +54,9 @@
                     <th class="wrap-text">Waktu Reservasi</th>
                     <th class="wrap-text">No Antrian</th>
                     <th>Status</th>
-                    <th>Aksi</th>
+                    <?php if ($this->session->userdata('role') === 'staf'): ?>
+                      <th>Aksi</th>
+                    <?php endif; ?>
 
                   </tr>
                 </thead>
@@ -61,6 +65,7 @@
                   foreach ($reservasi as $row): ?>
                     <tr>
                       <td><?= $no++ ?></td>
+                      <td>Belum di panggil dokternya</td>
                       <td><?= $row->created_at ?></td>
                       <td><?= $row->nama ?></td>
                       <td><?= $row->umur ?> Tahun</td>
@@ -70,23 +75,28 @@
                       <td><?= $row->no_antrian ?></td>
                       <td><?= $row->status ?></td>
 
-                      <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="<?= base_url('admin/reservasi/preview/' . $row->id_res) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Rincian">
-                            <ion-icon name="eye-sharp"></ion-icon>
-                          </a>
+                      <?php if ($this->session->userdata('role') === 'staf'): ?>
+                        <td>
+                          <div class="d-flex align-items-center gap-3 fs-6">
+                            <a href="<?= base_url('admin/reservasi/preview/' . $row->id_res) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Rincian">
+                              <ion-icon name="eye-sharp"></ion-icon>
+                            </a>
 
-                          <a href="<?= base_url('admin/reservasi/delete/' . $row->id_res) ?>"
-                            class="text-danger"
-                            onclick="return confirm('Yakin ingin menghapus data ini?')"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="bottom"
-                            title="Hapus">
-                            <ion-icon name="trash-sharp"></ion-icon>
-                          </a>
+                            <a href="<?= base_url('admin/reservasi/delete/' . $row->id_res) ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cencel">
+                              <ion-icon name="close-sharp"></ion-icon>
+                            </a>
 
-                        </div>
-                      </td>
+                            <a href="<?= base_url('admin/reservasi/delete/' . $row->id_res) ?>"
+                              class="text-danger"
+                              onclick="return confirm('Yakin ingin menghapus data ini?')"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="bottom"
+                              title="Hapus">
+                              <ion-icon name="trash-sharp"></ion-icon>
+                            </a>
+                          </div>
+                        </td>
+                      <?php endif; ?>
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
@@ -99,12 +109,12 @@
       </div>
       <!--end page content wrapper-->
     </div>
-  </div>
+    <!--start footer-->
+    <?php $this->load->view("admin/_templates/footer.php") ?>
+    <!--end footer-->
   </div>
 
-  <!--start footer-->
-  <?php $this->load->view("admin/_templates/footer.php") ?>
-  <!--end footer-->
+
 
 
 

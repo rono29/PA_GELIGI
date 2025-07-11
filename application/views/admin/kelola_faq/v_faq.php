@@ -55,7 +55,7 @@
 												<div style="display: flex; flex-direction: column;">
 													<div><?= nl2br(htmlspecialchars($row->jawaban)) ?></div>
 													<div style="align-self: flex-end; font-size: 9px; color: #999; font-style: italic; margin-top: 4px;">
-														ID Staf: <?= $row->id_staf ?> • <?= date('Y-m-d H:i:s', strtotime($row->created_at ?? 'now')) ?>
+														Diedit Oleh: <?= $row->id_staf ?> • <?= date('Y-m-d H:i:s', strtotime($row->created_at ?? 'now')) ?>
 													</div>
 												</div>
 											</td>

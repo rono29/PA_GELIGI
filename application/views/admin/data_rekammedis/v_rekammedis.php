@@ -32,9 +32,11 @@
 					<div class="breadcrumb-title pe-3">Data Rekam Medis</div>
 				</div>
 				<br>
-				<div class="col">
-					<a class="btn btn-primary px-5" href="<?php echo base_url() . 'admin/rekammedis/tambah' ?>">Tambah Data</a>
-				</div>
+				<?php if ($this->session->userdata('role') === 'staf'): ?>
+					<div class="col">
+						<a class="btn btn-primary px-5" href="<?= base_url('admin/rekammedis/tambah') ?>">Tambah Data</a>
+					</div>
+				<?php endif; ?>
 				<br><br>
 				<!--end breadcrumb-->
 
@@ -68,22 +70,38 @@
 											</td>
 											<td>
 												<div class="d-flex align-items-center gap-3 fs-6">
-													<a href="<?= base_url('admin/rekammedis/preview/' . $row->id_RM) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Rincian">
-														<ion-icon name="eye-sharp"></ion-icon>
-													</a>
-													<a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unduh">
-														<ion-icon name="download-outline"></ion-icon>
-													</a>
-													<a href="<?= base_url('admin/rekammedis/edit/' . $row->id_RM) ?>" class="btn btn-sm btn-primary">Edit</a>
+													<?php $role = $this->session->userdata('role'); ?>
 
-													<a href="<?= base_url('admin/rekammedis/delete/' . $row->id_RM) ?>"
-														class="text-danger"
-														onclick="return confirm('Yakin ingin menghapus data ini?')"
-														data-bs-toggle="tooltip"
-														data-bs-placement="bottom"
-														title="Hapus">
-														<ion-icon name="trash-sharp"></ion-icon>
-													</a>
+													<?php if ($role === 'staf'): ?>
+														<!-- Rincian -->
+														<a href="<?= base_url('admin/rekammedis/preview/' . $row->id_RM) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Rincian">
+															<ion-icon name="eye-sharp"></ion-icon>
+														</a>
+
+														<!-- Unduh -->
+														<a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unduh">
+															<ion-icon name="download-outline"></ion-icon>
+														</a>
+													<?php endif; ?>
+
+													<!-- Edit (boleh untuk dokter dan admin) -->
+													<?php if (in_array($role, ['staf', 'dokter'])): ?>
+														<a href="<?= base_url('admin/rekammedis/edit/' . $row->id_RM) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+															<ion-icon name="pencil-sharp"></ion-icon>
+														</a>
+													<?php endif; ?>
+
+													<?php if ($role === 'staf'): ?>
+														<!-- Hapus -->
+														<a href="<?= base_url('admin/rekammedis/delete/' . $row->id_RM) ?>"
+															class="text-danger"
+															onclick="return confirm('Yakin ingin menghapus data ini?')"
+															data-bs-toggle="tooltip"
+															data-bs-placement="bottom"
+															title="Hapus">
+															<ion-icon name="trash-sharp"></ion-icon>
+														</a>
+													<?php endif; ?>
 												</div>
 											</td>
 										</tr>

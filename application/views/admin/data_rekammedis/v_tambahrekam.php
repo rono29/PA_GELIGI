@@ -31,7 +31,13 @@
               </ol>
             </nav>
           </div>
+
+          <!-- Tambahkan ini untuk menampilkan Nomor Rekam Medis di sebelah kanan -->
+          <div class="ms-auto">
+            <span class="fw-bold">No Rekam Medis: <?= $datarekammedis->no_rekammedis ?? '-' ?></span>
+          </div>
         </div>
+
         <!--end breadcrumb-->
       </div>
       <!--end page content wrapper-->
@@ -42,6 +48,10 @@
           </div>
           <div class="card-body">
             <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">No Rekam Medis</label>
+                <input type="text" name="noRekamMedis" class="form-control" required>
+              </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Nama Lengkap</label>
                 <input type="text" name="namaLengkap" class="form-control" required>
@@ -207,8 +217,9 @@
                 <textarea class="form-control" name="keterangan"></textarea>
               </div>
             </div>
-            <div class="col d-flex justify-content-end">
-              <button type="submit" class="btn btn-primary px-3">Simpan</button>
+            <div class="col-12 d-flex justify-content-between mt-4">
+              <a href="<?= base_url('admin/rekammedis') ?>" class="btn btn-secondary">Kembali</a>
+              <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
           </div>
         </div>

@@ -50,6 +50,12 @@
                 <a href="<?= base_url('home') ?>">Kembali ke Home</a>
               </div>
 
+              <!-- Error Message -->
+              <?php if ($this->session->flashdata('error')): ?>
+                <div class="alert alert-danger mt-3">
+                  <?= $this->session->flashdata('error') ?>
+                </div>
+              <?php endif; ?>
 
               <form action="<?= base_url('masuk/login') ?>" method="post" class="row g-3">
                 <div class="col-12">
@@ -65,13 +71,6 @@
                   <button type="submit" class="btn btn-primary w-100 rounded-pill">Masuk</button>
                 </div>
               </form>
-
-              <!-- Error Message -->
-              <?php if ($this->session->flashdata('error')): ?>
-                <div class="alert alert-danger mt-3">
-                  <?= $this->session->flashdata('error') ?>
-                </div>
-              <?php endif; ?>
 
               <!-- Atau -->
               <div class="text-center my-3">

@@ -57,7 +57,8 @@
 													<div><?= nl2br(htmlspecialchars($row->deskripsi)) ?></div>
 													<!-- Optional info tambahan -->
 													<div style="align-self: flex-end; font-size: 9px; color: #999; font-style: italic; margin-top: 4px;">
-														ID Staf: <?= $row->id_staf ?>
+														Diedit Oleh: <?= $row->id_staf ?>•
+														<?= date('Y-m-d H:i:s', strtotime($row->updated_at ?? $row->created_at)) ?>
 													</div>
 												</div>
 											</td>

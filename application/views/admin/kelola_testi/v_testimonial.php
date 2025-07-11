@@ -42,7 +42,6 @@
 										<th>Rating</th>
 										<th>Testimonial</th>
 										<th>Aksi</th>
-
 									</tr>
 								</thead>
 								<tbody>
@@ -60,7 +59,7 @@
 															<ion-icon name="arrow-up-circle-sharp"></ion-icon> Unggah
 														</a>
 													<?php else: ?>
-														<button class="btn btn-sm btn-secondary" disabled>
+														<button class="btn btn-sm btn-secondary extra-small-btn" disabled>
 															<ion-icon name="checkmark-circle-sharp"></ion-icon> Sudah Diunggah
 														</button>
 													<?php endif; ?>

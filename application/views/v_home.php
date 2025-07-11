@@ -38,7 +38,6 @@
 </head>
 
 <body class="index-page">
-
   <!-- Modal Notifikasi Profil -->
   <div class="modal fade" id="profileNotificationModal" tabindex="-1" aria-labelledby="profileNotificationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -89,13 +88,12 @@
           <li><a href="#portfolio">Artikel</a></li>
           <li><a href="#contact">Kontak</a></li>
           <li><a href="<?= base_url('faq') ?>">FAQ</a></li>
-           <?php if ($this->session->userdata('id_user')): ?>
-      <li><a href="<?= base_url('profile') ?>" class="btn-login">Profil</a></li>
-    <?php else: ?>
-      <li><a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a></li>
-    <?php endif; ?>
+          <?php if ($this->session->userdata('id_user')): ?>
+            <a href="<?= base_url('profile') ?>" class="btn-login">Profil</a>
+          <?php else: ?>
+            <a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a>
+          <?php endif; ?>
         </ul>
-
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
@@ -235,18 +233,8 @@
               <img src="<?= base_url('depan/img/logo_geligi.svg') ?>" alt="Logo Geligi" class="img-fluid rounded shadow-sm" style="max-width: 80%; height: auto;">
             </div>
           </div>
-
         </div>
       </div>
-
-      </div>
-
-      </div>
-
-      </div>
-
-      </div>
-
     </section>
 
     <!-- /Doctor Section -->
@@ -266,55 +254,70 @@
           <div class="row justify-content-center">
 
             <!-- Card Pertama -->
-            <div class="col-lg-4 col-md-6 doctor-block scale-card">
-              <div class="inner-box shadow-sm rounded-4 overflow-hidden bg-white wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1500ms">
+            <div class="row">
+              <?php foreach ($dokter_dengan_jadwal as $dokter): ?>
+                <div class="col-lg-4 col-md-6 doctor-block scale-card mb-4">
+                  <div class="inner-box shadow-sm rounded-4 overflow-hidden bg-white h-100 d-flex flex-column wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1500ms">
 
-                <!-- Foto Dokter -->
-                <div class="image position-relative">
-                  <img src="<?= base_url('depan/img/doc.jpg') ?>" alt="dokter" class="img-fluid w-100 custom-img" style="height: 300px; object-fit: cover;">
-                </div>
-
-                <!-- Konten -->
-                <?php foreach ($dokter_dengan_jadwal as $dokter): ?>
-                  <div class="lower-content p-3 border rounded shadow-sm mb-3">
-                    <div class="top-content text-center mb-2">
-                      <div class="category text-muted small">Dokter Gigi Umum</div>
-                      <a href="#" class="text-decoration-none text-dark">
-                        <h5 class="fw-bold mb-1"><?= $dokter->nama ?></h5>
-                      </a>
-                      <div class="designation text-muted"><?= $dokter->spesialisasi ?? 'D.N.Sc. – M.B.B.S, Ph.D' ?></div>
+                    <!-- Foto Dokter -->
+                    <div class="image position-relative">
+                      <img src="<?= base_url('depan/img/doc.jpg') ?>" alt="dokter" class="img-fluid w-100 custom-img" style="height: 300px; object-fit: cover;">
                     </div>
 
-                    <div class="text-center small mb-2">
-                      <strong>Jadwal:</strong><br>
-                      <?= $dokter->hari ?>, <?= date('d M Y', strtotime($dokter->tgl)) ?> - <?= date('H:i', strtotime($dokter->waktu)) ?>
+                    <!-- Konten -->
+                    <div class="lower-content p-3 d-flex flex-column flex-grow-1 justify-content-between">
+                      <div>
+                        <div class="top-content text-center mb-2">
+                          <div class="category text-muted small">Dokter Gigi Umum</div>
+                          <a href="#" class="text-decoration-none text-dark">
+                            <h5 class="fw-bold mb-1"><?= $dokter->nama ?></h5>
+                          </a>
+                          <div class="designation text-muted small"><?= $dokter->spesialisasi ?? 'D.N.Sc. – M.B.B.S, Ph.D' ?></div>
+                        </div>
+
+                        <div class="text-center small mb-2">
+                          <strong>Jadwal:</strong><br>
+                          <?= $dokter->hari ?>, <?= date('d M Y', strtotime($dokter->tgl)) ?> - <?= date('H:i', strtotime($dokter->waktu)) ?>
+                        </div>
+                      </div>
+
+                      <!-- Tombol Aksi -->
+                      <div class="bottom-content mt-3 d-flex justify-content-around border-top pt-3">
+                        <a href="<?= base_url('jadwaldokter') ?>" class="text-decoration-none text-primary d-flex align-items-center gap-1 small">
+                          <i class="bi bi-calendar-event"></i> Jadwal
+                        </a>
+                        <a href="#"
+                          class="btn-buat-janji text-success text-decoration-none d-flex align-items-center gap-1 small"
+                          data-bs-toggle="modal"
+                          data-bs-target="#bookingModal"
+                          data-id="<?= $dokter->id_user ?>"
+                          data-nama="<?= $dokter->nama ?>"
+                          data-tanggal="<?= $dokter->tgl ?>"
+                          data-jam="<?= date('H:i', strtotime($dokter->waktu)) ?>">
+                          <i class="bi bi-pencil-square"></i> Buat Janji
+                        </a>
+                      </div>
                     </div>
 
-                    <div class="bottom-content mt-3 d-flex justify-content-around border-top pt-3">
-                      <a href="<?= base_url('jadwaldokter') ?>" class="text-decoration-none text-primary d-flex align-items-center gap-1">
-                        <i class="bi bi-calendar-event"></i> Jadwal
-                      </a>
-                      <a href="#"
-                        class="btn-buat-janji"
-                        data-bs-toggle="modal"
-                        data-bs-target="#bookingModal"
-                        data-id="<?= $dokter->id_user ?>"
-                        data-nama="<?= $dokter->nama ?>"
-                        data-tanggal="<?= $dokter->tgl ?>"
-                        data-jam="<?= date('H:i', strtotime($dokter->waktu)) ?>">
-                        Buat Janji
-                      </a>
-
-
-                    </div>
                   </div>
-                <?php endforeach; ?>
-
-
-
-              </div>
+                </div>
+              <?php endforeach; ?>
             </div>
 
+            <!-- Modal Notifikasi Berhasil -->
+            <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content text-center p-4">
+                  <h5 class="modal-title text-success" id="successModalLabel">Reservasi Berhasil!</h5>
+                  <div class="modal-body">
+                    <?= $this->session->flashdata('success') ?>
+                  </div>
+                  <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <!-- Modal Booking Awal -->
             <!-- Modal Buat Janji -->
@@ -333,8 +336,9 @@
                     <input type="hidden" name="dokterLama" id="inputIdDokter">
 
                     <!-- Tanggal -->
-                    <input type="text" id="modalTanggal" class="form-control form-control-sm w-75 mx-auto mb-3 rounded-pill text-center border-secondary" readonly>
-                    <input type="hidden" name="tglLama" id="inputTanggal">
+                    <input type="date" name="tglLama" id="modalTanggal"
+                      class="form-control form-control-sm w-75 mx-auto mb-3 rounded-pill text-center border-secondary"
+                      required min="<?= date('Y-m-d') ?>">
 
                     <!-- Pilihan Jam -->
                     <div id="pilihanJam" class="d-flex flex-wrap justify-content-center gap-2 mb-3">
@@ -450,42 +454,63 @@
 
     <!-- Portfolio Section -->
     <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-      <h2>Artikel</h2>
-      <p>Temukan berbagai artikel informatif seputar kesehatan gigi dan mulut yang dapat membantu Anda dan keluarga merawat senyum sehat setiap hari.</p>
-    </div><!-- End Section Title -->
-
-    <div class="container">
-      <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-        <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-          <?php if (!empty($artikel)) : ?>
-            <?php foreach ($artikel as $a) : ?>
-              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                <img src="data:image/jpeg;base64,<?= base64_encode($a->gambar) ?>" class="img-fluid" alt="Artikel <?= htmlspecialchars($a->judul) ?>">
-                <div class="portfolio-info">
-                  <h4><?= htmlspecialchars($a->judul) ?></h4>
-                  <p><?= character_limiter(strip_tags($a->deskripsi), 100) ?></p>
-                  <a href="data:image/jpeg;base64,<?= base64_encode($a->gambar) ?>" title="<?= htmlspecialchars($a->judul) ?>" data-gallery="portfolio-gallery-book" class="glightbox preview-link">
-                    <i class="bi bi-zoom-in"></i>
-                  </a>
-                  <a href="<?= base_url('detailberita/' . $a->id_artikel) ?>" title="Selengkapnya" class="details-link">
-                    <i class="bi bi-link-45deg"></i>
-                  </a>
-                </div>
-              </div>
-            <?php endforeach; ?>
-          <?php else : ?>
-            <div class="col-12 text-center text-muted">
-              <p>Belum ada artikel yang tersedia.</p>
-            </div>
-          <?php endif; ?>
-
-        </div><!-- End Portfolio Container -->
+    <!-- Section Title -->
+    <section id="portfolio" class="portfolio section">
+      <div class="container section-title" data-aos="fade-up" id="portofolio">
+        <h2>Artikel</h2>
+        <p>Temukan berbagai artikel informatif seputar kesehatan gigi dan mulut yang dapat membantu Anda dan keluarga merawat senyum sehat setiap hari.</p>
       </div>
-    </div>
-    </section><!-- /Portfolio Section --><!-- /Portfolio Section -->
 
+      <!-- Artikel Section -->
+      <div class="container">
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <?php if (!empty($artikel)) : ?>
+              <?php foreach ($artikel as $a) : ?>
+                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+                  <div class="card h-100 shadow-sm border-0">
+
+                    <!-- Gambar Artikel -->
+                    <img src="data:image/jpeg;base64,<?= base64_encode($a->gambar) ?>"
+                      class="card-img-top img-fluid"
+                      alt="Artikel <?= htmlspecialchars($a->judul) ?>"
+                      style="height: 220px; object-fit: cover;">
+
+                    <!-- Konten -->
+                    <div class="card-body d-flex flex-column justify-content-between">
+                      <h5 class="card-title"><?= htmlspecialchars($a->judul) ?></h5>
+                      <p class="card-text small text-muted"><?= character_limiter(strip_tags($a->deskripsi), 100) ?></p>
+                    </div>
+
+                    <!-- Aksi -->
+                    <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center px-3 pb-3">
+                      <a href="data:image/jpeg;base64,<?= base64_encode($a->gambar) ?>"
+                        title="<?= htmlspecialchars($a->judul) ?>"
+                        data-gallery="portfolio-gallery-book"
+                        class="glightbox text-decoration-none text-dark">
+                        <i class="bi bi-zoom-in fs-5"></i>
+                      </a>
+                      <a href="<?= base_url('detailberita/' . $a->id_artikel) ?>"
+                        title="Selengkapnya"
+                        class="text-decoration-none text-dark">
+                        <i class="bi bi-link-45deg fs-5"></i>
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            <?php else : ?>
+              <div class="col-12 text-center text-muted">
+                <p>Belum ada artikel yang tersedia.</p>
+              </div>
+            <?php endif; ?>
+
+          </div>
+        </div>
+      </div>
+    </section>
 
 
     <!-- Testimonials Section -->
@@ -602,44 +627,63 @@
 
           <!-- Form Penilaian -->
           <div class="col-lg-6 d-flex">
+            <?php if ($this->session->flashdata('sukses')): ?>
+              <div class="alert alert-success alert-dismissible fade show w-100" role="alert">
+                <?= $this->session->flashdata('sukses') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php endif; ?>
+
             <form action="<?= base_url('admin/testimonial/simpan') ?>" method="post"
               class="php-email-form p-4 p-lg-5 bg-white rounded shadow-sm w-100 d-flex flex-column justify-content-between"
               data-aos="fade-up" data-aos-delay="200">
-              <div class="col-md-12">
-                <input type="text" class="form-control form-control-lg rounded-3"
-                  name="nama_pengirim" placeholder="Nama Anda (Opsional)">
+
+              <!-- Input Nama -->
+              <div class="mb-3">
+                <input type="text" class="form-control form-control-lg rounded-3" name="nama_pengirim"
+                  placeholder="Nama Anda (Opsional)">
               </div>
 
+              <!-- Input Email -->
+              <div class="mb-3">
+                <input type="email" class="form-control form-control-lg rounded-3" name="email" placeholder="Email Anda" required>
+              </div>
 
-              <div class="row gy-4 flex-grow-1">
-                <div class="col-md-12">
-                  <input type="email" class="form-control form-control-lg rounded-3"
-                    name="email" placeholder="Email Anda" required>
+              <!-- Rating Bintang -->
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Beri Penilaian Pengalaman Anda:</label>
+                <div class="rating d-flex gap-2 fs-3 text-warning">
+                  <?php for ($i = 5; $i >= 1; $i--) : ?>
+                    <input type="radio" name="rating" id="star<?= $i ?>" value="<?= $i ?>" required
+                      class="d-none">
+                    <label for="star<?= $i ?>" style="cursor: pointer;">
+                      <i class="fas fa-star"></i>
+                    </label>
+                  <?php endfor; ?>
                 </div>
+              </div>
 
-                <div class="col-md-12">
-                  <label class="form-label mt-3 mb-2 fw-semibold">Beri Penilaian Pengalaman Anda:</label>
-                  <div class="rating d-flex justify-content-start gap-2 fs-3 text-warning position-relative">
-                    <?php for ($i = 5; $i >= 1; $i--) : ?>
-                      <input type="radio" name="rating" id="star<?= $i ?>" value="<?= $i ?>" required
-                        style="position: absolute; opacity: 0; width: 1px; height: 1px;">
-                      <label for="star<?= $i ?>" style="cursor: pointer;"><i class="fas fa-star"></i></label>
-                    <?php endfor; ?>
-                  </div>
+              <!-- Pesan Testimonial -->
+              <div class="mb-3">
+                <textarea class="form-control form-control-lg rounded-3" name="message" rows="6"
+                  placeholder="Bagikan pengalaman Anda dengan Geligi Dental Care..." required></textarea>
+              </div>
+
+              <?php if (!$this->session->userdata('id_user')): ?>
+                <!-- User belum login -->
+                <div class="text-center">
+                  <a href="<?= base_url('masuk') ?>" class="btn btn-warning px-5 rounded-pill mt-3">
+                    Login untuk Kirim Testimoni
+                  </a>
                 </div>
-
-
-                <div class="col-md-12">
-                  <textarea class="form-control form-control-lg rounded-3"
-                    name="message" rows="6"
-                    placeholder="Bagikan pengalaman Anda dengan Geligi Dental Care..." required></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
+              <?php else: ?>
+                <!-- User sudah login -->
+                <div class="text-center">
                   <button type="submit" class="btn btn-primary px-5 rounded-pill mt-3">Kirim Pesan</button>
                 </div>
-              </div>
+              <?php endif; ?>
 
+              <!-- Status Pengiriman -->
               <div class="mt-3 text-center">
                 <div class="loading d-none">Mengirim...</div>
                 <div class="error-message text-danger d-none"></div>
@@ -805,10 +849,14 @@
     });
   </script>
 
-
-
-
-
+  <?php if ($this->session->flashdata('success')): ?>
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+      });
+    </script>
+  <?php endif; ?>
 
 </body>
 

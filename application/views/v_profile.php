@@ -90,10 +90,14 @@
                     <li><a href="<?= base_url('home/#portfolio') ?>">Artikel</a></li>
                     <li><a href="<?= base_url('home/#contact') ?>">Kontak</a></li>
                     <li><a href="<?= base_url('faq') ?>">FAQ</a></li>
-                    <a href="<?= base_url('masuk') ?>" class="btn-login">Masuk</a>
+
+                    <?php if ($this->session->userdata('id_user')): ?>
+                        <a href="<?= base_url('masuk/logout') ?>" class="btn-login">Logout</a>
+                    <?php endif; ?>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
+
 
         </div>
     </header>

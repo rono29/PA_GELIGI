@@ -55,7 +55,8 @@
               <label class="form-label">Gambar</label>
               <input type="file" class="form-control mb-3" name="gambar" required>
             </div>
-            <div class="col d-flex justify-content-end">
+            <div class="col-12 d-flex justify-content-between mt-4">
+              <a href="<?= base_url('admin/artikel') ?>" class="btn btn-secondary px-2 m-3">Kembali</a>
               <button type="submit" class="btn btn-primary px-2 m-3">Simpan</button>
             </div>
           </div>

@@ -30,9 +30,12 @@
 					<div class="breadcrumb-title pe-3">Penjadwalan</div>
 				</div>
 				<br>
-				<div class="col">
-					<a class="btn btn-primary px-5" href="<?php echo base_url() . 'admin/jadwal/tambah' ?>">Tambah Data</a>
-				</div> <br><br>
+				<?php if ($this->session->userdata('role') === 'admin'): ?>
+					<div class="col">
+						<a class="btn btn-primary px-5" href="<?php echo base_url() . 'admin/jadwal/tambah' ?>">Tambah Data</a>
+					</div>
+				<?php endif; ?>
+				<br><br>
 				<!--end breadcrumb-->
 
 				<div class="card">
@@ -42,9 +45,12 @@
 								<thead>
 									<tr>
 										<th>Nama Dokter</th>
+										<th>Hari</th>
 										<th>Jam Praktik</th>
 										<th>Status</th>
-										<th>Aksi</th>
+										<?php if ($this->session->userdata('role') === 'staf'): ?>
+											<th>Aksi</th>
+										<?php endif; ?>
 									</tr>
 								</thead>
 								<tbody>
@@ -52,22 +58,24 @@
 									foreach ($reservasi as $row): ?>
 										<tr>
 											<td><?= $row->nama ?></td>
+											<td><?= $row->hari ?></td>
 											<td><?= $row->waktu ?></td>
 											<td><span class="badge alert-danger">TIdak AKtif</span></td>
-											<td>
-												<div class="d-flex align-items-center gap-3 fs-6">
-													<a href="<?= base_url('admin/jadwal/edit/' . $row->id_jadwal) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" aria-label="Edit">
-														<ion-icon name="pencil-sharp"></ion-icon>
-													</a>
-													<a href="<?= base_url('admin/jadwal/delete/' . $row->id_jadwal) ?>" onclick="return confirm('Yakin ingin menghapus jadwal ini?');" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus" aria-label="Delete">
-														<ion-icon name="trash-sharp"></ion-icon>
-													</a>
+											<?php if ($this->session->userdata('role') === 'staf'): ?>
+												<td>
+													<div class="d-flex align-items-center gap-3 fs-6">
+														<a href="<?= base_url('admin/jadwal/edit/' . $row->id_jadwal) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" aria-label="Edit">
+															<ion-icon name="pencil-sharp"></ion-icon>
+														</a>
+														<a href="<?= base_url('admin/jadwal/delete/' . $row->id_jadwal) ?>" onclick="return confirm('Yakin ingin menghapus jadwal ini?');" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus" aria-label="Delete">
+															<ion-icon name="trash-sharp"></ion-icon>
+														</a>
 
-												</div>
-											</td>
+													</div>
+												</td>
+											<?php endif; ?>
 										</tr>
 									<?php endforeach; ?>
-
 								</tbody>
 								<tfoot>
 								</tfoot>
@@ -95,26 +103,24 @@
 				<!--end overlay-->
 
 		</div>
-		<!--end wrapper-->
+	</div>
+	<!--end wrapper-->
 
 
+	<!-- JS Files-->
+	<script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
+	<script src="<?= base_url('assets/plugins/simplebar/js/simplebar.min.js') ?>"></script>
+	<script src="<?= base_url('assets/plugins/metismenu/js/metisMenu.min.js') ?>"></script>
+	<script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<!--plugins-->
+	<script src="<?= base_url('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') ?>"></script>
+	<script src="<?= base_url('assets/plugins/datatable/js/jquery.dataTables.min.js') ?>"></script>
+	<script src="<?= base_url('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') ?>"></script>
+	<script src="<?= base_url('assets/js/table-datatable.js') ?>"></script>
 
-
-
-		<!-- JS Files-->
-		<script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
-		<script src="<?= base_url('assets/plugins/simplebar/js/simplebar.min.js') ?>"></script>
-		<script src="<?= base_url('assets/plugins/metismenu/js/metisMenu.min.js') ?>"></script>
-		<script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
-		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-		<!--plugins-->
-		<script src="<?= base_url('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') ?>"></script>
-		<script src="<?= base_url('assets/plugins/datatable/js/jquery.dataTables.min.js') ?>"></script>
-		<script src="<?= base_url('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') ?>"></script>
-		<script src="<?= base_url('assets/js/table-datatable.js') ?>"></script>
-
-		<!-- Main JS-->
-		<script src="<?= base_url('assets/js/main.js') ?>"></script>
+	<!-- Main JS-->
+	<script src="<?= base_url('assets/js/main.js') ?>"></script>
 
 
 </body>

@@ -106,9 +106,11 @@
               <div class="card-body d-flex flex-column justify-content-center align-items-center" style="min-height: 250px;">
                 <p class="mb-2 fs-5">Antrian Sekarang</p>
                 <h1 class="fw-bold mb-4"><?= $antrian_sekarang ? $antrian_sekarang->no_antrian : '-' ?></h1>
-                <a href="<?= base_url('admin/antrian/lanjut') ?>" class="btn btn-primary px-4 py-2 fw-bold" style="background-color: #a94b8f; border: none;">
-                  Lanjut
-                </a>
+                <?php if ($this->session->userdata('role') === 'staf'): ?>
+                  <a href="<?= base_url('admin/antrian/lanjut') ?>" class="btn btn-primary px-4 py-2 fw-bold" style="background-color: #a94b8f; border: none;">
+                    Lanjut
+                  </a>
+                <?php endif; ?>
               </div>
             </div>
           </div>
@@ -118,12 +120,10 @@
       </div>
       <!--end page content wrapper-->
     </div>
+    <!--start footer-->
+    <?php $this->load->view("admin/_templates/footer.php") ?>
+    <!--end footer-->
   </div>
-  </div>
-  <!--start footer-->
-  <?php $this->load->view("admin/_templates/footer.php") ?>
-  <!--end footer-->
-
 
   <!--Start Back To Top Button-->
   <<a href="javaScript:;" class="back-to-top"><ion-icon name="arrow-up-outline"></ion-icon></a>

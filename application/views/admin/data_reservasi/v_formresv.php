@@ -132,8 +132,8 @@
                           </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                          <label class="form-label">Tekanan Darah</label>
-                          <input type="text" name="tekananDarah" class="form-control" required>
+                          <label class="form-label">Tekanan Darah ( opsional )</label>
+                          <input type="text" name="tekananDarah" class="form-control">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Penyakit Jantung</label>
@@ -214,10 +214,18 @@
                           <label class="form-label">Tanggal Reservasi</label>
                           <input type="date" class="form-control" name="tgl" required>
                         </div>
+
+                        <!--udah dropdown tinggal get data dari database waktunya-->
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Waktu Reservasi</label>
-                          <input type="time" class="form-control" name="waktu" required>
+                          <select class="form-select" name="waktu" required>
+                            <option value="">-- Pilih Waktu --</option>
+                            <?php foreach ($waktu_jadwal as $w) : ?>
+                              <option value="<?= $w->waktu ?>" <?= $jadwal->waktu == $w->waktu ? 'selected' : '' ?>>
+                              <?php endforeach; ?>
+                          </select>
                         </div>
+
                         <div class="col-6 mb-3">
                           <label class="form-label">Rencana Perawatan</label>
                           <select class="form-select" name="rencanaPerawatan">
@@ -246,8 +254,9 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col d-flex justify-content-end mx-4 my-3">
-                    <button type="submit" class="btn btn-primary px-3">Simpan</button>
+                  <div class="col-12 d-flex justify-content-between mt-4">
+                    <a href="<?= base_url('admin/reservasi') ?>" class="btn btn-secondary">Kembali</a>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                   </div>
                 </form>
               </div>
@@ -285,10 +294,18 @@
                           <label class="form-label">Tanggal Reservasi</label>
                           <input type="date" class="form-control" name="tglLama" required>
                         </div>
+
+                        <!--udah dropdown tinggal get data dari database waktunya-->
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Waktu Reservasi</label>
-                          <input type="time" class="form-control" name="waktuLama" required>
+                          <select class="form-select" name="waktuLama" required>
+                            <option value="">-- Pilih Waktu --</option>
+                            <?php foreach ($waktu_jadwal as $w) : ?>
+                              <option value="<?= $w->waktu ?>" <?= $jadwal->waktu == $w->waktu ? 'selected' : '' ?>>
+                              <?php endforeach; ?>
+                          </select>
                         </div>
+
                         <div class="col-12 mb-3">
                           <label class="form-label">Keluhan</label>
                           <textarea class="form-control" name="keluhanLama" rows="3"></textarea>
@@ -315,8 +332,9 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary px-3 mb-3">Simpan</button>
+                      <div class="col-12 d-flex justify-content-between mt-4">
+                        <a href="<?= base_url('admin/reservasi') ?>" class="btn btn-secondary">Kembali</a>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                       </div>
                     </div>
                   </div>

@@ -57,11 +57,22 @@
                                 </select>
                             </div>
 
+                            <label class="form-label">Hari / Tanggal</label>
+                            <input class="form-control mb-3" type="date" aria-label="default input example" name="date">
+
                             <label class="form-label">Jam Praktik</label>
                             <input class="form-control mb-3" type="time" aria-label="default input example" name="waktu">
 
-                            <label class="form-label">Hari / Tanggal</label>
-                            <input class="form-control mb-3" type="date" aria-label="default input example" name="date">
+                            <label class="form-label">Status</label>
+                            <select class="form-select mb-3" name="status" required>
+                                <option value="">-- Pilih Status --</option>
+                                <option value="aktif">Aktif</option>
+                                <option value="tidak_aktif">Tidak Aktif</option>
+                            </select>
+
+
+                            <label class="form-label">Gambar</label>
+                            <input class="form-control mb-3" type="file" aria-label="default input example" name="gambar">
                         </div>
                         <div class="col d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary px-2 m-3">Simpan</button>
