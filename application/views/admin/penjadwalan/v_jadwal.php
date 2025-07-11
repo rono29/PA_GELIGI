@@ -30,7 +30,7 @@
 					<div class="breadcrumb-title pe-3">Penjadwalan</div>
 				</div>
 				<br>
-				<?php if ($this->session->userdata('role') === 'admin'): ?>
+				<?php if ($this->session->userdata('role') === 'staf'): ?>
 					<div class="col">
 						<a class="btn btn-primary px-5" href="<?php echo base_url() . 'admin/jadwal/tambah' ?>">Tambah Data</a>
 					</div>
