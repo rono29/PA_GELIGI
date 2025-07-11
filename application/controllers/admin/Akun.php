@@ -37,4 +37,19 @@ class Akun extends CI_Controller
 		$this->db->insert('datauser', $data);
 		redirect('admin/akun');
 	}
+
+	public function delete($id)
+	{
+		$this->load->database();
+
+		$deleted = $this->db->delete('datauser', ['id_user' => $id]);
+
+		if ($deleted) {
+			$this->session->set_flashdata('success', 'Akun berhasil dihapus.');
+		} else {
+			$this->session->set_flashdata('error', 'Gagal menghapus akun.');
+		}
+
+		redirect('admin/akun');
+	}
 }

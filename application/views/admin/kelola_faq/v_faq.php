@@ -61,12 +61,17 @@
 											</td>
 											<td>
 												<div class="d-flex align-items-center gap-3 fs-6">
-													<a href="javascript:;" class="text-warning" title="Edit">
+													<a href="<?= base_url('admin/faq/edit/' . $row->id_staf) ?>" class="text-warning" title="Edit">
 														<ion-icon name="pencil-sharp"></ion-icon>
 													</a>
-													<a href="javascript:;" class="text-danger" title="Delete">
+
+													<a href="<?= base_url('admin/faq/delete/' . $row->id) ?>"
+														class="text-danger btn-delete"
+														title="Delete"
+														onclick="return confirm('Yakin ingin menghapus data ini?')">
 														<ion-icon name="trash-sharp"></ion-icon>
 													</a>
+
 												</div>
 											</td>
 										</tr>
@@ -119,6 +124,32 @@
 
 		<!-- Main JS-->
 		<script src="<?= base_url('assets/js/main.js') ?>"></script>
+
+		<?php if ($this->session->flashdata('success')): ?>
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+			<script>
+				Swal.fire({
+					icon: 'success',
+					title: 'Berhasil!',
+					text: '<?= $this->session->flashdata('success') ?>',
+					showConfirmButton: false,
+					timer: 1000
+				});
+			</script>
+		<?php endif; ?>
+
+		<?php if ($this->session->flashdata('error')): ?>
+			<script>
+				Swal.fire({
+					icon: 'error',
+					title: 'Gagal!',
+					text: '<?= $this->session->flashdata('error') ?>',
+					showConfirmButton: false,
+					timer: 1000
+				});
+			</script>
+		<?php endif; ?>
+
 
 
 </body>

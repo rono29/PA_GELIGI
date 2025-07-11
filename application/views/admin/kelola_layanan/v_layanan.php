@@ -66,10 +66,17 @@
 												<img src="<?= base_url('admin/layanan/gambar/' . $row->id_layanan) ?>" style="width: 100px;" alt="gambar">
 											</td>
 											<td>
-												<div class="d-flex align-items-center gap-3 fs-6">
-													<a href="javascript:;" class="text-warning" title="Edit"><ion-icon name="pencil-sharp"></ion-icon></a>
-													<a href="javascript:;" class="text-danger" title="Delete"><ion-icon name="trash-sharp"></ion-icon></a>
-												</div>
+												<a href="<?= base_url('admin/layanan/edit/' . $row->id_layanan) ?>"
+													class="text-warning" title="Edit">
+													<ion-icon name="pencil-sharp"></ion-icon>
+												</a>
+
+												<a href="<?= base_url('admin/layanan/delete/' . $row->id_layanan) ?>"
+													class="text-danger"
+													onclick="return confirm('Yakin ingin menghapus data ini?')"
+													title="Delete">
+													<ion-icon name="trash-sharp"></ion-icon>
+												</a>
 											</td>
 										</tr>
 									<?php endforeach; ?>
@@ -123,6 +130,19 @@
 
 		<!-- Main JS-->
 		<script src="<?= base_url('assets/js/main.js') ?>"></script>
+
+		<?php if ($this->session->flashdata('success')): ?>
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+			<script>
+				Swal.fire({
+					icon: 'success',
+					title: 'Berhasil!',
+					text: '<?= $this->session->flashdata('success') ?>',
+					showConfirmButton: false,
+					timer: 2000
+				});
+			</script>
+		<?php endif; ?>
 
 
 </body>

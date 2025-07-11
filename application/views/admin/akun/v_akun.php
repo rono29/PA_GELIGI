@@ -86,10 +86,10 @@
 	</div>
 
 	<!--start footer-->
-	
+
 	<!--end footer-->
 
-<?php $this->load->view("admin/_templates/footer.php") ?>
+	<?php $this->load->view("admin/_templates/footer.php") ?>
 
 	<!--Start Back To Top Button-->
 	<<a href="javaScript:;" class="back-to-top"><ion-icon name="arrow-up-outline"></ion-icon></a>
@@ -121,6 +121,32 @@
 
 		<!-- Main JS-->
 		<script src="<?= base_url('assets/js/main.js') ?>"></script>
+
+		<?php if ($this->session->flashdata('success')): ?>
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+			<script>
+				Swal.fire({
+					icon: 'success',
+					title: 'Sukses!',
+					text: '<?= $this->session->flashdata('success') ?>',
+					timer: 1000,
+					showConfirmButton: false
+				});
+			</script>
+		<?php endif; ?>
+
+		<?php if ($this->session->flashdata('error')): ?>
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+			<script>
+				Swal.fire({
+					icon: 'error',
+					title: 'Gagal!',
+					text: '<?= $this->session->flashdata('error') ?>',
+					timer: 1000,
+					showConfirmButton: false
+				});
+			</script>
+		<?php endif; ?>
 
 
 </body>

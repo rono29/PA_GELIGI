@@ -65,9 +65,11 @@
 													<?php endif; ?>
 
 
-													<button type="submit" class="btn btn-sm btn-danger extra-small-btn">
-														<ion-icon name="trash-sharp"></ion-icon>
-													</button>
+													<a href="<?= base_url('admin/testimonial/delete/' . $row->id_testimonial) ?>"
+														class="btn btn-sm btn-danger extra-small-btn"
+														onclick="return confirm('Yakin ingin menghapus testimonial ini?')">
+														<ion-icon name="trash-sharp"></ion-icon> Hapus
+													</a>
 												</div>
 												<div style="align-self: flex-end; font-size: 9px; color: #999; font-style: italic; margin-top: 4px;">
 													Status: <?= ucfirst($row->status) ?> •
@@ -125,6 +127,32 @@
 
 		<!-- Main JS-->
 		<script src="<?= base_url('assets/js/main.js') ?>"></script>
+
+		<?php if ($this->session->flashdata('success')): ?>
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+			<script>
+				Swal.fire({
+					icon: 'success',
+					title: 'Sukses!',
+					text: '<?= $this->session->flashdata('success') ?>',
+					timer: 1000,
+					showConfirmButton: false
+				});
+			</script>
+		<?php endif; ?>
+
+		<?php if ($this->session->flashdata('error')): ?>
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+			<script>
+				Swal.fire({
+					icon: 'error',
+					title: 'Gagal!',
+					text: '<?= $this->session->flashdata('error') ?>',
+					timer: 1000,
+					showConfirmButton: false
+				});
+			</script>
+		<?php endif; ?>
 
 
 </body>

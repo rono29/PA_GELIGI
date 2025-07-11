@@ -58,4 +58,54 @@ class Layanan extends CI_Controller
 			echo "Upload gagal: " . $_FILES['gambar']['error'];
 		}
 	}
+
+	public function edit($id)
+	{
+		$this->load->database();
+
+		$data['layanan'] = $this->db->get_where('datalayanan', ['id_layanan' => $id])->row();
+
+		if (!$data['layanan']) {
+			show_404();
+		}
+
+		$this->load->view('admin/kelola_layanan/v_editlayanan', $data);
+	}
+
+	public function update($id)
+	{
+		$this->load->database();
+
+		$data = [
+			'judul' => $this->input->post('judul', true),
+			'deskripsi' => $this->input->post('deskripsi', true),
+		];
+
+		// Jika ada gambar baru yang diupload
+		if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
+			$image_data = file_get_contents($_FILES['gambar']['tmp_name']);
+			$data['gambar'] = $image_data;
+		}
+
+		$this->db->where('id_layanan', $id);
+		$this->db->update('datalayanan', $data);
+
+		$this->session->set_flashdata('success', 'Data layanan berhasil diperbarui.');
+		redirect('admin/layanan');
+	}
+
+	public function delete($id)
+	{
+		$this->load->database();
+
+		$deleted = $this->db->delete('datalayanan', ['id_layanan' => $id]);
+
+		if ($deleted) {
+			$this->session->set_flashdata('success', 'Data layanan berhasil dihapus.');
+		} else {
+			$this->session->set_flashdata('error', 'Gagal menghapus data layanan.');
+		}
+
+		redirect('admin/layanan');
+	}
 }

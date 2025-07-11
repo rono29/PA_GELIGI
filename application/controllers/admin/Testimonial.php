@@ -56,4 +56,19 @@ class Testimonial extends CI_Controller
 		$this->session->set_flashdata('success', 'Testimoni berhasil dikirim. Menunggu persetujuan admin.');
 		redirect($_SERVER['HTTP_REFERER']);
 	}
+
+	public function delete($id)
+	{
+		$this->load->database();
+
+		$deleted = $this->db->delete('datatestimonial', ['id_testimonial' => $id]);
+
+		if ($deleted) {
+			$this->session->set_flashdata('success', 'Testimonial berhasil dihapus.');
+		} else {
+			$this->session->set_flashdata('error', 'Gagal menghapus testimonial.');
+		}
+
+		redirect('admin/testimonial');
+	}
 }
