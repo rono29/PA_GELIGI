@@ -71,7 +71,9 @@
                 <div class="d-flex align-items-center">
                   <div class="">
                     <p class="mb-1">Antrian Saat Ini</p>
-                    <h4 class="mb-0 text-info"><?= $antrian_sekarang->no_antrian ?></h4>
+                    <h4 class="mb-0 text-info">
+                      <?= !empty($antrian_sekarang->no_antrian) ? $antrian_sekarang->no_antrian : '0' ?>
+                    </h4>
                   </div>
                   <div class="ms-auto text-info fs-2">
                     <ion-icon name="people-sharp"></ion-icon>
@@ -188,6 +190,39 @@
   <script src="<?= base_url('assets/js/index3.js') ?>"></script>
   <!-- Main JS-->
   <script src="<?= base_url('assets/js/main.js') ?>"></script>
+  <!-- Include SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    let lastId = 0;
+
+    function cekReservasiBaru() {
+      fetch("<?= base_url('admin/reservasi/cek_reservasi_baru') ?>")
+        .then(res => res.json())
+        .then(res => {
+          if (res.status && res.data) {
+            if (res.data.id_res > lastId) {
+              lastId = res.data.id_res;
+
+              // Tampilkan notifikasi popup
+              Swal.fire({
+                title: 'Reservasi Baru!',
+                text: `Pasien: ${res.data.nama_pasien || 'Pasien baru'}`,
+                icon: 'info',
+                timer: 4000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end'
+              });
+            }
+          }
+        });
+    }
+
+    // Jalankan tiap 10 detik
+    setInterval(cekReservasiBaru, 1);
+  </script>
 
 
 </body>

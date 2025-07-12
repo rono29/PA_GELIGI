@@ -65,9 +65,9 @@
                   foreach ($reservasi as $row): ?>
                     <tr>
                       <td><?= $no++ ?></td>
-                      <td>Belum di panggil dokternya</td>
+                      <td><?= $row->nama_dokter ?? 'Belum dipanggil' ?></td>
                       <td><?= $row->created_at ?></td>
-                      <td><?= $row->nama ?></td>
+                      <td><?= $row->nama_pasien ?></td>
                       <td><?= $row->umur ?> Tahun</td>
                       <td><?= $row->alamat ?></td>
                       <td><?= $row->tgl_input ?></td>
@@ -82,7 +82,7 @@
                               <ion-icon name="eye-sharp"></ion-icon>
                             </a>
 
-                            <a href="<?= base_url('admin/reservasi/delete/' . $row->id_res) ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cencel">
+                            <a href="<?= base_url('admin/reservasi/batalkan/' . $row->id_res) ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cancel">
                               <ion-icon name="close-sharp"></ion-icon>
                             </a>
 

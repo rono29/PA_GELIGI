@@ -56,16 +56,20 @@ class Jadwal extends CI_Controller
 			return;
 		}
 
+		$image_data = file_get_contents($_FILES['gambar']['tmp_name']);
+
 		// Simpan ke datajadwal
 		$this->db->insert('datajadwal', [
 			'id_dok'  => $id_dokter,
 			'nama'    => $dokter->nama,
 			'hari'    => $this->input->post('date', true), // pastikan input name-nya 'hari'
 			'tgl'     => $this->input->post('date', true),
-			'waktu'   => $this->input->post('waktu', true)
+			'waktu'   => $this->input->post('waktu', true),
+			'gambar'  => $image_data,
+			'status'  => $this->input->post('status')
 		]);
 
-		redirect('jadwaldokter'); // atau tujuan lain setelah simpan
+		redirect('admin/jadwal'); // atau tujuan lain setelah simpan
 	}
 
 
@@ -82,7 +86,7 @@ class Jadwal extends CI_Controller
 	{
 		$this->load->database();
 
-		$id_dokter = $this->input->post('dokter', true);
+		$id_dokter = $this->input->post('id_dokter', true);
 		$dokter = $this->db->get_where('datauser', ['id_user' => $id_dokter])->row();
 
 		if (!$dokter) {

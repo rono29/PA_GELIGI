@@ -44,6 +44,8 @@
 									<?php endforeach; ?>
 								</select>
 							</div> -->
+							
+							<input type="hidden" name="id_dokter" value="<?= $jadwal->id_dok ?>" class="form-control" required>
 
 							<div class="mb-3">
 								<label class="form-label">Nama Dokter</label>

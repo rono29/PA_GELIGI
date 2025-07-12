@@ -31,7 +31,9 @@
                 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                     <div class="breadcrumb-title pe-3">Preview Data Rekam Medis</div>
                 </div>
-
+                <div class="ms-auto">
+                    <span class="fw-bold">No Rekam Medis: <?= $detail->no_rekammedis ?? '-' ?></span>
+                </div>
                 <!-- Card Preview -->
                 <div class="card shadow-sm border-0 rounded-4">
                     <div class="card-body p-4">
@@ -39,6 +41,7 @@
                         <h4 class="fw-bold mb-4">Preview Data Reservasi</h4>
                         <form>
                             <div class="row g-3">
+
 
                                 <!-- Informasi Pasien -->
                                 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">

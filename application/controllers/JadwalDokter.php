@@ -45,7 +45,8 @@ class JadwalDokter extends CI_Controller
 		$this->db->from('datauser');
 		$this->db->join('datajadwal', 'datauser.id_user = datajadwal.id_dok', 'left');
 		$this->db->where('datauser.role', 'dokter');
-		$this->db->where('datajadwal.hari', $tanggalHariIni); // bisa juga pakai tgl = $tanggalHariIni
+		// $this->db->where('datajadwal.hari', $tanggalHariIni);
+		$this->db->group_by('datauser.id_user'); // <== PENTING: hanya tampilkan satu per dokter
 		$this->db->order_by('datajadwal.waktu', 'ASC');
 		$data['dokter_dengan_jadwal'] = $this->db->get()->result();
 
@@ -75,18 +76,27 @@ class JadwalDokter extends CI_Controller
 		$data['testimoni'] = $this->db->get('datatestimonial')->result();
 		$this->load->view('v_jadwaldokter', $data);
 	}
-	public function get_jadwal_by_dokter()
-	{
-		$id_dokter = $this->input->post('id_dokter');
-		$tanggal = $this->input->post('tanggal');
+	 public function get_jadwal_by_dokter()
+    {
+        header('Content-Type: application/json');
 
-		$this->db->where('id_dok', $id_dokter);
-		if ($tanggal) {
-			$this->db->where('tgl', $tanggal);
-		}
-		$this->db->order_by('waktu', 'ASC');
-		$jadwal = $this->db->get('datajadwal')->result();
+        // Ambil dari POST
+        $id_dokter = $this->input->post('id_dokter', true);
+        $tanggal   = $this->input->post('tanggal', true);
 
-		echo json_encode($jadwal);
-	}
+        if ( ! $id_dokter || ! $tanggal) {
+            echo json_encode([]);
+            return;
+        }
+
+        // Hanya pilih kolom kecil, hindari BLOB
+        $this->db->select('id_jadwal,id_dok,tgl,waktu');
+        $this->db->from('datajadwal');
+        $this->db->where('id_dok', $id_dokter);
+        $this->db->where('tgl',    $tanggal);
+        $this->db->order_by('waktu','ASC');
+        $rows = $this->db->get()->result();
+
+        echo json_encode($rows);
+    }
 }

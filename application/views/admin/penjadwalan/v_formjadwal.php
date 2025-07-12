@@ -44,7 +44,7 @@
 
 
                 <div class="card">
-                    <form action="<?= base_url('admin/jadwal/simpan') ?>" method="post">
+                    <form action="<?= base_url('admin/jadwal/simpan') ?>" method="post"  enctype="multipart/form-data">
 
                         <div class="card-body">
                             <div class="col-12 mb-3">

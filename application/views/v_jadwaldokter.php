@@ -156,9 +156,65 @@
       </div>
     </div>
   </div>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <script src="<?= base_url('depan/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+
+  <script src="<?= base_url('depan/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.input-tanggal').forEach(function(inputTanggal) {
+        inputTanggal.addEventListener('change', function() {
+          const card = inputTanggal.closest('.card');
+          const dokterId = card.querySelector('input[name="id_dokter"]').value;
+          const tanggal = this.value;
+          const pilihanJam = card.querySelector('.pilihan-jam');
+          const inputJam = card.querySelector('.input-jam');
+
+          if (!dokterId || !tanggal) return;
+
+          pilihanJam.innerHTML = '<span class="text-muted">Memuat jam...</span>';
+
+          fetch("<?= base_url('jadwaldokter/get_jadwal_by_dokter') ?>", {
+              method: "POST",
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: `id_dokter=${encodeURIComponent(dokterId)}&tanggal=${encodeURIComponent(tanggal)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+              pilihanJam.innerHTML = '';
+              if (data.length === 0) {
+                pilihanJam.innerHTML = '<span class="text-muted">Tidak ada jam tersedia</span>';
+                return;
+              }
+
+              data.forEach(jadwal => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'btn btn-outline-primary btn-sm rounded-pill pilih-jam';
+                btn.textContent = jadwal.waktu.slice(0, 5);
+                btn.dataset.jam = jadwal.waktu;
+
+                btn.addEventListener('click', function() {
+                  pilihanJam.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                  this.classList.add('active');
+                  inputJam.value = this.dataset.jam;
+                });
+
+                pilihanJam.appendChild(btn);
+              });
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              pilihanJam.innerHTML = '<span class="text-danger">Gagal memuat jam</span>';
+            });
+        });
+      });
+    });
+  </script>
+
   <script>
     const isLoggedIn = <?= $this->session->userdata('id_user') ? 'true' : 'false' ?>;
     $(document).ready(function() {
@@ -202,7 +258,9 @@
           });
           return; // Jangan lanjut ke modal reservasi
         }
-        window.location.href = "<?= base_url('masuk') ?>";
+
+        // window.location.href = "<?= base_url('masuk') ?>"; // 🔴 INI PERLU DIHAPUS
+
         const form = $(this).closest('.form-reservasi');
         const dokter = form.find('input[name="id_dokter"]').val();
         const tanggal = form.find('input[name="tanggal"]').val();
@@ -216,7 +274,7 @@
 
         $('#confirmIdDokter').val(dokter);
         $('#confirmTgl').val(tanggal);
-        $('#confirmJamInput').val(jam);
+        $('#confirmJamInput').val(jam); // ✅ perbaikan di sini
         $('#confirmKeluhanInput').val(keluhan);
         $('.text-nama-dokter').text("Reservasi untuk " + $(this).data('nama') + "?");
 

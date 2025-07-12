@@ -246,12 +246,12 @@
                         <div class="text-center">
                             <div class="d-flex justify-content-center align-items-center mt-3">
                                 <!-- Tombol Simpan -->
-                                <button type="submit" class="btn btn-primary btn-sm">
+                                <button type="submit" class="btn btn-primary btn-sm" name="aksi" value="0">
                                     <i class="bi bi-save me-1"></i> Simpan Data
                                 </button>
 
                                 <!-- Tombol Edit -->
-                                <button type="button" class="btn btn-outline-secondary btn-sm ms-2">
+                                <button type="submit" class="btn btn-outline-secondary btn-sm ms-2" name="aksi" value="1">
                                     <i class="bi bi-pencil-square me-1"></i> Edit Profile
                                 </button>
                             </div>

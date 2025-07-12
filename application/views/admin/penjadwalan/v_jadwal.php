@@ -60,8 +60,13 @@
 											<td><?= $row->nama ?></td>
 											<td><?= $row->hari ?></td>
 											<td><?= $row->waktu ?></td>
-											<td><span class="badge alert-danger">TIdak AKtif</span></td>
-											<?php if ($this->session->userdata('role') === 'staf'): ?>
+<td>
+  <?php if ($row->status === 'aktif'): ?>
+    <span class="badge bg-success">Aktif</span>
+  <?php else: ?>
+    <span class="badge bg-danger"><?= ucfirst($row->status) ?></span>
+  <?php endif; ?>
+</td>											<?php if ($this->session->userdata('role') === 'staf'): ?>
 												<td>
 													<div class="d-flex align-items-center gap-3 fs-6">
 														<a href="<?= base_url('admin/jadwal/edit/' . $row->id_jadwal) ?>" class="text-warning">

@@ -79,7 +79,7 @@
 														</a>
 
 														<!-- Unduh -->
-														<a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unduh">
+														<a href="<?= base_url('admin/rekammedis/unduh/' . $row->id_RM) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unduh">
 															<ion-icon name="download-outline"></ion-icon>
 														</a>
 													<?php endif; ?>

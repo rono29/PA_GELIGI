@@ -12,13 +12,22 @@ class reservasiModel extends CI_Model
 
     public function get_data_reservasi()
     {
-        $this->db->select('datareservasi.*, datapasien.tgl_lahir, datapasien.alamat, datapasien.nama,
-        TIMESTAMPDIFF(YEAR, datapasien.tgl_lahir, CURDATE()) AS umur');
+        $this->db->distinct();
+        $this->db->select('
+        datareservasi.*, 
+        datapasien.tgl_lahir, 
+        datapasien.alamat, 
+        datapasien.nama AS nama_pasien,
+        dokter.nama AS nama_dokter,
+        TIMESTAMPDIFF(YEAR, datapasien.tgl_lahir, CURDATE()) AS umur
+    ');
         $this->db->from('datareservasi');
         $this->db->join('datapasien', 'datapasien.id_user = datareservasi.id_pasien');
+        $this->db->join('datauser as dokter', 'dokter.id_user = datareservasi.id_dok', 'left');
         $query = $this->db->get();
         return $query->result();
     }
+
 
     public function get_data_rekammedis()
     {
@@ -86,21 +95,13 @@ class reservasiModel extends CI_Model
     public function get_reservasi_hari_ini()
     {
         $this->db->select('datareservasi.*, 
-                       pasien.nama as nama_pasien, 
-                       dokter.nama as nama_dokter');
+                       pasien.nama AS nama_pasien, 
+                       dokter.nama AS nama_dokter');
         $this->db->from('datareservasi');
-
-        // Join untuk pasien (id_user)
-        $this->db->join('datauser as pasien', 'pasien.id_user = datareservasi.id_pasien');
-
-        // Join untuk dokter (id_dokter)
-        $this->db->join('datauser as dokter', 'dokter.id_user = datareservasi.id_dok');
-
-
-        // Hanya data hari ini
+        $this->db->join('datauser AS pasien', 'pasien.id_user = datareservasi.id_pasien');
+        $this->db->join('datauser AS dokter', 'dokter.id_user = datareservasi.id_dok');
         $this->db->where('DATE(datareservasi.created_at)', date('Y-m-d'));
         $this->db->order_by('datareservasi.created_at', 'ASC');
-
         return $this->db->get()->result();
     }
 }

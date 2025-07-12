@@ -44,14 +44,15 @@ class Reservasi extends CI_Controller
 		$this->load->database();
 		$tipe = $this->input->post('tipe_pasien', true);
 		$jenis_reservasi = $this->input->post('jenis_reservasi', true) ?? $this->input->post('jenis_reservasiLama', true);
-		$tgl = $this->input->post('tgl', true) ?? $this->input->post('tglLama', true);
-		$jam = $this->input->post('waktu', true) ?? $this->input->post('waktuLama', true);
+		$tgl = $this->input->post('tanggal', true) ?? $this->input->post('tglLama', true);
+		$jam = $this->input->post('jam', true) ?? $this->input->post('waktuLama', true);
 		$keluhan = $this->input->post('keluhan', true) ?? $this->input->post('keluhanLama', true);
 		$dokter = $this->input->post('dokterLama', true);
 		$rencana_perawatan = $this->input->post('rencanaPerawatan', true) ?? $this->input->post('rencanaPerawatanLama', true);
 
 		if ($tipe == 'lama') {
 			$id_pasien = $this->input->post('pasienLama', true);
+			
 		} else {
 			// SIMPAN PASIEN BARU
 			$id_user = $this->session->userdata('id_user');
@@ -191,9 +192,19 @@ class Reservasi extends CI_Controller
 			redirect('riwayat');
 		}
 
-		// Hanya bisa batalkan jika status masih proses
+		// Hanya bisa batalkan jika status masih dalam proses
 		if ($reservasi->status !== 'dalam proses') {
 			$this->session->set_flashdata('error', 'Reservasi sudah tidak bisa dibatalkan.');
+			redirect('riwayat');
+		}
+
+		// Cek apakah pembatalan masih dalam batas waktu (maksimal 30 menit sebelum jam reservasi)
+		$waktu_reservasi = strtotime($reservasi->tanggal . ' ' . $reservasi->jam_res);
+		$waktu_sekarang = time();
+
+		// Batas maksimal pembatalan adalah 30 menit (60 * 30 = 1800 detik)
+		if (($waktu_reservasi - $waktu_sekarang) < 1800) {
+			$this->session->set_flashdata('error', 'Reservasi hanya bisa dibatalkan maksimal 30 menit sebelum waktu reservasi.');
 			redirect('riwayat');
 		}
 
@@ -208,31 +219,29 @@ class Reservasi extends CI_Controller
 
 
 
+
 	public function preview($id_reservasi)
 	{
 		$this->load->database();
 
 		$this->db->select('
-        datareservasi.*, 
-        datapasien.nama, datapasien.tmpt_lahir, datapasien.tgl_lahir, datapasien.jk,
-        datapasien.pekerjaan, datapasien.status, datapasien.alamat, datapasien.no_hp,
-        datamedik.goldar, datamedik.blood_press, datamedik.jantung, datamedik.diabetes,
-        datamedik.haemophilia, datamedik.hepatitis, datamedik.sakit_lain, 
-        datamedik.alergi_obat, datamedik.alergi_makanan
-    ');
+		datareservasi.*, 
+		datapasien.nama, datapasien.tmpt_lahir, datapasien.tgl_lahir, datapasien.jk,
+		datapasien.pekerjaan, datapasien.status, datapasien.alamat, datapasien.no_hp
+	');
 		$this->db->from('datareservasi');
-		$this->db->join('datapasien', 'datapasien.id_pasien = datareservasi.id_pasien');
-		$this->db->join('datamedik', 'datamedik.id_pasien = datareservasi.id_pasien');
+		$this->db->join('datapasien', 'datapasien.id_user = datareservasi.id_pasien', 'left');
 		$this->db->where('datareservasi.id_res', $id_reservasi);
 
 		$data['detail'] = $this->db->get()->row();
 
-		if (!$data['detail']) {
-			show_404(); // jika tidak ada
-		}
+		// if (!$data['detail']) {
+		//     show_404(); // jika tidak ada
+		// }
 
 		$this->load->view('admin/data_reservasi/v_preview', $data);
 	}
+
 
 	public function delete($id_reservasi)
 	{
@@ -254,5 +263,24 @@ class Reservasi extends CI_Controller
 
 		// Redirect ke halaman utama
 		redirect('admin/reservasi');
+	}
+
+	public function cek_reservasi_baru()
+	{
+		$this->load->database();
+
+		// Cek reservasi dengan status 'dalam proses' hari ini
+		$this->db->where('DATE(created_at)', date('Y-m-d'));
+		$this->db->where('status', 'dalam proses');
+		$this->db->order_by('created_at', 'DESC');
+		$this->db->limit(1);
+
+		$last = $this->db->get('datareservasi')->row();
+
+		if ($last) {
+			echo json_encode(['status' => true, 'data' => $last]);
+		} else {
+			echo json_encode(['status' => false]);
+		}
 	}
 }

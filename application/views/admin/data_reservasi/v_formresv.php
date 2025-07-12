@@ -210,20 +210,17 @@
                             <?php endforeach; ?>
                           </select>
                         </div>
-                        <div class="col-md-6 mb-3">
-                          <label class="form-label">Tanggal Reservasi</label>
-                          <input type="date" class="form-control" name="tgl" required>
+                        <input type="hidden" name="id_dokter" value="<?= $d->id_user ?>">
+
+                        <div class="mb-3">
+                          <label class="form-label">Pilih Tanggal</label>
+                          <input type="date" class="form-control input-tanggal" name="tanggal" required>
                         </div>
 
-                        <!--udah dropdown tinggal get data dari database waktunya-->
-                        <div class="col-md-6 mb-3">
-                          <label class="form-label">Waktu Reservasi</label>
-                          <select class="form-select" name="waktu" required>
-                            <option value="">-- Pilih Waktu --</option>
-                            <?php foreach ($waktu_jadwal as $w) : ?>
-                              <option value="<?= $w->waktu ?>" <?= $jadwal->waktu == $w->waktu ? 'selected' : '' ?>>
-                              <?php endforeach; ?>
-                          </select>
+                        <div class="mb-3">
+                          <label class="form-label">Pilih Jam</label>
+                          <div class="d-flex flex-wrap gap-2 pilihan-jam"></div>
+                          <input type="hidden" name="jam" class="input-jam">
                         </div>
 
                         <div class="col-6 mb-3">
@@ -290,20 +287,17 @@
                           </select>
                         </div>
 
-                        <div class="col-md-6 mb-3">
-                          <label class="form-label">Tanggal Reservasi</label>
-                          <input type="date" class="form-control" name="tglLama" required>
+                        <input type="hidden" name="id_dokter" value="<?= $d->id_user ?>">
+
+                        <div class="mb-3">
+                          <label class="form-label">Pilih Tanggal</label>
+                          <input type="date" class="form-control input-tanggal" name="tanggal" required>
                         </div>
 
-                        <!--udah dropdown tinggal get data dari database waktunya-->
-                        <div class="col-md-6 mb-3">
-                          <label class="form-label">Waktu Reservasi</label>
-                          <select class="form-select" name="waktuLama" required>
-                            <option value="">-- Pilih Waktu --</option>
-                            <?php foreach ($waktu_jadwal as $w) : ?>
-                              <option value="<?= $w->waktu ?>" <?= $jadwal->waktu == $w->waktu ? 'selected' : '' ?>>
-                              <?php endforeach; ?>
-                          </select>
+                        <div class="mb-3">
+                          <label class="form-label">Pilih Jam</label>
+                          <div class="d-flex flex-wrap gap-2 pilihan-jam"></div>
+                          <input type="hidden" name="jam" class="input-jam">
                         </div>
 
                         <div class="col-12 mb-3">
@@ -400,6 +394,133 @@
         detail.value = '';
       }
     }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="<?= base_url('depan/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+
+  <script src="<?= base_url('depan/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.input-tanggal').forEach(function(inputTanggal) {
+        inputTanggal.addEventListener('change', function() {
+          const card = inputTanggal.closest('.card');
+          const dokterId = card.querySelector('input[name="id_dokter"]').value;
+          const tanggal = this.value;
+          const pilihanJam = card.querySelector('.pilihan-jam');
+          const inputJam = card.querySelector('.input-jam');
+
+          if (!dokterId || !tanggal) return;
+
+          pilihanJam.innerHTML = '<span class="text-muted">Memuat jam...</span>';
+
+          fetch("<?= base_url('jadwaldokter/get_jadwal_by_dokter') ?>", {
+              method: "POST",
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: `id_dokter=${encodeURIComponent(dokterId)}&tanggal=${encodeURIComponent(tanggal)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+              pilihanJam.innerHTML = '';
+              if (data.length === 0) {
+                pilihanJam.innerHTML = '<span class="text-muted">Tidak ada jam tersedia</span>';
+                return;
+              }
+
+              data.forEach(jadwal => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'btn btn-outline-primary btn-sm rounded-pill pilih-jam';
+                btn.textContent = jadwal.waktu.slice(0, 5);
+                btn.dataset.jam = jadwal.waktu;
+
+                btn.addEventListener('click', function() {
+                  pilihanJam.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                  this.classList.add('active');
+                  inputJam.value = this.dataset.jam;
+                });
+
+                pilihanJam.appendChild(btn);
+              });
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              pilihanJam.innerHTML = '<span class="text-danger">Gagal memuat jam</span>';
+            });
+        });
+      });
+    });
+  </script>
+
+  <script>
+    const isLoggedIn = <?= $this->session->userdata('id_user') ? 'true' : 'false' ?>;
+    $(document).ready(function() {
+      $('.input-tanggal').on('change', function() {
+        const tanggal = $(this).val();
+        const form = $(this).closest('.form-reservasi');
+        const id_dokter = form.find('input[name="id_dokter"]').val();
+        const pilihanJam = form.find('.pilihan-jam');
+
+        $.post("<?= base_url('home/get_jadwal_by_dokter') ?>", {
+          id_dokter,
+          tanggal
+        }, function(res) {
+          let jadwal = JSON.parse(res);
+          let html = jadwal.length ? '' : '<div class="text-muted">Tidak ada jadwal</div>';
+          jadwal.forEach(j => {
+            html += `<button type="button" class="btn btn-outline-primary pilih-jam" data-jam="${j.waktu}">${j.waktu.slice(0,5)}</button>`;
+          });
+          pilihanJam.html(html);
+        });
+      });
+
+      $(document).on('click', '.pilih-jam', function() {
+        const form = $(this).closest('.form-reservasi');
+        form.find('.pilih-jam').removeClass('btn-primary').addClass('btn-outline-primary');
+        $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+        form.find('.input-jam').val($(this).data('jam'));
+      });
+
+      $('.btn-konfirmasi').on('click', function() {
+        if (!isLoggedIn) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Belum Login',
+            text: 'Silakan login terlebih dahulu untuk melakukan reservasi!',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "<?= base_url('masuk') ?>";
+            }
+          });
+          return; // Jangan lanjut ke modal reservasi
+        }
+
+        // window.location.href = "<?= base_url('masuk') ?>"; // 🔴 INI PERLU DIHAPUS
+
+        const form = $(this).closest('.form-reservasi');
+        const dokter = form.find('input[name="id_dokter"]').val();
+        const tanggal = form.find('input[name="tanggal"]').val();
+        const jam = form.find('input[name="jam"]').val();
+        const keluhan = form.find('.input-keluhan').val();
+
+        if (!tanggal || !jam || !keluhan) {
+          alert('Mohon lengkapi semua data.');
+          return;
+        }
+
+        $('#confirmIdDokter').val(dokter);
+        $('#confirmTgl').val(tanggal);
+        $('#confirmJamInput').val(jam); // ✅ perbaikan di sini
+        $('#confirmKeluhanInput').val(keluhan);
+        $('.text-nama-dokter').text("Reservasi untuk " + $(this).data('nama') + "?");
+
+        new bootstrap.Modal(document.getElementById('confirmModal')).show();
+      });
+    });
   </script>
 
 </body>

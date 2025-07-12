@@ -70,7 +70,7 @@ class RekamMedis extends CI_Controller
 			'id_pasien' => $id_pasien,
 			'id_dok' => 1,
 			'id_staf' => $id_user,
-			'no_rekammedis' => 1,
+			'no_rekammedis' => $this->input->post('noRekamMedis'),
 			'tgl_periksa' => $this->input->post('tgl'),
 			'gigi' => $this->input->post('gigi'),
 			'diagnosa' => $this->input->post('diagnosa'),
@@ -107,6 +107,36 @@ class RekamMedis extends CI_Controller
 
 		$this->load->view('admin/data_rekammedis/v_preview', $data);
 	}
+
+	public function unduh($id_reservasi)
+	{
+		$this->load->database();
+
+		$this->db->select('
+		datarekammedis.*, 
+		datapasien.nama, datapasien.tmpt_lahir, datapasien.tgl_lahir, datapasien.jk,
+		datapasien.pekerjaan, datapasien.status, datapasien.alamat, datapasien.no_hp,
+		datamedik.goldar, datamedik.blood_press, datamedik.jantung, datamedik.diabetes,
+		datamedik.haemophilia, datamedik.hepatitis, datamedik.sakit_lain, 
+		datamedik.alergi_obat, datamedik.alergi_makanan
+	');
+		$this->db->from('datarekammedis');
+		$this->db->join('datapasien', 'datapasien.id_pasien = datarekammedis.id_pasien');
+		$this->db->join('datamedik', 'datamedik.id_pasien = datarekammedis.id_pasien');
+		$this->db->where('datarekammedis.id_RM', $id_reservasi);
+
+		$data['detail'] = $this->db->get()->row();
+
+		if (!$data['detail']) {
+			show_404();
+		}
+
+		$html = $this->load->view('admin/data_rekammedis/v_preview', $data, true);
+
+		$this->load->library('pdf');
+		$this->pdf->generate($html, 'rekam_medis_' . $id_reservasi);
+	}
+
 
 	public function edit($id_RM)
 	{

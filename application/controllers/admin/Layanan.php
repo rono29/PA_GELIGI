@@ -11,7 +11,10 @@ class Layanan extends CI_Controller
 	public function index()
 	{
 		$this->load->database();
-		$data['layanan'] = $this->db->get('datalayanan')->result();
+		$this->db->select('datalayanan.*, staf.nama as nama_staf');
+		$this->db->from('datalayanan');
+		$this->db->join('datauser as staf', 'staf.id_user = datalayanan.id_staf', 'left');
+		$data['layanan'] = $this->db->get()->result();
 		$this->load->view('admin/kelola_layanan/v_layanan', $data);
 	}
 
@@ -40,13 +43,18 @@ class Layanan extends CI_Controller
 	public function simpan()
 	{
 		$this->load->database();
+		$id_user = $this->session->userdata('id_user');
 
+		// Cek apakah user sudah login
+		if (!$id_user) {
+			redirect('masuk'); // atau tampilkan error
+		}
 		// Cek apakah ada file yang diupload
 		if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
 			$image_data = file_get_contents($_FILES['gambar']['tmp_name']);
 
 			$data = [
-				'id_staf'    => 1,
+				'id_staf'    => $id_user,
 				'judul'      => $this->input->post('judul', true),
 				'deskripsi'  => $this->input->post('deskripsi', true),
 				'gambar'     => $image_data // simpan sebagai binary BLOB
