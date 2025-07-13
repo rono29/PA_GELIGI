@@ -107,4 +107,19 @@ class Home extends CI_Controller
 
 		echo json_encode($jadwal);
 	}
+
+	public function detailberita($id)
+	{
+		$this->load->database();
+
+		// Ambil data artikel berdasarkan ID
+		$artikel = $this->db->get_where('dataartikel', ['id_artikel' => $id])->row();
+
+		if (!$artikel) {
+			show_404(); // Jika tidak ditemukan
+		}
+
+		$data['artikel'] = $artikel;
+		$this->load->view('v_detailberita', $data); // pastikan file view ini ada
+	}
 }

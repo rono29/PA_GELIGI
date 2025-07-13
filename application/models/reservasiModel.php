@@ -93,15 +93,19 @@ class reservasiModel extends CI_Model
     }
 
     public function get_reservasi_hari_ini()
-    {
-        $this->db->select('datareservasi.*, 
+{
+    $this->db->select('datareservasi.*, 
                        pasien.nama AS nama_pasien, 
                        dokter.nama AS nama_dokter');
-        $this->db->from('datareservasi');
-        $this->db->join('datauser AS pasien', 'pasien.id_user = datareservasi.id_pasien');
-        $this->db->join('datauser AS dokter', 'dokter.id_user = datareservasi.id_dok');
-        $this->db->where('DATE(datareservasi.created_at)', date('Y-m-d'));
-        $this->db->order_by('datareservasi.created_at', 'ASC');
-        return $this->db->get()->result();
-    }
+    $this->db->from('datareservasi');
+    $this->db->join('datauser AS pasien', 'pasien.id_user = datareservasi.id_pasien');
+    $this->db->join('datauser AS dokter', 'dokter.id_user = datareservasi.id_dok');
+    $this->db->where('DATE(datareservasi.created_at)', date('Y-m-d'));
+    $this->db->order_by('datareservasi.created_at', 'ASC');
+
+    $query = $this->db->get();
+    // print_r($query->result()); exit;
+    return $query->result();
+}
+
 }

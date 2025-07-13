@@ -124,9 +124,9 @@
                         <td>
                           <?php
                           $badge_class = match ($resv->status) {
-                            'Terkonfirmasi' => 'success',
-                            'Menunggu' => 'warning text-dark',
-                            'Dibatalkan' => 'danger',
+                            'selesai' => 'success',
+                            'dalam proses' => 'warning text-dark',
+                            'batal' => 'danger',
                             default => 'secondary'
                           };
                           ?>
@@ -134,9 +134,20 @@
                         </td>
                         <td>
                           <div class="d-flex gap-2">
-                            <a href="#" class="btn btn-sm btn-primary"><ion-icon name="eye-sharp"></ion-icon></a>
-                            <a href="#" class="btn btn-sm btn-warning"><ion-icon name="pencil-sharp"></ion-icon></a>
-                            <a href="#" class="btn btn-sm btn-danger"><ion-icon name="trash-sharp"></ion-icon></a>
+                            <a href="<?= base_url('admin/reservasi/preview/' . $resv->id_res) ?>" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Rincian">
+                              <ion-icon name="eye-sharp"></ion-icon>
+                            </a>
+                            <a href="<?= base_url('admin/reservasi/batalkan/' . $resv->id_res) ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cancel">
+                              <ion-icon name="close-sharp"></ion-icon>
+                            </a>
+                            <a href="<?= base_url('admin/reservasi/delete/' . $resv->id_res) ?>"
+                              class="text-danger"
+                              onclick="return confirm('Yakin ingin menghapus data ini?')"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="bottom"
+                              title="Hapus">
+                              <ion-icon name="trash-sharp"></ion-icon>
+                            </a>
                           </div>
                         </td>
                       </tr>

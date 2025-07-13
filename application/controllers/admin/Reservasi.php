@@ -248,7 +248,7 @@ class Reservasi extends CI_Controller
 		$this->load->database();
 
 		// Ambil data reservasi untuk mendapatkan id_pasien
-		$this->db->where('id_reservasi', $id_reservasi);
+		$this->db->where('id_res', $id_reservasi);
 		$reservasi = $this->db->get('datareservasi')->row();
 
 		if (!$reservasi) {

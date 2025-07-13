@@ -499,7 +499,7 @@
                         </div>
                       </div>
 
-                      <a href="<?= base_url('detailberita/' . $a->id_artikel) ?>"
+                      <a href="<?= base_url('home/detailberita/' . $a->id_artikel) ?>"
                         title="Selengkapnya"
                         class="text-decoration-none text-dark">
                         <i class="bi bi-link-45deg fs-5"></i>

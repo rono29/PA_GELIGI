@@ -75,12 +75,13 @@
                 <div class="col-lg-10">
 
                     <!-- Judul dan Tanggal -->
-                    <h1 class="fw-bold mb-3" style="color:#A94B87;">Cara Menjaga Kebersihan Gigi Anak Sejak Dini</h1>
-                    <p class="text-muted mb-4">Dipublikasikan pada 01 Juli 2025</p>
+                    <h1 class="fw-bold mb-3" style="color:#A94B87;"><?= htmlspecialchars($artikel->judul) ?></h1>
+                    <p class="text-muted mb-4">Dipublikasikan pada <?= date('d F Y', strtotime($artikel->created_at)) ?></p>
+
 
                     <!-- Gambar Artikel -->
                     <div class="mb-4 text-center">
-                        <img src="<?= base_url('depan/img/portfolio/berita-1.jpeg') ?>"
+                        <img src="data:image/jpeg;base64,<?= base64_encode($artikel->gambar) ?>"
                             class="img-fluid rounded shadow-sm"
                             alt="Gigi Anak"
                             style="max-width: 400px; height: auto;">
@@ -88,23 +89,7 @@
 
                     <!-- Konten Artikel -->
                     <div class="article-content fs-6">
-                        <p>Menjaga kebersihan gigi anak sejak usia dini merupakan langkah penting untuk mencegah berbagai masalah gigi seperti gigi berlubang dan gusi bengkak. Anak-anak yang diajarkan untuk merawat giginya dengan benar akan tumbuh menjadi pribadi yang sadar akan pentingnya kesehatan mulut.</p>
-
-                        <h5 class="mt-4">Mengapa Perlu Merawat Gigi Sejak Dini?</h5>
-                        <p>Kesehatan gigi yang baik di masa kecil membantu perkembangan bicara, nutrisi, serta kepercayaan diri anak. Gigi susu yang sehat juga menjadi penuntun bagi pertumbuhan gigi permanen.</p>
-
-                        <h5 class="mt-4">Tips Menjaga Kebersihan Gigi Anak</h5>
-                        <ul>
-                            <li>Menyikat gigi dua kali sehari dengan pasta gigi berfluoride.</li>
-                            <li>Menghindari konsumsi makanan dan minuman manis berlebihan.</li>
-                            <li>Memperkenalkan anak pada kunjungan rutin ke dokter gigi sejak usia 1 tahun.</li>
-                            <li>Menggunakan sikat gigi khusus anak dan teknik menyikat yang lembut.</li>
-                        </ul>
-
-                        <h5 class="mt-4">Kapan Harus Membawa Anak ke Dokter Gigi?</h5>
-                        <p>Disarankan membawa anak ke dokter gigi pertama kali sebelum usia 1 tahun, atau saat gigi pertamanya tumbuh. Selanjutnya, kontrol rutin setiap 6 bulan sekali dapat membantu mendeteksi masalah lebih awal.</p>
-
-                        <p>Dengan membiasakan kebiasaan baik sejak dini, anak akan tumbuh dengan senyum sehat dan percaya diri. Jangan ragu untuk berkonsultasi dengan dokter gigi kami untuk mendapatkan panduan yang tepat.</p>
+                        <?= $artikel->deskripsi ?>
                     </div>
 
                     <!-- Tombol Kembali -->
