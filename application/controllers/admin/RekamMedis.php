@@ -113,13 +113,13 @@ class RekamMedis extends CI_Controller
 		$this->load->database();
 
 		$this->db->select('
-		datarekammedis.*, 
-		datapasien.nama, datapasien.tmpt_lahir, datapasien.tgl_lahir, datapasien.jk,
-		datapasien.pekerjaan, datapasien.status, datapasien.alamat, datapasien.no_hp,
-		datamedik.goldar, datamedik.blood_press, datamedik.jantung, datamedik.diabetes,
-		datamedik.haemophilia, datamedik.hepatitis, datamedik.sakit_lain, 
-		datamedik.alergi_obat, datamedik.alergi_makanan
-	');
+        datarekammedis.*, 
+        datapasien.nama, datapasien.tmpt_lahir, datapasien.tgl_lahir, datapasien.jk,
+        datapasien.pekerjaan, datapasien.status, datapasien.alamat, datapasien.no_hp,
+        datamedik.goldar, datamedik.blood_press, datamedik.jantung, datamedik.diabetes,
+        datamedik.haemophilia, datamedik.hepatitis, datamedik.sakit_lain, 
+        datamedik.alergi_obat, datamedik.alergi_makanan
+    ');
 		$this->db->from('datarekammedis');
 		$this->db->join('datapasien', 'datapasien.id_pasien = datarekammedis.id_pasien');
 		$this->db->join('datamedik', 'datamedik.id_pasien = datarekammedis.id_pasien');
@@ -131,11 +131,12 @@ class RekamMedis extends CI_Controller
 			show_404();
 		}
 
-		$html = $this->load->view('admin/data_rekammedis/v_preview', $data, true);
+		$html = $this->load->view('admin/data_rekammedis/v_surat', $data, true);
 
 		$this->load->library('pdf');
 		$this->pdf->generate($html, 'rekam_medis_' . $id_reservasi);
 	}
+
 
 
 	public function edit($id_RM)
