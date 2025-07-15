@@ -267,7 +267,7 @@
 
                       <!-- Foto Dokter -->
                       <div class="image position-relative">
-                        <img src="<?= base_url('depan/img/doc.jpg') ?>" alt="dokter" class="img-fluid w-100 custom-img" style="height: 300px; object-fit: cover;">
+                        <img src="data:image/jpeg;base64,<?= base64_encode($dokter->gambar) ?>" alt="dokter" class="img-fluid w-100 custom-img" style="height: 300px; object-fit: cover;">
                       </div>
 
                       <!-- Konten -->

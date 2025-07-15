@@ -65,9 +65,25 @@ class Jadwal extends CI_Controller
 			'hari'    => $this->input->post('date', true), // pastikan input name-nya 'hari'
 			'tgl'     => $this->input->post('date', true),
 			'waktu'   => $this->input->post('waktu', true),
-			'gambar'  => $image_data,
+
 			'status'  => $this->input->post('status')
 		]);
+
+		// Ambil data dokter berdasarkan ID
+		$dokter = $this->db->get_where('datauser', ['id_user' => $id_dokter])->row();
+
+		// Pastikan dokter ditemukan
+		if ($dokter) {
+			// Update gambar berdasarkan id_user
+			$this->db->where('id_user', $id_dokter);
+			$this->db->update('datauser', [
+				'gambar' => $image_data
+			]);
+		} else {
+			// Jika tidak ditemukan, bisa lempar error/log
+			log_message('error', 'Dokter dengan ID ' . $id_dokter . ' tidak ditemukan.');
+		}
+
 
 		redirect('admin/jadwal'); // atau tujuan lain setelah simpan
 	}
