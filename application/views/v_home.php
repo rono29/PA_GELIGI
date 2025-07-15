@@ -640,6 +640,13 @@
               </div>
             <?php endif; ?>
 
+            <?php if ($this->session->flashdata('error')): ?>
+              <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+                <?= $this->session->flashdata('error') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php endif; ?>
+
             <form action="<?= base_url('admin/testimonial/simpan') ?>" method="post"
               class="php-email-form p-4 p-lg-5 bg-white rounded shadow-sm w-100 d-flex flex-column justify-content-between"
               data-aos="fade-up" data-aos-delay="200">

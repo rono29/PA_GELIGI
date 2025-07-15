@@ -9,21 +9,21 @@
 
                   </li>
                   <li class="nav-item dropdown dropdown-large">
-                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                    <!-- <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
                       <div class="position-relative">
                         <span class="notify-badge">1</span>
                         <ion-icon name="notifications-sharp"></ion-icon>
                       </div>
-                    </a>
+                    </a> -->
                     <div class="dropdown-menu dropdown-menu-end">
-                      <a href="javascript:;">
+                      <!-- <a href="javascript:;">
                         <div class="msg-header">
                           <p class="msg-header-title">Notifikasi</p>
                           <p class="msg-header-clear ms-auto">Tandai Sudah diBaca</p>
                         </div>
                       </a>
-                      <div class="header-notifications-list">
-                        <!-- <a class="dropdown-item" href="javascript:;">
+                      <div class="header-notifications-list"> -->
+                      <!-- <a class="dropdown-item" href="javascript:;">
                         <div class="d-flex align-items-center">
                           <div class="notify text-primary"><ion-icon name="cart-outline"></ion-icon>
                           </div>
@@ -34,7 +34,7 @@
                           </div>
                         </div>
                       </a> -->
-                        <!-- <a class="dropdown-item" href="javascript:;">
+                      <!-- <a class="dropdown-item" href="javascript:;">
                         <div class="d-flex align-items-center">
                           <div class="notify text-danger"><ion-icon name="person-outline"></ion-icon>
                           </div>
@@ -45,18 +45,18 @@
                           </div>
                         </div>
                       </a> -->
-                        <a class="dropdown-item" href="javascript:;">
+                      <!-- <a class="dropdown-item" href="javascript:;">
                           <div class="d-flex align-items-center">
                             <div class="notify text-success"><ion-icon name="document-outline"></ion-icon>
                             </div>
                             <div class="flex-grow-1">
                               <h6 class="msg-name">4 Data Reservasi<span class="msg-time float-end">2 Menit Lalu</span></h6>
-                              <!-- <p class="msg-info">The pdf files generated</p> -->
+                              <p class="msg-info">The pdf files generated</p>
                             </div>
                           </div>
-                        </a>
+                        </a> -->
 
-                        <!-- <a class="dropdown-item" href="javascript:;">
+                      <!-- <a class="dropdown-item" href="javascript:;">
                         <div class="d-flex align-items-center">
                           <div class="notify text-info"><ion-icon name="checkmark-done-outline"></ion-icon>
                           </div>
@@ -123,22 +123,22 @@
                         </div>
                       </a>
                     </div> -->
-                        <!-- <a href="javascript:;">
+                      <!-- <a href="javascript:;">
                       <div class="text-center msg-footer">View All Notifications</div>
                     </a> -->
-                      </div>
+                    </div>
                   </li>
                   <li class="nav-item dropdown dropdown-user-setting">
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
                       <div class="user-setting">
-                        <img src="<?= base_url('assets/images/avatars/06.png') ?>" class="user-img" alt="">
+                        <img src="<?= base_url('assets/images/avatars/10.jpg') ?>" class="user-img" alt="">
                       </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                       <li>
                         <a class="dropdown-item" href="#">
                           <div class="d-flex flex-row align-items-center gap-2">
-                            <img src="<?= base_url('assets/images/avatars/06.png') ?>" alt="" class="rounded-circle" width="54" height="54">
+                            <img src="<?= base_url('assets/images/avatars/10.jpg') ?>" alt="" class="rounded-circle" width="54" height="54">
                             <div>
                               <h6 class="mb-0 dropdown-user-name">
                                 <?= $this->session->userdata('nama') ?? 'Pengguna' ?>

@@ -11,20 +11,24 @@
     <div style="max-width: 800px; margin: 0 auto; background-color: white; padding: 30px; border: 2px solid #333; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
 
         <!-- Header with logo and title -->
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <!-- Kiri: Logo dan Nama -->
             <div style="display: flex; align-items: center;">
                 <div style="width: 60px; height: 60px; background: linear-gradient(45deg, #e91e63, #9c27b0); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                    <span style="color: white; font-size: 24px; font-weight: bold;">🦷</span>
+                    <span style="color: white; font-size: 24px; font-weight: bold;">🦷</span> <!-- Ganti ini dengan gambar jika tidak muncul -->
                 </div>
                 <div>
-                    <div style="color: #e91e63; font-weight: bold; font-size: 14px;">GRIGI</div>
+                    <div style="color: #e91e63; font-weight: bold; font-size: 14px;">GELIGI</div>
                     <div style="color: #666; font-size: 12px;">DENTAL CARE</div>
                 </div>
             </div>
-            <div style="border: 2px solid #333; padding: 5px 10px; font-weight: bold; font-size: 12px;">
-                NO.RM
+
+            <!-- Kanan: Box RM -->
+            <div style="border: 2px solid #333; padding: 5px 10px; font-weight: bold; font-size: 12px; min-width: 100px; max-width: 150px; text-align: center; white-space: nowrap;">
+                <?= $detail->id_RM ?? 'NO.RM' ?>
             </div>
         </div>
+
 
         <!-- Practice info -->
         <div style="text-align: center; margin-bottom: 20px; font-size: 11px; line-height: 1.4;">
@@ -45,31 +49,31 @@
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; border: 2px solid #333;">
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold; width: 25%;">NAMA</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">AMANDA</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->nama ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">TEMPAT/TGL LAHIR</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">PEKANBARU, 01-01-2001</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->tmpt_lahir ?>, <?= date('d-m-Y', strtotime($detail->tgl_lahir)) ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">JENIS KELAMIN</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">wanita</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->jk ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">PEKERJAAN</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">MAHASISWA</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->pekerjaan ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">ALAMAT</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">JL. SEKOLAH</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->alamat ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">STATUS PERNIKAHAN</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">BELUM MENIKAH</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->status ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">NO. HP</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">089993877478</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->no_hp ?></td>
             </tr>
         </table>
 
@@ -83,55 +87,55 @@
                 <td style="border: 1px solid #333; padding: 8px 12px; width: 5%; text-align: center; background-color: #f8f8f8; font-weight: bold;">1.</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; width: 70%; background-color: #f8f8f8; font-weight: bold;">GOLONGAN DARAH</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; width: 5%; text-align: center; background-color: #f8f8f8; font-weight: bold;">:</td>
-                <td style="border: 1px solid #333; padding: 8px 12px; width: 20%;">A</td>
+                <td style="border: 1px solid #333; padding: 8px 12px; width: 20%;"><?= $detail->goldar ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">2.</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">TEKANAN DARAH</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">:</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">90/60</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->blood_press ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">3.</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">PENYAKIT JANTUNG</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">:</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">TIDAK ADA</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->jantung ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">4.</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">DIABETES</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">:</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">TIDAK ADA</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->diabetes ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">5.</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">HAEMOPHILIA/KELAINAN DARAH</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">:</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">TIDAK ADA</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->haemophilia ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">6.</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">HEPATITIS</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">:</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">TIDAK ADA</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->hepatitis ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">7.</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">PENYAKIT LAINNYA</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">:</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">GERD</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->sakit_lain ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">8.</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">ALERGI TERHADAP OBAT-OBATAN</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">:</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">TIDAK ADA</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->alergi_obat ?></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">9.</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; background-color: #f8f8f8; font-weight: bold;">ALERGI MAKANAN</td>
                 <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; background-color: #f8f8f8; font-weight: bold;">:</td>
-                <td style="border: 1px solid #333; padding: 8px 12px;">SEAFOOD</td>
+                <td style="border: 1px solid #333; padding: 8px 12px;"><?= $detail->alergi_makanan ?></td>
             </tr>
         </table>
 

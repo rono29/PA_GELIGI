@@ -68,45 +68,53 @@
     </div>
     <div class="container">
       <div class="row justify-content-center">
-        <?php foreach ($dokter_dengan_jadwal as $dokter): ?>
-          <div class="col-lg-10 mb-4">
-            <div class="card shadow-sm border-0 rounded-4">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col-md-4 text-center">
-                    <img src="<?= base_url('depan/img/doc.jpg') ?>" class="img-fluid rounded-circle mb-3" alt="Foto Dokter" style="width: 150px; height: 150px; object-fit: cover;">
-                    <h5 class="fw-bold mb-0"><?= $dokter->nama ?></h5>
-                  </div>
-                  <div class="col-md-8">
-                    <form class="form-reservasi">
-                      <input type="hidden" name="id_dokter" value="<?= $dokter->id_user ?>">
+        <?php if (empty($dokter_dengan_jadwal)): ?>
+          <div class="col-lg-8 text-center">
+            <div class="alert alert-warning shadow-sm rounded-4">
+              <strong>Maaf,</strong> jadwal dokter belum tersedia saat ini. Silakan kembali lagi nanti.
+            </div>
+          </div>
+        <?php else: ?>
+          <?php foreach ($dokter_dengan_jadwal as $dokter): ?>
+            <div class="col-lg-10 mb-4">
+              <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-md-4 text-center">
+                      <img src="<?= base_url('depan/img/doc.jpg') ?>" class="img-fluid rounded-circle mb-3" alt="Foto Dokter" style="width: 150px; height: 150px; object-fit: cover;">
+                      <h5 class="fw-bold mb-0"><?= $dokter->nama ?></h5>
+                    </div>
+                    <div class="col-md-8">
+                      <form class="form-reservasi">
+                        <input type="hidden" name="id_dokter" value="<?= $dokter->id_user ?>">
 
-                      <div class="mb-3">
-                        <label class="form-label">Pilih Tanggal</label>
-                        <input type="date" class="form-control input-tanggal" name="tanggal" required>
-                      </div>
+                        <div class="mb-3">
+                          <label class="form-label">Pilih Tanggal</label>
+                          <input type="date" class="form-control input-tanggal" name="tanggal" required min="<?= date('Y-m-d') ?>">
+                        </div>
 
-                      <div class="mb-3">
-                        <label class="form-label">Pilih Jam</label>
-                        <div class="d-flex flex-wrap gap-2 pilihan-jam"></div>
-                        <input type="hidden" name="jam" class="input-jam">
-                      </div>
+                        <div class="mb-3">
+                          <label class="form-label">Pilih Jam</label>
+                          <div class="d-flex flex-wrap gap-2 pilihan-jam"></div>
+                          <input type="hidden" name="jam" class="input-jam">
+                        </div>
 
-                      <div class="mb-3">
-                        <label class="form-label">Keluhan</label>
-                        <textarea class="form-control input-keluhan" name="keluhan" rows="2" required></textarea>
-                      </div>
+                        <div class="mb-3">
+                          <label class="form-label">Keluhan</label>
+                          <textarea class="form-control input-keluhan" name="keluhan" rows="2" required></textarea>
+                        </div>
 
-                      <button type="button" class="btn btn-primary btn-sm rounded-pill px-4 btn-konfirmasi" data-nama="<?= $dokter->nama ?>">
-                        Reservasi
-                      </button>
-                    </form>
+                        <button type="button" class="btn btn-primary btn-sm rounded-pill px-4 btn-konfirmasi" data-nama="<?= $dokter->nama ?>">
+                          Reservasi
+                        </button>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
     </div>
   </section>
